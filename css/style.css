@@ -1492,38 +1492,6 @@ section { padding: var(--section) 0; }
 .btn-wa:hover { box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3); }
 
 
-/* ─── PAGE WIPE TRANSITION ─── */
-#wipe {
-  position: fixed;
-  inset: 0;
-  z-index: 9998;
-  background: var(--void);
-  transform: translateX(0%);
-  pointer-events: none;
-  will-change: transform;
-  /* Pure CSS reveal on every page load — no JS timing dependency */
-  animation: wipe-reveal 0.52s cubic-bezier(0.72, 0, 0.22, 1) 0.08s both;
-}
-
-/* Red slash — leading edge glow */
-#wipe::before {
-  content: '';
-  position: absolute;
-  top: 0; left: -3px; bottom: 0;
-  width: 6px;
-  background: var(--hunt);
-  box-shadow: 0 0 32px rgba(251, 54, 64, 0.95), 0 0 90px rgba(251, 54, 64, 0.45);
-}
-
-@keyframes wipe-cover {
-  from { transform: translateX(106%) skewX(-4deg); }
-  to   { transform: translateX(0%)   skewX(0deg);  }
-}
-
-@keyframes wipe-reveal {
-  from { transform: translateX(0%)    skewX(0deg);  }
-  to   { transform: translateX(-106%) skewX(-4deg); }
-}
 
 
 /* ─── BLOG INDEX ─── */
@@ -1703,4 +1671,464 @@ section { padding: var(--section) 0; }
 }
 @media (max-width: 640px) {
   .blog-grid { grid-template-columns: 1fr; }
+}
+
+/* ─── VIEW TRANSITIONS — MPA (page navigation) ─── */
+
+/* Enable native browser transition capture across HTML files */
+@view-transition {
+  navigation: auto;
+}
+
+/* The stacking container — red = our brand slash between pages */
+::view-transition {
+  background-color: var(--hunt);
+}
+
+/* Old page: skid left, slight skew — diagonal slash feel */
+::view-transition-old(root) {
+  animation: rc-vt-out 0.32s cubic-bezier(0.74, 0.07, 0.34, 0.96) forwards;
+}
+
+/* New page: rides in from right — delayed so red flashes */
+::view-transition-new(root) {
+  animation: rc-vt-in 0.36s cubic-bezier(0.74, 0.07, 0.34, 0.96) 0.22s both;
+}
+
+/* image-pair must allow overflow for the skew slide */
+::view-transition-image-pair(root) {
+  overflow: visible;
+}
+
+@keyframes rc-vt-out {
+  0%   { transform: translateX(0)     skewX(0deg);  opacity: 1; }
+  100% { transform: translateX(-105%) skewX(-4deg); opacity: 0.6; }
+}
+
+@keyframes rc-vt-in {
+  0%   { transform: translateX(105%)  skewX(-4deg); opacity: 0.6; }
+  100% { transform: translateX(0)     skewX(0deg);  opacity: 1; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   MOBILE OPTIMISATION — comprehensive rewrite for small screens
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ─── GLOBAL MOBILE BASE ─── */
+@media (max-width: 900px) {
+  :root {
+    --section: clamp(3rem, 7vw, 5rem);
+    --wrap: min(94%, 1200px);
+  }
+
+  h1 { letter-spacing: 0.01em; }
+  h2 { letter-spacing: 0.01em; }
+
+  /* Bigger tap targets everywhere */
+  a, button { min-height: 44px; }
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ─── NAV MOBILE ─── */
+@media (max-width: 900px) {
+  .nav { padding: 1rem 0; }
+  .nav.scrolled { padding: 0.7rem 0; }
+
+  .nav-inner { padding: 0 1.1rem; }
+
+  .nav-logo img { height: 30px; }
+
+  .nav-actions { gap: 0.5rem; }
+
+  /* Hide book button on very small screens — WhatsApp FAB covers it */
+  .nav-actions .btn { display: none; }
+}
+
+@media (max-width: 480px) {
+  .nav-wordmark { display: none; } /* logo icon is enough */
+  .nav-inner { padding: 0 1rem; }
+}
+
+/* ─── TOP TICKER ─── */
+@media (max-width: 640px) {
+  .ticker-item {
+    font-size: 0.6rem;
+    letter-spacing: 0.14em;
+    padding: 0 1.2rem;
+  }
+  .top-ticker { padding: 0.35rem 0; }
+}
+
+/* ─── HERO ─── */
+@media (max-width: 900px) {
+  .hero {
+    min-height: 100svh; /* safe viewport height for mobile */
+    padding-top: 70px;
+  }
+
+  .hero-inner {
+    padding: 2.5rem 0 4rem;
+  }
+
+  .hero-photo {
+    width: 100%;
+    opacity: 0.18;
+    position: absolute;
+    top: 0; bottom: 0;
+  }
+
+  .hero h1 { max-width: 100%; font-size: clamp(2.8rem, 10vw, 5.5rem); }
+
+  .hero-sub {
+    font-size: 0.95rem;
+    max-width: 100%;
+  }
+
+  .hero-checks {
+    gap: 0.8rem;
+  }
+
+  .hero-check { font-size: 0.68rem; }
+
+  .hero-ctas {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .hero-ctas .btn {
+    width: 100%;
+    justify-content: center;
+    padding: 1em 1.5em;
+    font-size: 0.88rem;
+  }
+
+  .scroll-hint { display: none; }
+}
+
+@media (max-width: 480px) {
+  .hero h1 { font-size: clamp(2.4rem, 12vw, 3.6rem); }
+  .hero-tag { font-size: 0.58rem; margin-bottom: 1rem; }
+}
+
+/* ─── DISCIPLINE TICKER ─── */
+@media (max-width: 640px) {
+  .disc-ticker .ticker-item {
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+  }
+}
+
+/* ─── STATS BAR ─── */
+@media (max-width: 900px) {
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+
+  .stat-item {
+    padding: 1.75rem 1rem;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+  .stat-item:nth-child(odd)  { border-right: 1px solid var(--border); }
+  .stat-item:nth-child(3),
+  .stat-item:nth-child(4)    { border-bottom: none; }
+
+  .stat-num  { font-size: clamp(1.6rem, 5vw, 2.4rem); }
+  .stat-label { font-size: 0.65rem; }
+}
+
+@media (max-width: 480px) {
+  .stat-item { padding: 1.4rem 0.75rem; }
+}
+
+/* ─── SECTION HEADERS ─── */
+@media (max-width: 640px) {
+  .container h2  { margin-bottom: 2rem !important; }
+  .section-num   { font-size: 0.6rem; }
+  .label         { font-size: 0.6rem; }
+}
+
+/* ─── WHY GRID ─── */
+@media (max-width: 900px) {
+  .why-grid { grid-template-columns: 1fr; }
+  .why-item { padding: 2rem 1.5rem; }
+  .why-icon { font-size: 1.3rem; margin-bottom: 0.9rem; }
+  .why-item h3 { font-size: 1.05rem; }
+  .why-item p  { font-size: 0.85rem; }
+}
+
+/* ─── PROGRAMS GRID ─── */
+@media (max-width: 900px) {
+  .programs-grid { grid-template-columns: 1fr 1fr; }
+  .prog-card { padding: 1.5rem 1.25rem; }
+  .prog-card h3 { font-size: 1.1rem; }
+  .prog-card p  { font-size: 0.82rem; }
+}
+
+@media (max-width: 640px) {
+  .programs-grid { grid-template-columns: 1fr; }
+  .prog-card[style*="grid-column"] { grid-column: span 1 !important; }
+}
+
+/* ─── COACH SECTION ─── */
+@media (max-width: 900px) {
+  .coach-wrap {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .coach-img-frame {
+    max-width: 280px;
+    aspect-ratio: 3/4;
+  }
+
+  .coach-stats-grid {
+    grid-template-columns: repeat(4, 1fr); /* stay 4-col on tablet */
+    gap: 1px;
+  }
+
+  .coach-stat .snum { font-size: 1.4rem; }
+  .coach-stat .slbl { font-size: 0.58rem; }
+}
+
+@media (max-width: 640px) {
+  .coach-img-frame { max-width: 220px; }
+
+  .coach-stats-grid { grid-template-columns: 1fr 1fr; }
+
+  .coach-creds li { font-size: 0.82rem; }
+}
+
+/* ─── TESTIMONIALS ─── */
+@media (max-width: 900px) {
+  .test-grid { grid-template-columns: 1fr; }
+  .test-card { padding: 1.5rem; }
+  .test-card p { font-size: 0.86rem; }
+}
+
+/* ─── PRICING ─── */
+@media (max-width: 1100px) {
+  .pricing-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 640px) {
+  .pricing-grid { grid-template-columns: 1fr; }
+  .price-card { padding: 1.75rem 1.5rem; }
+  .price-amount { font-size: 2rem; }
+}
+
+/* ─── FAQ ─── */
+@media (max-width: 640px) {
+  .faq-btn  { padding: 1.25rem 1.25rem; font-size: 0.9rem; }
+  .faq-body p { padding: 0 1.25rem; font-size: 0.86rem; }
+}
+
+/* ─── CTA BAND ─── */
+@media (max-width: 640px) {
+  .cta-band .ctas { flex-direction: column; align-items: stretch; }
+  .cta-band .ctas .btn { width: 100%; }
+  .cta-band p { font-size: 0.9rem; }
+}
+
+/* ─── DIVIDER BAND ─── */
+@media (max-width: 640px) {
+  .divider-band { padding: 2rem 0; }
+  .divider-band h2 { font-size: clamp(1.4rem, 5vw, 2rem); }
+}
+
+/* ─── MODAL ─── */
+@media (max-width: 640px) {
+  .modal-backdrop {
+    align-items: flex-end; /* sheet from bottom on mobile */
+  }
+
+  .modal {
+    max-height: 92svh;
+    padding: 1.75rem 1.25rem 2.5rem;
+    border-radius: 0;
+    /* Safe area for iPhone home indicator */
+    padding-bottom: calc(2.5rem + env(safe-area-inset-bottom));
+  }
+
+  .modal-header h3 { font-size: 1.35rem; }
+
+  .form-row {
+    grid-template-columns: 1fr; /* stack fields */
+    gap: 0;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    font-size: 16px; /* prevent iOS auto-zoom on focus */
+    padding: 0.9rem 1rem;
+  }
+}
+
+/* ─── FOOTER ─── */
+@media (max-width: 900px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .footer-brand { grid-column: 1 / -1; }
+  .footer-desc  { max-width: 100%; font-size: 0.82rem; }
+}
+
+@media (max-width: 640px) {
+  .footer-grid  { grid-template-columns: 1fr; gap: 1.75rem; }
+  .footer-brand { grid-column: auto; }
+
+  .footer-col h5 { margin-bottom: 0.85rem; }
+  .footer-col ul li { margin-bottom: 0.45rem; }
+  .footer-col ul li a { font-size: 0.82rem; }
+
+  .footer-bot {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .footer-copy  { font-size: 0.7rem; }
+  .footer-legal { gap: 1rem; }
+  .footer-legal a { font-size: 0.7rem; }
+
+  .footer { padding: 3rem 0 calc(2rem + env(safe-area-inset-bottom)); }
+}
+
+/* ─── PAGE HERO (inner pages) ─── */
+@media (max-width: 900px) {
+  .page-hero { padding: 7.5rem 0 3rem; }
+  .page-hero h1 { font-size: clamp(2rem, 8vw, 3.5rem); }
+  .page-hero p  { font-size: 0.95rem; }
+}
+
+/* ─── PROGRAMS PAGE ─── */
+@media (max-width: 900px) {
+  .prog-inner {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .prog-meta { position: static; }
+
+  .prog-ph {
+    aspect-ratio: 4/3;
+  }
+
+  .prog-detail { padding: 3rem 0; }
+
+  .prog-detail h2 { font-size: clamp(1.6rem, 5vw, 2.2rem); }
+  .prog-detail p  { font-size: 0.88rem; }
+
+  .learn-block li { font-size: 0.85rem; }
+}
+
+/* ─── COACHES PAGE ─── */
+@media (max-width: 640px) {
+  .coach-wrap > div:last-child p { font-size: 0.88rem; }
+}
+
+/* ─── SCHEDULE PAGE ─── */
+@media (max-width: 900px) {
+  .schedule-wrapper {
+    -webkit-overflow-scrolling: touch;
+    overflow-x: auto;
+    margin: 0 -1rem; /* bleed to edges */
+    padding: 0 1rem;
+  }
+
+  .schedule-table th,
+  .schedule-table td { padding: 0.75rem 0.9rem; font-size: 0.75rem; }
+
+  .s-pill { font-size: 0.58rem; padding: 0.18em 0.42em; }
+}
+
+/* ─── CONTACT PAGE ─── */
+@media (max-width: 900px) {
+  .contact-layout {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .contact-form-box { padding: 1.75rem 1.25rem; }
+
+  .map-ph {
+    aspect-ratio: 4/3;
+    margin-top: 2rem;
+  }
+}
+
+/* ─── BLOG ─── */
+@media (max-width: 900px) {
+  .blog-grid { grid-template-columns: 1fr 1fr; }
+  .blog-card { padding: 1.5rem 1.25rem; }
+  .blog-card h3 { font-size: 1rem; }
+  .blog-card p  { font-size: 0.82rem; }
+}
+
+@media (max-width: 640px) {
+  .blog-grid { grid-template-columns: 1fr; }
+}
+
+/* ─── BLOG POST ─── */
+@media (max-width: 640px) {
+  .post-hero { padding: 7rem 0 2.5rem; }
+  .post-hero h1 { font-size: clamp(1.8rem, 7vw, 2.8rem); }
+
+  .post-body { padding: 2.5rem 0 4rem; }
+  .post-body p  { font-size: 0.92rem; line-height: 1.8; }
+  .post-body h2 { font-size: clamp(1.2rem, 5vw, 1.6rem); }
+
+  .post-cta { padding: 1.75rem 1.25rem; }
+}
+
+/* ─── WHATSAPP FAB ─── */
+@media (max-width: 640px) {
+  .wa-fab {
+    bottom: calc(1.25rem + env(safe-area-inset-bottom));
+    right: 1.25rem;
+    width: 46px;
+    height: 46px;
+  }
+  .wa-fab svg { width: 22px; height: 22px; }
+}
+
+/* ─── BUTTONS: minimum tap size ─── */
+@media (max-width: 640px) {
+  .btn { min-height: 48px; }
+  .btn-sm { min-height: 40px; }
+}
+
+/* ─── PRIVACY / TERMS ─── */
+@media (max-width: 640px) {
+  .container[style*="max-width:760px"] {
+    max-width: 100% !important;
+  }
+}
+
+/* ─── 480px: small phones ─── */
+@media (max-width: 480px) {
+  :root { --section: clamp(2.5rem, 8vw, 4rem); }
+
+  .container { width: min(92%, 1200px); }
+
+  /* Scale down section labels */
+  .section-num { font-size: 0.58rem; letter-spacing: 0.2em; }
+
+  /* Programs badge */
+  .prog-badge { font-size: 0.52rem; }
+
+  /* Stat numbers  */
+  .stat-num { font-size: clamp(1.4rem, 8vw, 2rem); }
+
+  /* Why items */
+  .why-item { padding: 1.75rem 1.25rem; }
+
+  /* Theme toggle label hidden on tiny screens */
+  .t-lbl { display: none; }
+  .theme-toggle { padding: 0 0.55rem; width: 36px; }
+
+  /* Modal */
+  .modal { padding: 1.5rem 1rem calc(2rem + env(safe-area-inset-bottom)); }
+  .modal-header h3 { font-size: 1.2rem; }
 }
