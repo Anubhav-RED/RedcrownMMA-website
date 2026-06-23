@@ -47,6 +47,14 @@
     <priority>0.8</priority>
   </url>
 
+
+  <!-- Blog -->
+  <url>
+    <loc>https://redcrownmma.com/pages/blog.html</loc>
+    <lastmod>2026-06-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
   <!-- Legal — low priority -->
   <url>
     <loc>https://redcrownmma.com/pages/privacy.html</loc>
