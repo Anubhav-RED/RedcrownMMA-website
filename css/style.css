@@ -4,7 +4,6 @@
    Viking / Bloodhound — Dark Hunter Aesthetic
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Share+Tech&display=swap');
 
 /* ─── 1. VARIABLES ─── */
 :root {
@@ -92,7 +91,7 @@ h1 em, h2 em { color: var(--hunt); font-style: italic; }
 .section-num {
   display: block;
   font-family: 'Rajdhani', sans-serif;
-  font-size: 0.65rem;
+  font-size: 0.68rem;
   letter-spacing: 0.3em;
   text-transform: uppercase;
   color: var(--hunt);
@@ -113,7 +112,7 @@ section { padding: var(--section) 0; }
   gap: 0.5em;
   font-family: 'Rajdhani', sans-serif;
   font-weight: 600;
-  font-size: 0.92rem;
+  font-size: 0.97rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   padding: 0.85em 2.1em;
@@ -153,7 +152,7 @@ section { padding: var(--section) 0; }
 .btn-outline:hover::before { transform: scaleX(1); }
 .btn-outline:hover { border-color: var(--hunt); color: var(--hunt); }
 
-.btn-sm { padding: 0.6em 1.5em; font-size: 0.78rem; }
+.btn-sm { padding: 0.6em 1.5em; font-size: 0.82rem; }
 .btn-lg { padding: 1.05em 2.8em; font-size: 1rem; }
 
 /* ─── 6. CARD BASE ─── */
@@ -236,7 +235,7 @@ section { padding: var(--section) 0; }
 .nav-links a {
   font-family: 'Rajdhani', sans-serif;
   font-weight: 600;
-  font-size: 0.78rem;
+  font-size: 0.82rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--bone-70);
@@ -278,7 +277,7 @@ section { padding: var(--section) 0; }
   user-select: none;
 }
 .theme-toggle:hover { border-color: var(--hunt); color: var(--hunt); }
-.t-icon { font-size: 0.82rem; line-height: 1; }
+.t-icon { font-size: 0.86rem; line-height: 1; }
 .t-lbl {
   font-family: 'Rajdhani', sans-serif;
   font-weight: 600;
@@ -336,7 +335,7 @@ section { padding: var(--section) 0; }
 
 .mobile-nav .btn {
   margin-top: 1rem;
-  font-size: 0.95rem;
+  font-size: 1.0rem;
 }
 
 /* ─── 8. TOP TICKER ─── */
@@ -357,7 +356,7 @@ section { padding: var(--section) 0; }
 .ticker-item {
   font-family: 'Rajdhani', sans-serif;
   font-weight: 600;
-  font-size: 0.7rem;
+  font-size: 0.73rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--bone-45);
@@ -377,7 +376,7 @@ section { padding: var(--section) 0; }
   border-bottom: 1px solid var(--border);
 }
 .disc-ticker .ticker-item {
-  font-size: 0.75rem;
+  font-size: 0.79rem;
   color: var(--bone-45);
   letter-spacing: 0.25em;
 }
@@ -441,7 +440,7 @@ section { padding: var(--section) 0; }
   display: block;
   font-family: 'Rajdhani', sans-serif;
   font-weight: 600;
-  font-size: 0.68rem;
+  font-size: 0.71rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--bone-45);
@@ -457,7 +456,7 @@ section { padding: var(--section) 0; }
   border: 1px solid var(--border);
   color: var(--bone);
   font-family: 'Share Tech', sans-serif;
-  font-size: 0.95rem;
+  font-size: 1.0rem;
   padding: 0.75rem 1rem;
   outline: none;
   transition: border-color 0.2s;
@@ -474,7 +473,7 @@ section { padding: var(--section) 0; }
 
 .form-note {
   text-align: center;
-  font-size: 0.78rem;
+  font-size: 0.82rem;
   color: var(--bone-45);
   margin-top: 0.85rem;
 }
@@ -484,7 +483,7 @@ section { padding: var(--section) 0; }
 .modal-form.hide { display: none; }
 .success-icon { font-size: 2.5rem; margin-bottom: 1.25rem; }
 .success-icon + h3 { margin-bottom: 0.75rem; }
-.success-icon + h3 + p { color: var(--bone-45); font-size: 0.9rem; }
+.success-icon + h3 + p { color: var(--bone-45); font-size: 0.95rem; }
 
 /* ─── 10. HERO ─── */
 .hero {
@@ -544,7 +543,7 @@ section { padding: var(--section) 0; }
   justify-content: center;
   gap: 0.75rem;
   font-family: 'Rajdhani', sans-serif;
-  font-size: 0.68rem;
+  font-size: 0.71rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--bone-45);
@@ -578,6 +577,19 @@ section { padding: var(--section) 0; }
   background: var(--hunt);
 }
 
+.hero-logo {
+  display: block;
+  height: 160px;
+  width: auto;
+  margin-bottom: 2rem;
+  opacity: 0;
+  animation: fadeUp 0.55s var(--ease) 0.22s forwards;
+  filter:
+    drop-shadow(0 0 18px rgba(200, 0, 0, 0.55))
+    drop-shadow(0 0 48px rgba(200, 0, 0, 0.28))
+    drop-shadow(0 0 90px rgba(200, 0, 0, 0.14));
+}
+
 .hero h1 {
   margin-bottom: 1.5rem;
   opacity: 0;
@@ -604,7 +616,7 @@ section { padding: var(--section) 0; }
 }
 .hero-check {
   font-family: 'Rajdhani', sans-serif;
-  font-size: 0.72rem;
+  font-size: 0.76rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--bone-70);
@@ -692,7 +704,7 @@ section { padding: var(--section) 0; }
   display: block;
 }
 .stat-label {
-  font-size: 0.72rem;
+  font-size: 0.76rem;
   color: var(--bone-45);
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -717,7 +729,7 @@ section { padding: var(--section) 0; }
 .why-item:hover { background: var(--void-3); }
 .why-icon { font-size: 1.6rem; margin-bottom: 1.2rem; display: block; }
 .why-item h3 { font-size: 1.15rem; margin-bottom: 0.7rem; }
-.why-item p { font-size: 0.88rem; color: var(--bone-70); line-height: 1.75; }
+.why-item p { font-size: 0.92rem; color: var(--bone-70); line-height: 1.75; }
 
 /* ─── 13. PROGRAMS ─── */
 .programs-grid {
@@ -760,14 +772,14 @@ section { padding: var(--section) 0; }
 }
 .prog-card h3 { font-size: 1.25rem; margin-bottom: 0.35rem; }
 .prog-for {
-  font-size: 0.7rem;
+  font-size: 0.73rem;
   color: var(--bone-45);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   margin-bottom: 0.9rem;
   display: block;
 }
-.prog-card p { font-size: 0.86rem; color: var(--bone-70); line-height: 1.65; }
+.prog-card p { font-size: 0.9rem; color: var(--bone-70); line-height: 1.65; }
 
 .prog-link {
   display: flex;
@@ -775,7 +787,7 @@ section { padding: var(--section) 0; }
   gap: 0.5rem;
   margin-top: 1.3rem;
   font-family: 'Rajdhani', sans-serif;
-  font-size: 0.7rem;
+  font-size: 0.73rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--hunt);
@@ -825,7 +837,7 @@ section { padding: var(--section) 0; }
   justify-content: center;
   gap: 0.6rem;
   font-family: 'Rajdhani', sans-serif;
-  font-size: 0.68rem;
+  font-size: 0.71rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--bone-45);
@@ -855,7 +867,7 @@ section { padding: var(--section) 0; }
   display: block;
 }
 .coach-stat .slbl {
-  font-size: 0.68rem;
+  font-size: 0.71rem;
   color: var(--bone-45);
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -868,7 +880,7 @@ section { padding: var(--section) 0; }
   gap: 0.75rem;
   padding: 0.6rem 0;
   border-bottom: 1px solid var(--border);
-  font-size: 0.88rem;
+  font-size: 0.92rem;
   color: var(--bone-70);
 }
 .coach-creds li::before { content: '✓'; color: var(--hunt); font-weight: 700; flex-shrink: 0; }
@@ -897,7 +909,7 @@ section { padding: var(--section) 0; }
   line-height: 1;
 }
 .test-card p {
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   color: var(--bone-70);
   line-height: 1.75;
   font-style: italic;
@@ -910,26 +922,26 @@ section { padding: var(--section) 0; }
   display: flex; align-items: center; justify-content: center;
   font-family: 'Rajdhani', sans-serif;
   font-weight: 700;
-  font-size: 0.85rem;
+  font-size: 0.89rem;
   color: var(--bone);
   flex-shrink: 0;
 }
 .test-name {
   font-family: 'Rajdhani', sans-serif;
   font-weight: 600;
-  font-size: 0.92rem;
+  font-size: 0.97rem;
   color: var(--bone);
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
 .test-disc {
-  font-size: 0.72rem;
+  font-size: 0.76rem;
   color: var(--bone-45);
   text-transform: uppercase;
   letter-spacing: 0.1em;
 }
 .test-result {
-  font-size: 0.68rem;
+  font-size: 0.71rem;
   color: var(--hunt);
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -948,7 +960,63 @@ section { padding: var(--section) 0; }
   background: var(--void);
   padding: 2rem 1.75rem;
 }
-.price-card.featured { background: var(--void-3); }
+.price-card.featured {
+  background: linear-gradient(160deg, rgba(200, 0, 0, 0.07) 0%, var(--void-3) 60%);
+  border: 1px solid rgba(200, 0, 0, 0.28);
+  box-shadow: 0 0 32px rgba(200, 0, 0, 0.09);
+}
+.price-card.featured .price-tag { background: var(--hunt); }
+.price-card.featured .price-amount { color: var(--hunt); }
+.price-card.featured .price-sub { color: var(--hunt); opacity: 0.85; }
+.price-card.featured .price-features li::before { color: var(--hunt); }
+
+/* ─── Gold / Referral card ─── */
+.price-card.gold {
+  border: 1px solid rgba(201, 168, 76, 0.45);
+  background: linear-gradient(160deg, rgba(201, 168, 76, 0.06) 0%, var(--void) 60%);
+  position: relative;
+}
+.gold-tag {
+  background: #C9A84C !important;
+  color: #0a0a0a !important;
+}
+.price-card.gold .price-amount {
+  color: #C9A84C;
+}
+.price-card.gold .price-sub {
+  color: #C9A84C;
+  opacity: 0.85;
+}
+.price-card.gold .price-features li::before {
+  color: #C9A84C;
+}
+
+/* Gold CTA button */
+.btn-gold {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75em 2em;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: #C9A84C;
+  color: #0a0a0a;
+  border: 1px solid #C9A84C;
+  cursor: pointer;
+  transition: background 0.22s, transform 0.18s, box-shadow 0.22s;
+  position: relative;
+  overflow: hidden;
+}
+.btn-gold:hover {
+  background: #b89540;
+  border-color: #b89540;
+  box-shadow: 0 4px 18px rgba(201, 168, 76, 0.35);
+}
 
 .price-tag {
   display: inline-block;
@@ -965,7 +1033,7 @@ section { padding: var(--section) 0; }
 .price-plan {
   font-family: 'Rajdhani', sans-serif;
   font-weight: 700;
-  font-size: 0.88rem;
+  font-size: 0.92rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--bone-70);
@@ -979,13 +1047,13 @@ section { padding: var(--section) 0; }
   line-height: 1;
 }
 .price-per {
-  font-size: 0.8rem;
+  font-size: 0.84rem;
   color: var(--bone-45);
   margin-left: 0.25rem;
 }
 .price-sub {
   font-family: 'Rajdhani', sans-serif;
-  font-size: 0.8rem;
+  font-size: 0.84rem;
   color: var(--hunt);
   letter-spacing: 0.05em;
   margin-top: 0.4rem;
@@ -997,7 +1065,7 @@ section { padding: var(--section) 0; }
   align-items: flex-start;
   gap: 0.6rem;
   padding: 0.42rem 0;
-  font-size: 0.83rem;
+  font-size: 0.87rem;
   color: var(--bone-70);
   border-bottom: 1px solid var(--border);
 }
@@ -1005,7 +1073,7 @@ section { padding: var(--section) 0; }
 
 .pricing-note {
   text-align: center;
-  font-size: 0.78rem;
+  font-size: 0.82rem;
   color: var(--bone-45);
   margin-top: 2rem;
   padding-top: 1.75rem;
@@ -1039,7 +1107,7 @@ section { padding: var(--section) 0; }
   flex-shrink: 0;
   font-family: 'Rajdhani', sans-serif;
   font-weight: 600;
-  font-size: 0.7rem;
+  font-size: 0.73rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--bone-70);
@@ -1065,7 +1133,7 @@ section { padding: var(--section) 0; }
 .faq-cat-label {
   display: block;
   font-family: 'Rajdhani', sans-serif;
-  font-size: 0.65rem;
+  font-size: 0.68rem;
   letter-spacing: 0.3em;
   text-transform: uppercase;
   color: var(--hunt);
@@ -1099,7 +1167,7 @@ section { padding: var(--section) 0; }
   width: 20px; height: 20px;
   border: 1px solid var(--border);
   display: flex; align-items: center; justify-content: center;
-  font-size: 0.88rem;
+  font-size: 0.92rem;
   color: var(--hunt);
   flex-shrink: 0;
   transition: transform 0.3s var(--ease), border-color 0.25s;
@@ -1115,7 +1183,7 @@ section { padding: var(--section) 0; }
 
 .faq-body p {
   padding: 0 2rem;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   color: var(--bone-70);
   line-height: 1.75;
 }
@@ -1124,7 +1192,7 @@ section { padding: var(--section) 0; }
   margin: 0;
 }
 .faq-body ul li {
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   color: var(--bone-70);
   line-height: 1.9;
 }
@@ -1170,7 +1238,7 @@ section { padding: var(--section) 0; }
 [data-theme="light"] .footer-brand img { filter: drop-shadow(0 0 0 2px #000F08) brightness(0.15) saturate(0.8); }
 
 .footer-desc {
-  font-size: 0.85rem;
+  font-size: 0.89rem;
   color: var(--bone-45);
   line-height: 1.75;
   margin-bottom: 1.5rem;
@@ -1181,14 +1249,14 @@ section { padding: var(--section) 0; }
   width: 34px; height: 34px;
   border: 1px solid var(--border);
   display: flex; align-items: center; justify-content: center;
-  font-size: 0.78rem;
+  font-size: 0.82rem;
   color: var(--bone-70);
   transition: all 0.22s;
 }
 .soc-link:hover { border-color: var(--hunt); color: var(--hunt); }
 
 .footer-col h5 {
-  font-size: 0.65rem;
+  font-size: 0.68rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--bone-45);
@@ -1198,7 +1266,7 @@ section { padding: var(--section) 0; }
 }
 .footer-col ul li { margin-bottom: 0.55rem; }
 .footer-col ul li a {
-  font-size: 0.86rem;
+  font-size: 0.9rem;
   color: var(--bone-70);
   transition: color 0.2s;
 }
@@ -1211,9 +1279,9 @@ section { padding: var(--section) 0; }
   flex-wrap: wrap;
   gap: 1rem;
 }
-.footer-copy { font-size: 0.76rem; color: var(--bone-45); }
+.footer-copy { font-size: 0.8rem; color: var(--bone-45); }
 .footer-legal { display: flex; gap: 1.5rem; }
-.footer-legal a { font-size: 0.76rem; color: var(--bone-45); transition: color 0.2s; }
+.footer-legal a { font-size: 0.8rem; color: var(--bone-45); transition: color 0.2s; }
 .footer-legal a:hover { color: var(--hunt); }
 
 /* WHATSAPP FAB */
@@ -1275,14 +1343,14 @@ section { padding: var(--section) 0; }
 }
 .prog-detail h2 { font-size: clamp(1.8rem, 3vw, 2.4rem); margin-bottom: 0.4rem; }
 .prog-who {
-  font-size: 0.7rem;
+  font-size: 0.73rem;
   color: var(--bone-45);
   letter-spacing: 0.14em;
   text-transform: uppercase;
   margin-bottom: 1.5rem;
   display: block;
 }
-.prog-detail p { font-size: 0.92rem; color: var(--bone-70); line-height: 1.8; margin-bottom: 1.5rem; }
+.prog-detail p { font-size: 0.97rem; color: var(--bone-70); line-height: 1.8; margin-bottom: 1.5rem; }
 
 .prog-ph {
   aspect-ratio: 16/9;
@@ -1291,7 +1359,7 @@ section { padding: var(--section) 0; }
   display: flex;
   align-items: center; justify-content: center;
   font-family: 'Rajdhani', sans-serif;
-  font-size: 0.68rem;
+  font-size: 0.71rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--bone-45);
@@ -1301,7 +1369,7 @@ section { padding: var(--section) 0; }
 }
 
 .learn-block h4 {
-  font-size: 0.65rem;
+  font-size: 0.68rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--bone-45);
@@ -1313,10 +1381,10 @@ section { padding: var(--section) 0; }
   gap: 0.75rem;
   padding: 0.58rem 0;
   border-bottom: 1px solid var(--border);
-  font-size: 0.88rem;
+  font-size: 0.92rem;
   color: var(--bone-70);
 }
-.learn-block li::before { content: '⚔'; font-size: 0.65rem; color: var(--hunt); flex-shrink: 0; margin-top: 4px; }
+.learn-block li::before { content: '⚔'; font-size: 0.68rem; color: var(--hunt); flex-shrink: 0; margin-top: 4px; }
 
 /* ─── SCHEDULE PAGE ─── */
 .schedule-wrapper { overflow-x: auto; }
@@ -1331,13 +1399,13 @@ section { padding: var(--section) 0; }
   border: 1px solid var(--border);
   padding: 1rem 1.25rem;
   text-align: left;
-  font-size: 0.83rem;
+  font-size: 0.87rem;
   vertical-align: top;
 }
 .schedule-table th {
   font-family: 'Rajdhani', sans-serif;
   font-weight: 700;
-  font-size: 0.72rem;
+  font-size: 0.76rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   background: var(--void-3);
@@ -1350,7 +1418,7 @@ section { padding: var(--section) 0; }
   font-weight: 600;
   color: var(--bone-70);
   white-space: nowrap;
-  font-size: 0.78rem;
+  font-size: 0.82rem;
   letter-spacing: 0.08em;
 }
 
@@ -1359,7 +1427,7 @@ section { padding: var(--section) 0; }
   align-items: center;
   padding: 0.22em 0.55em;
   font-family: 'Rajdhani', sans-serif;
-  font-size: 0.65rem;
+  font-size: 0.68rem;
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -1395,17 +1463,17 @@ section { padding: var(--section) 0; }
   display: flex; align-items: center; justify-content: center;
   color: var(--hunt);
   flex-shrink: 0;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
 }
 .contact-lbl {
   font-family: 'Rajdhani', sans-serif;
-  font-size: 0.65rem;
+  font-size: 0.68rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--bone-45);
   margin-bottom: 0.25rem;
 }
-.contact-val { font-size: 0.92rem; color: var(--bone); }
+.contact-val { font-size: 0.97rem; color: var(--bone); }
 .contact-val a { color: var(--bone); transition: color 0.2s; }
 .contact-val a:hover { color: var(--hunt); }
 
@@ -1427,7 +1495,7 @@ section { padding: var(--section) 0; }
   gap: 0.75rem;
   color: var(--bone-45);
   font-family: 'Rajdhani', sans-serif;
-  font-size: 0.7rem;
+  font-size: 0.73rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
 }
@@ -1547,7 +1615,7 @@ section { padding: var(--section) 0; }
   gap: 0.6em;
   font-family: 'Rajdhani', sans-serif;
   font-weight: 600;
-  font-size: 0.88rem;
+  font-size: 0.92rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   padding: 0.85em 2em;
@@ -1613,7 +1681,7 @@ section { padding: var(--section) 0; }
   line-height: 1.18;
 }
 .blog-card p {
-  font-size: 0.85rem;
+  font-size: 0.89rem;
   color: var(--bone-70);
   line-height: 1.7;
   flex: 1;
@@ -1621,7 +1689,7 @@ section { padding: var(--section) 0; }
 }
 .blog-date {
   font-family: 'Rajdhani', sans-serif;
-  font-size: 0.65rem;
+  font-size: 0.68rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--bone-45);
@@ -1632,7 +1700,7 @@ section { padding: var(--section) 0; }
   gap: 0.5rem;
   margin-top: 1.1rem;
   font-family: 'Rajdhani', sans-serif;
-  font-size: 0.68rem;
+  font-size: 0.71rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--hunt);
@@ -1677,7 +1745,7 @@ section { padding: var(--section) 0; }
 }
 .post-meta-row span {
   font-family: 'Rajdhani', sans-serif;
-  font-size: 0.68rem;
+  font-size: 0.71rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--bone-45);
@@ -1734,7 +1802,7 @@ section { padding: var(--section) 0; }
   text-align: center;
 }
 .post-cta h3 { margin-bottom: 0.75rem; }
-.post-cta p { color: var(--bone-70); font-size: 0.9rem; margin-bottom: 1.5rem; }
+.post-cta p { color: var(--bone-70); font-size: 0.95rem; margin-bottom: 1.5rem; }
 
 @media (max-width: 900px) {
   .blog-grid { grid-template-columns: 1fr 1fr; }
@@ -1847,10 +1915,11 @@ section { padding: var(--section) 0; }
     top: 0; bottom: 0;
   }
 
+  .hero-logo { height: 120px; margin-bottom: 1.5rem; }
   .hero h1 { max-width: 100%; font-size: clamp(2.8rem, 10vw, 5.5rem); }
 
   .hero-sub {
-    font-size: 0.95rem;
+    font-size: 1.0rem;
     max-width: 100%;
   }
 
@@ -1858,7 +1927,7 @@ section { padding: var(--section) 0; }
     gap: 0.8rem;
   }
 
-  .hero-check { font-size: 0.68rem; }
+  .hero-check { font-size: 0.71rem; }
 
   .hero-ctas {
     flex-direction: column;
@@ -1868,14 +1937,16 @@ section { padding: var(--section) 0; }
   .hero-ctas .btn {
     width: 100%;
     justify-content: center;
-    padding: 1em 1.5em;
-    font-size: 0.88rem;
+    padding: 1.1em 1.5em;
+    font-size: 0.97rem;
+    min-height: 52px;
   }
 
   .scroll-hint { display: none; }
 }
 
 @media (max-width: 480px) {
+  .hero-logo { height: 100px; margin-bottom: 1.25rem; }
   .hero h1 { font-size: clamp(2.4rem, 12vw, 3.6rem); }
   .hero-tag { font-size: 0.58rem; margin-bottom: 1rem; }
 }
@@ -1883,7 +1954,7 @@ section { padding: var(--section) 0; }
 /* ─── DISCIPLINE TICKER ─── */
 @media (max-width: 640px) {
   .disc-ticker .ticker-item {
-    font-size: 0.65rem;
+    font-size: 0.68rem;
     letter-spacing: 0.18em;
   }
 }
@@ -1902,7 +1973,7 @@ section { padding: var(--section) 0; }
   .stat-item:nth-child(4)    { border-bottom: none; }
 
   .stat-num  { font-size: clamp(1.6rem, 5vw, 2.4rem); }
-  .stat-label { font-size: 0.65rem; }
+  .stat-label { font-size: 0.68rem; }
 }
 
 @media (max-width: 480px) {
@@ -1914,6 +1985,9 @@ section { padding: var(--section) 0; }
   .container h2  { margin-bottom: 2rem !important; }
   .section-num   { font-size: 0.6rem; }
   .label         { font-size: 0.6rem; }
+  p { font-size: 1.0rem; line-height: 1.8; }
+  h2 { font-size: clamp(1.6rem, 7vw, 2.5rem); }
+  h3 { font-size: clamp(1.1rem, 5vw, 1.5rem); }
 }
 
 /* ─── WHY GRID ─── */
@@ -1922,7 +1996,7 @@ section { padding: var(--section) 0; }
   .why-item { padding: 2rem 1.5rem; }
   .why-icon { font-size: 1.3rem; margin-bottom: 0.9rem; }
   .why-item h3 { font-size: 1.05rem; }
-  .why-item p  { font-size: 0.85rem; }
+  .why-item p  { font-size: 0.89rem; }
 }
 
 /* ─── PROGRAMS GRID ─── */
@@ -1930,12 +2004,16 @@ section { padding: var(--section) 0; }
   .programs-grid { grid-template-columns: 1fr 1fr; }
   .prog-card { padding: 1.5rem 1.25rem; }
   .prog-card h3 { font-size: 1.1rem; }
-  .prog-card p  { font-size: 0.82rem; }
+  .prog-card p  { font-size: 0.86rem; }
 }
 
 @media (max-width: 640px) {
   .programs-grid { grid-template-columns: 1fr; }
   .prog-card[style*="grid-column"] { grid-column: span 1 !important; }
+}
+@media (max-width: 540px) {
+  .programs-grid { grid-template-columns: 1fr !important; }
+  .prog-card { padding: 1.5rem 1.25rem; }
 }
 
 /* ─── COACH SECTION ─── */
@@ -1964,14 +2042,14 @@ section { padding: var(--section) 0; }
 
   .coach-stats-grid { grid-template-columns: 1fr 1fr; }
 
-  .coach-creds li { font-size: 0.82rem; }
+  .coach-creds li { font-size: 0.86rem; }
 }
 
 /* ─── TESTIMONIALS ─── */
 @media (max-width: 900px) {
   .test-grid { grid-template-columns: 1fr; }
   .test-card { padding: 1.5rem; }
-  .test-card p { font-size: 0.86rem; }
+  .test-card p { font-size: 0.9rem; }
 }
 
 /* ─── PRICING ─── */
@@ -1987,15 +2065,15 @@ section { padding: var(--section) 0; }
 
 /* ─── FAQ ─── */
 @media (max-width: 640px) {
-  .faq-btn  { padding: 1.25rem 1.25rem; font-size: 0.9rem; }
-  .faq-body p { padding: 0 1.25rem; font-size: 0.86rem; }
+  .faq-btn  { padding: 1.25rem 1.25rem; font-size: 0.95rem; }
+  .faq-body p { padding: 0 1.25rem; font-size: 0.9rem; }
 }
 
 /* ─── CTA BAND ─── */
 @media (max-width: 640px) {
   .cta-band .ctas { flex-direction: column; align-items: stretch; }
   .cta-band .ctas .btn { width: 100%; }
-  .cta-band p { font-size: 0.9rem; }
+  .cta-band p { font-size: 0.95rem; }
 }
 
 /* ─── DIVIDER BAND ─── */
@@ -2041,7 +2119,7 @@ section { padding: var(--section) 0; }
   }
 
   .footer-brand { grid-column: 1 / -1; }
-  .footer-desc  { max-width: 100%; font-size: 0.82rem; }
+  .footer-desc  { max-width: 100%; font-size: 0.86rem; }
 }
 
 @media (max-width: 640px) {
@@ -2050,7 +2128,7 @@ section { padding: var(--section) 0; }
 
   .footer-col h5 { margin-bottom: 0.85rem; }
   .footer-col ul li { margin-bottom: 0.45rem; }
-  .footer-col ul li a { font-size: 0.82rem; }
+  .footer-col ul li a { font-size: 0.86rem; }
 
   .footer-bot {
     flex-direction: column;
@@ -2058,9 +2136,9 @@ section { padding: var(--section) 0; }
     gap: 0.75rem;
   }
 
-  .footer-copy  { font-size: 0.7rem; }
+  .footer-copy  { font-size: 0.73rem; }
   .footer-legal { gap: 1rem; }
-  .footer-legal a { font-size: 0.7rem; }
+  .footer-legal a { font-size: 0.73rem; }
 
   .footer { padding: 3rem 0 calc(2rem + env(safe-area-inset-bottom)); }
 }
@@ -2069,7 +2147,7 @@ section { padding: var(--section) 0; }
 @media (max-width: 900px) {
   .page-hero { padding: 7.5rem 0 3rem; }
   .page-hero h1 { font-size: clamp(2rem, 8vw, 3.5rem); }
-  .page-hero p  { font-size: 0.95rem; }
+  .page-hero p  { font-size: 1.0rem; }
 }
 
 /* ─── PROGRAMS PAGE ─── */
@@ -2088,14 +2166,14 @@ section { padding: var(--section) 0; }
   .prog-detail { padding: 3rem 0; }
 
   .prog-detail h2 { font-size: clamp(1.6rem, 5vw, 2.2rem); }
-  .prog-detail p  { font-size: 0.88rem; }
+  .prog-detail p  { font-size: 0.92rem; }
 
-  .learn-block li { font-size: 0.85rem; }
+  .learn-block li { font-size: 0.89rem; }
 }
 
 /* ─── COACHES PAGE ─── */
 @media (max-width: 640px) {
-  .coach-wrap > div:last-child p { font-size: 0.88rem; }
+  .coach-wrap > div:last-child p { font-size: 0.92rem; }
 }
 
 /* ─── SCHEDULE PAGE ─── */
@@ -2108,7 +2186,7 @@ section { padding: var(--section) 0; }
   }
 
   .schedule-table th,
-  .schedule-table td { padding: 0.75rem 0.9rem; font-size: 0.75rem; }
+  .schedule-table td { padding: 0.75rem 0.9rem; font-size: 0.79rem; }
 
   .s-pill { font-size: 0.58rem; padding: 0.18em 0.42em; }
 }
@@ -2133,7 +2211,7 @@ section { padding: var(--section) 0; }
   .blog-grid { grid-template-columns: 1fr 1fr; }
   .blog-card { padding: 1.5rem 1.25rem; }
   .blog-card h3 { font-size: 1rem; }
-  .blog-card p  { font-size: 0.82rem; }
+  .blog-card p  { font-size: 0.86rem; }
 }
 
 @media (max-width: 640px) {
@@ -2146,7 +2224,7 @@ section { padding: var(--section) 0; }
   .post-hero h1 { font-size: clamp(1.8rem, 7vw, 2.8rem); }
 
   .post-body { padding: 2.5rem 0 4rem; }
-  .post-body p  { font-size: 0.92rem; line-height: 1.8; }
+  .post-body p  { font-size: 0.97rem; line-height: 1.8; }
   .post-body h2 { font-size: clamp(1.2rem, 5vw, 1.6rem); }
 
   .post-cta { padding: 1.75rem 1.25rem; }
@@ -2157,10 +2235,11 @@ section { padding: var(--section) 0; }
   .wa-fab {
     bottom: calc(1.25rem + env(safe-area-inset-bottom));
     right: 1.25rem;
-    width: 46px;
-    height: 46px;
+    width: 56px;
+    height: 56px;
+    box-shadow: 0 4px 22px rgba(37, 211, 102, 0.38);
   }
-  .wa-fab svg { width: 22px; height: 22px; }
+  .wa-fab svg { width: 28px; height: 28px; }
 }
 
 /* ─── BUTTONS: minimum tap size ─── */

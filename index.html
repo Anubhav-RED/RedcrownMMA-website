@@ -42,6 +42,13 @@
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 
 <link rel="stylesheet" href="css/style.css">
+<!-- Fonts: preconnect first, then async stylesheet (non-render-blocking) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Share+Tech&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Share+Tech&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Share+Tech&display=swap"></noscript>
+<link rel="preload" as="image" href="assets/images/hero-fighter.webp" fetchpriority="high">
 
 <!-- ═══════════════════════════════════════════════════════════════
      STRUCTURED DATA  (Schema.org / JSON-LD)
@@ -223,6 +230,7 @@
   </div>
 </div>
 
+<main>
 <!-- ============ NAV ============ -->
 
 <header class="nav">
@@ -230,7 +238,7 @@
 
     <!-- Logo -->
     <a href="index.html" class="nav-logo">
-      <img src="assets/logo.png" alt="Red Crown MMA">
+      <img src="assets/logo.png" alt="Red Crown MMA" width="512" height="512">
     </a>
 
     <!-- Navigation -->
@@ -280,10 +288,11 @@
 <section class="hero">
   <div class="hero-vline"></div>
   <div class="hero-photo">
-    <img src="assets/images/hero-fighter.jpg" alt="Redcrown MMA training session" class="hero-photo-img" style="width:100%;height:100%;object-fit:cover;">
+    <img src="assets/images/hero-fighter.webp" alt="Redcrown MMA training session" class="hero-photo-img" width="797" height="1266" fetchpriority="high" style="width:100%;height:100%;object-fit:cover;">
   </div>
   <div class="container hero-inner">
     <div class="hero-tag">Noida Sector 18 · MMA Academy</div>
+    <img src="assets/logo.png" alt="Red Crown MMA" class="hero-logo" width="512" height="512">
     <h1>Enter the <em>Hunt</em></h1>
     <p class="hero-sub">Real coaches. Real training. Zero experience needed. Seven disciplines under one roof — one membership gets you all of it.</p>
     <div class="hero-checks">
@@ -442,10 +451,10 @@
     <span class="section-num">Who You'll Train With</span>
     <div class="coach-wrap">
       <div class="coach-img-frame reveal">
-        <img loading="lazy" src="assets/images/coach-aditya.jpg" alt="Coach Aditya Heera" style="width:100%;height:100%;object-fit:cover;">
+        <img loading="lazy" src="assets/images/coach-aditya.webp" alt="Coach Aditya Heera" width="797" height="1266" style="width:100%;height:100%;object-fit:cover;">
       </div>
       <div class="reveal d1">
-        <h2 style="margin-bottom:1.5rem;">Aditya Heera</h2>
+        <h3 style="margin-bottom:1.5rem;">Aditya Heera</h3>
         <div class="coach-stats-grid">
           <div class="coach-stat">
             <span class="snum">10+</span>
@@ -552,7 +561,8 @@
         </ul>
         <a href="#" class="btn btn-primary" style="width:100%;" data-open-modal><span>Get Started</span></a>
       </div>
-      <div class="price-card reveal d2">
+      <div class="price-card gold reveal d2">
+        <span class="price-tag gold-tag">Referral Bonus</span>
         <div class="price-plan">6 Months</div>
         <div class="price-amount">₹21,000</div>
         <div class="price-sub">₹3,500 / mo · Save ₹6,000</div>
@@ -561,7 +571,7 @@
           <li>Referral reward eligible</li>
           <li>Founding member recognition</li>
         </ul>
-        <a href="#" class="btn btn-outline" style="width:100%;" data-open-modal><span>Get Started</span></a>
+        <a href="#" class="btn btn-gold" style="width:100%;" data-open-modal><span>Get Started</span></a>
       </div>
       <div class="price-card reveal d3">
         <div class="price-plan">Annual</div>
@@ -644,11 +654,13 @@
 </div>
 
 <!-- ============ FOOTER ============ -->
+</main>
+
 <footer class="footer">
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <img src="assets/logo.png" alt="Redcrown MMA">
+        <img src="assets/logo.png" alt="Redcrown MMA" width="512" height="512">
         <p class="footer-desc">Elite MMA training in Noida Sector 18. Real coaches, real results. Seven disciplines, one membership, zero ego.</p>
         <div class="footer-socials">
           <a href="https://instagram.com/redcrownmma" class="soc-link" aria-label="Instagram" target="_blank" rel="noopener">IG</a>
@@ -656,7 +668,7 @@
         </div>
       </div>
       <div class="footer-col">
-        <h5>Navigate</h5>
+        <h3>Navigate</h3>
         <ul>
           <li><a href="pages/programs.html">Programs</a></li>
           <li><a href="pages/schedule.html">Schedule</a></li>
@@ -665,7 +677,7 @@
         </ul>
       </div>
       <div class="footer-col">
-        <h5>Programs</h5>
+        <h3>Programs</h3>
         <ul>
           <li><a href="pages/programs.html#mma">MMA</a></li>
           <li><a href="pages/programs.html#bjj">BJJ</a></li>
@@ -675,7 +687,7 @@
         </ul>
       </div>
       <div class="footer-col">
-        <h5>Contact</h5>
+        <h3>Contact</h3>
         <ul>
           <li><a href="tel:+919910604536">+91 99106 04536</a></li>
           <li><a href="mailto:manager@redcrownmma.com">manager@redcrownmma.com</a></li>
@@ -726,8 +738,8 @@
       </div>
       <div class="form-row">
         <div class="form-group">
-          <label>Discipline</label>
-          <select name="discipline">
+          <label for="modal-discipline">Discipline</label>
+          <select name="discipline" id="modal-discipline">
             <option value="">Not sure yet</option>
             <option value="mma">MMA</option>
             <option value="bjj">BJJ</option>
@@ -738,8 +750,8 @@
           </select>
         </div>
         <div class="form-group">
-          <label>Preferred Batch</label>
-          <select name="batch">
+          <label for="modal-batch">Preferred Batch</label>
+          <select name="batch" id="modal-batch">
             <option value="">No preference</option>
             <option value="morning">Morning</option>
             <option value="evening">Evening</option>

@@ -26,6 +26,12 @@
 <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
 <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
 <link rel="stylesheet" href="../css/style.css">
+<!-- Fonts: preconnect first, then async stylesheet (non-render-blocking) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Share+Tech&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Share+Tech&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Share+Tech&display=swap"></noscript>
 
 
 
@@ -70,7 +76,7 @@
 <header class="nav">
   <div class="nav-inner">
     <a href="../index.html" class="nav-logo">
-      <img src="../assets/logo.png" alt="Red Crown MMA">
+      <img src="../assets/logo.png" alt="Red Crown MMA" width="512" height="512">
     </a>
 
     <nav class="nav-links">
@@ -169,7 +175,7 @@
       <!-- FORM COLUMN -->
       <div class="contact-form-box reveal d1">
         <span class="section-num">Founding Access</span>
-        <h3 style="margin-bottom:0.5rem;">Book Your Free Class</h3>
+        <h2 style="margin-bottom:0.5rem; font-size: 1.4rem;">Book Your Free Class</h2>
         <p style="color:var(--bone-70); font-size:0.9rem; margin-bottom:1.75rem;">No payment, no commitment. Tell us a little about you and we'll reach out to confirm a slot.</p>
 
         <form class="modal-form">
@@ -254,12 +260,15 @@
   </div>
 </div>
 
+<main>
 <!-- ============ FOOTER ============ -->
+</main>
+
 <footer class="footer">
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <img src="../assets/logo.png" alt="Redcrown MMA">
+        <img src="../assets/logo.png" alt="Redcrown MMA" width="512" height="512">
         <p class="footer-desc">Elite MMA training in Noida Sector 18. Real coaches, real results. Seven disciplines, one membership, zero ego.</p>
         <div class="footer-socials">
           <a href="https://instagram.com/redcrownmma" class="soc-link" aria-label="Instagram" target="_blank" rel="noopener">IG</a>
@@ -267,7 +276,7 @@
         </div>
       </div>
       <div class="footer-col">
-        <h5>Navigate</h5>
+        <h3>Navigate</h3>
         <ul>
           <li><a href="programs.html">Programs</a></li>
           <li><a href="schedule.html">Schedule</a></li>
@@ -276,7 +285,7 @@
         </ul>
       </div>
       <div class="footer-col">
-        <h5>Programs</h5>
+        <h3>Programs</h3>
         <ul>
           <li><a href="programs.html#mma">MMA</a></li>
           <li><a href="programs.html#bjj">BJJ</a></li>
@@ -286,7 +295,7 @@
         </ul>
       </div>
       <div class="footer-col">
-        <h5>Contact</h5>
+        <h3>Contact</h3>
         <ul>
           <li><a href="tel:+919910604536">+91 99106 04536</a></li>
           <li><a href="mailto:manager@redcrownmma.com">manager@redcrownmma.com</a></li>
@@ -335,8 +344,8 @@
       </div>
       <div class="form-row">
         <div class="form-group">
-          <label>Discipline</label>
-          <select name="discipline">
+          <label for="contact-discipline">Discipline</label>
+          <select name="discipline" id="contact-discipline">
             <option value="">Not sure yet</option>
             <option value="mma">MMA</option>
             <option value="bjj">BJJ</option>
@@ -347,8 +356,8 @@
           </select>
         </div>
         <div class="form-group">
-          <label>Preferred Batch</label>
-          <select name="batch">
+          <label for="contact-batch">Preferred Batch</label>
+          <select name="batch" id="contact-batch">
             <option value="">No preference</option>
             <option value="morning">Morning</option>
             <option value="evening">Evening</option>
@@ -362,7 +371,7 @@
     </form>
     <div class="modal-success">
       <div class="success-icon">⚔</div>
-      <h3>You're In.</h3>
+      <h2 style="font-size:1.4rem;">You're In.</h2>
       <p>We'll reach out shortly to confirm your free class. Welcome to the hunt.</p>
     </div>
   </div>

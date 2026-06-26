@@ -26,6 +26,12 @@
 <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
 <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
 <link rel="stylesheet" href="../css/style.css">
+<!-- Fonts: preconnect first, then async stylesheet (non-render-blocking) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Share+Tech&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Share+Tech&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Share+Tech&display=swap"></noscript>
 
 
 
@@ -88,7 +94,7 @@
 <header class="nav">
   <div class="nav-inner">
     <a href="../index.html" class="nav-logo">
-      <img src="../assets/logo.png" alt="Red Crown MMA">
+      <img src="../assets/logo.png" alt="Red Crown MMA" width="512" height="512">
     </a>
 
     <nav class="nav-links">
@@ -132,6 +138,7 @@
   </a>
 </div>
 
+<main>
 <!-- ============ PAGE HERO ============ -->
 <section class="page-hero">
   <div class="container">
@@ -155,10 +162,10 @@
       </div>
       <div>
         <div class="prog-ph reveal">
-          <img loading="lazy" src="../assets/images/program-mma.jpg" alt="MMA training at Redcrown" style="width:100%;height:100%;object-fit:cover;">
+          <img loading="lazy" src="../assets/images/program-mma.webp" width="1280" height="720" alt="MMA training at Redcrown" style="width:100%;height:100%;object-fit:cover;">
         </div>
         <div class="learn-block reveal d1">
-          <h4>What You'll Train</h4>
+          <h3>What You'll Train</h3>
           <ul>
             <li>Striking fundamentals — boxing, kicks, knees, elbows</li>
             <li>Takedowns and takedown defence</li>
@@ -187,10 +194,10 @@
       </div>
       <div>
         <div class="prog-ph reveal">
-          <img loading="lazy" src="../assets/images/program-bjj.jpg" alt="BJJ training at Redcrown" style="width:100%;height:100%;object-fit:cover;">
+          <img loading="lazy" src="../assets/images/program-bjj.webp" width="1280" height="720" alt="BJJ training at Redcrown" style="width:100%;height:100%;object-fit:cover;">
         </div>
         <div class="learn-block reveal d1">
-          <h4>What You'll Train</h4>
+          <h3>What You'll Train</h3>
           <ul>
             <li>Guard, mount, side control and back control fundamentals</li>
             <li>Submissions and the escapes that counter them</li>
@@ -219,10 +226,10 @@
       </div>
       <div>
         <div class="prog-ph reveal">
-          <img loading="lazy" src="../assets/images/program-muaythai.jpg" alt="Muay Thai training at Redcrown" style="width:100%;height:100%;object-fit:cover;">
+          <img loading="lazy" src="../assets/images/program-muaythai.webp" width="1280" height="720" alt="Muay Thai training at Redcrown" style="width:100%;height:100%;object-fit:cover;">
         </div>
         <div class="learn-block reveal d1">
-          <h4>What You'll Train</h4>
+          <h3>What You'll Train</h3>
           <ul>
             <li>Stance, footwork and range management</li>
             <li>Punches, elbows, knees and kicks</li>
@@ -251,10 +258,10 @@
       </div>
       <div>
         <div class="prog-ph reveal">
-          <img loading="lazy" src="../assets/images/program-boxing.jpg" alt="Boxing training at Redcrown" style="width:100%;height:100%;object-fit:cover;">
+          <img loading="lazy" src="../assets/images/program-boxing.webp" width="1280" height="720" alt="Boxing training at Redcrown" style="width:100%;height:100%;object-fit:cover;">
         </div>
         <div class="learn-block reveal d1">
-          <h4>What You'll Train</h4>
+          <h3>What You'll Train</h3>
           <ul>
             <li>Stance, guard and footwork basics</li>
             <li>Jab, cross, hook and uppercut combinations</li>
@@ -283,10 +290,10 @@
       </div>
       <div>
         <div class="prog-ph reveal">
-          <img loading="lazy" src="../assets/images/program-snc.jpg" alt="Strength and conditioning at Redcrown" style="width:100%;height:100%;object-fit:cover;">
+          <img loading="lazy" src="../assets/images/program-snc.webp" width="1280" height="720" alt="Strength and conditioning at Redcrown" style="width:100%;height:100%;object-fit:cover;">
         </div>
         <div class="learn-block reveal d1">
-          <h4>What You'll Train</h4>
+          <h3>What You'll Train</h3>
           <ul>
             <li>Strength training built on compound movements</li>
             <li>High-intensity conditioning circuits</li>
@@ -314,10 +321,10 @@
       </div>
       <div>
         <div class="prog-ph reveal">
-          <img loading="lazy" src="../assets/images/program-selfdefence.jpg" alt="Self defence training at Redcrown" style="width:100%;height:100%;object-fit:cover;">
+          <img loading="lazy" src="../assets/images/program-selfdefence.webp" width="1280" height="720" alt="Self defence training at Redcrown" style="width:100%;height:100%;object-fit:cover;">
         </div>
         <div class="learn-block reveal d1">
-          <h4>What You'll Train</h4>
+          <h3>What You'll Train</h3>
           <ul>
             <li>Situational awareness and de-escalation</li>
             <li>Grip breaks and escapes from common holds</li>
@@ -345,10 +352,10 @@
       </div>
       <div>
         <div class="prog-ph reveal">
-          <img loading="lazy" src="../assets/images/program-kids.jpg" alt="Kids martial arts classes at Redcrown — coming soon" style="width:100%;height:100%;object-fit:cover;">
+          <img loading="lazy" src="../assets/images/program-kids.webp" width="1280" height="720" alt="Kids martial arts classes at Redcrown — coming soon" style="width:100%;height:100%;object-fit:cover;">
         </div>
         <div class="learn-block reveal d1">
-          <h4>What Kids Will Train</h4>
+          <h3>What Kids Will Train</h3>
           <ul>
             <li>Discipline, focus and listening skills</li>
             <li>Striking and grappling fundamentals, age-appropriate</li>
@@ -376,11 +383,13 @@
 </div>
 
 <!-- ============ FOOTER ============ -->
+</main>
+
 <footer class="footer">
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <img src="../assets/logo.png" alt="Redcrown MMA">
+        <img src="../assets/logo.png" alt="Redcrown MMA" width="512" height="512">
         <p class="footer-desc">Elite MMA training in Noida Sector 18. Real coaches, real results. Seven disciplines, one membership, zero ego.</p>
         <div class="footer-socials">
           <a href="https://instagram.com/redcrownmma" class="soc-link" aria-label="Instagram" target="_blank" rel="noopener">IG</a>
@@ -388,7 +397,7 @@
         </div>
       </div>
       <div class="footer-col">
-        <h5>Navigate</h5>
+        <h3>Navigate</h3>
         <ul>
           <li><a href="programs.html">Programs</a></li>
           <li><a href="schedule.html">Schedule</a></li>
@@ -397,7 +406,7 @@
         </ul>
       </div>
       <div class="footer-col">
-        <h5>Programs</h5>
+        <h3>Programs</h3>
         <ul>
           <li><a href="programs.html#mma">MMA</a></li>
           <li><a href="programs.html#bjj">BJJ</a></li>
@@ -407,7 +416,7 @@
         </ul>
       </div>
       <div class="footer-col">
-        <h5>Contact</h5>
+        <h3>Contact</h3>
         <ul>
           <li><a href="tel:+919910604536">+91 99106 04536</a></li>
           <li><a href="mailto:manager@redcrownmma.com">manager@redcrownmma.com</a></li>
@@ -456,8 +465,8 @@
       </div>
       <div class="form-row">
         <div class="form-group">
-          <label>Discipline</label>
-          <select name="discipline">
+          <label for="modal-discipline">Discipline</label>
+          <select name="discipline" id="modal-discipline">
             <option value="">Not sure yet</option>
             <option value="mma">MMA</option>
             <option value="bjj">BJJ</option>
@@ -468,8 +477,8 @@
           </select>
         </div>
         <div class="form-group">
-          <label>Preferred Batch</label>
-          <select name="batch">
+          <label for="modal-batch">Preferred Batch</label>
+          <select name="batch" id="modal-batch">
             <option value="">No preference</option>
             <option value="morning">Morning</option>
             <option value="evening">Evening</option>
