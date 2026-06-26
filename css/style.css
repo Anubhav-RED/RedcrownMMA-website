@@ -579,7 +579,7 @@ section { padding: var(--section) 0; }
 
 .hero-logo {
   display: block;
-  height: 160px;
+  height: 200px;
   width: auto;
   margin-bottom: 2rem;
   opacity: 0;
@@ -1234,7 +1234,7 @@ section { padding: var(--section) 0; }
   border-bottom: 1px solid var(--border);
   margin-bottom: 2rem;
 }
-.footer-brand img { height: 38px; margin-bottom: 1rem; }
+.footer-brand img { height: 40px; width: auto; max-width: 100%; margin-bottom: 1rem; display: block; }
 [data-theme="light"] .footer-brand img { filter: drop-shadow(0 0 0 2px #000F08) brightness(0.15) saturate(0.8); }
 
 .footer-desc {
@@ -1867,6 +1867,96 @@ section { padding: var(--section) 0; }
   -webkit-tap-highlight-color: transparent;
 }
 
+
+/* ─── CLASS LANDING PAGES ─── */
+.class-cover {
+  position: relative;
+  height: 68vh;
+  min-height: 460px;
+  max-height: 680px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+}
+.class-cover img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+}
+.class-cover-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,15,8,0.60) 0%,
+    rgba(0,15,8,0.08) 32%,
+    rgba(0,15,8,0.08) 52%,
+    rgba(0,15,8,0.92) 80%,
+    rgba(0,15,8,1.00) 100%
+  );
+  z-index: 1;
+}
+.class-cover-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding: 0 0 3.5rem;
+}
+.class-cover-content .container { position: relative; }
+.class-cover h1 {
+  margin-bottom: 0.5rem;
+  max-width: 700px;
+}
+.class-cover p {
+  color: var(--bone-70);
+  font-size: 1.05rem;
+  max-width: 520px;
+}
+
+/* Benefits grid */
+.benefits-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  margin-top: 2.5rem;
+}
+.benefit-card {
+  border: 1px solid var(--border);
+  padding: 1.75rem 1.5rem;
+  background: var(--void);
+  transition: border-color 0.22s, background 0.22s;
+}
+.benefit-card:hover {
+  border-color: rgba(200,0,0,0.35);
+  background: var(--void-3);
+}
+.benefit-icon {
+  font-size: 1.4rem;
+  margin-bottom: 0.9rem;
+  display: block;
+}
+.benefit-card h3 {
+  font-size: 1.05rem;
+  margin-bottom: 0.6rem;
+  color: var(--bone);
+}
+.benefit-card p {
+  font-size: 0.92rem;
+  color: var(--bone-70);
+  line-height: 1.75;
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  .class-cover { height: 55vh; min-height: 380px; }
+  .class-cover-content { padding: 0 0 2.5rem; }
+  .benefits-grid { grid-template-columns: 1fr; }
+  .class-cover h1 { font-size: clamp(2rem, 9vw, 3.5rem); }
+}
+
 /* ─── NAV MOBILE ─── */
 @media (max-width: 900px) {
   .nav { padding: 1rem 0; }
@@ -1915,7 +2005,7 @@ section { padding: var(--section) 0; }
     top: 0; bottom: 0;
   }
 
-  .hero-logo { height: 120px; margin-bottom: 1.5rem; }
+  .hero-logo { height: 150px; margin-bottom: 1.5rem; }
   .hero h1 { max-width: 100%; font-size: clamp(2.8rem, 10vw, 5.5rem); }
 
   .hero-sub {
@@ -1946,7 +2036,7 @@ section { padding: var(--section) 0; }
 }
 
 @media (max-width: 480px) {
-  .hero-logo { height: 100px; margin-bottom: 1.25rem; }
+  .hero-logo { height: 125px; margin-bottom: 1.25rem; }
   .hero h1 { font-size: clamp(2.4rem, 12vw, 3.6rem); }
   .hero-tag { font-size: 0.58rem; margin-bottom: 1rem; }
 }
