@@ -1,0 +1,49 @@
+TITLE:    This Is a Sample Post — Replace This With Your Real Title
+DATE:     2026-06-23
+CATEGORY: Beginners Guide
+SLUG:     sample-post-delete-me
+EXCERPT:  One clear sentence that describes the article. This shows on the blog index card. Keep it under 20 words.
+---
+This is your first paragraph. Write it like you're talking to someone who just walked into your gym. No jargon, no fluff — just the thing they need to know.
+
+This is your second paragraph. Leave a blank line between paragraphs — the script turns each block into its own paragraph automatically.
+
+## This Is a Section Heading (H2)
+
+Use double hash for main section headings. Keep them clear and keyword-rich where it makes sense.
+
+This paragraph lives under the section heading above. The script handles all the HTML — you just write the content.
+
+### This Is a Sub-heading (H3)
+
+Use triple hash for sub-sections within a main section.
+
+## Lists Work Too
+
+- First item in a bullet list
+- Second item
+- Third item
+
+Or numbered:
+
+1. First step
+2. Second step
+3. Third step
+
+## Bold Text
+
+Use **double asterisks** for **bold words** inside a paragraph. Use *single asterisks* for *italics*.
+
+## Blockquotes
+
+> Use a greater-than symbol for a pull quote or callout. It gets styled with a red left border.
+
+## Publishing This File
+
+From your project root folder, run:
+
+    python tools/publish-blog.py tools/posts/this-file.txt
+
+That generates pages/your-slug.html and updates pages/blog.html automatically.
+
+DELETE this sample file once you understand the format. Do not publish it.

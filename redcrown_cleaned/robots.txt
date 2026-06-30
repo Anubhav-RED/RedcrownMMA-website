@@ -1,0 +1,12 @@
+# Redcrown MMA — robots.txt
+# Tells search engine crawlers what they can and cannot access.
+# This file must live at: https://redcrownmma.com/robots.txt
+
+User-agent: *
+Allow: /
+
+# Block crawlers from indexing raw asset files (optional — uncomment if needed)
+# Disallow: /assets/
+
+# Sitemap location — submit this URL to Google Search Console too
+Sitemap: https://redcrownmma.com/sitemap.xml
