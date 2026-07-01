@@ -1907,6 +1907,7 @@ section { padding: var(--section) 0; }
 }
 .class-cover-content .container { position: relative; }
 .class-cover h1 {
+  font-size: clamp(1.9rem, 4.5vw, 3.2rem);
   margin-bottom: 0.5rem;
   max-width: 700px;
 }
