@@ -47,6 +47,48 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- Class pages — core conversion pages -->
+  <url>
+    <loc>https://redcrownmma.com/pages/classes/mma-classes-noida.html</loc>
+    <lastmod>2026-07-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://redcrownmma.com/pages/classes/bjj-classes-noida.html</loc>
+    <lastmod>2026-07-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://redcrownmma.com/pages/classes/boxing-classes-noida.html</loc>
+    <lastmod>2026-07-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://redcrownmma.com/pages/classes/muay-thai-classes-noida.html</loc>
+    <lastmod>2026-07-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://redcrownmma.com/pages/classes/self-defence-classes-noida.html</loc>
+    <lastmod>2026-07-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://redcrownmma.com/pages/classes/strength-conditioning-noida.html</loc>
+    <lastmod>2026-07-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 
   <!-- Blog -->
   <url>
@@ -55,6 +97,23 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
+
+  <!-- FAQ -->
+  <url>
+    <loc>https://redcrownmma.com/pages/faq.html</loc>
+    <lastmod>2026-07-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Beginner's guide article -->
+  <url>
+    <loc>https://redcrownmma.com/pages/what-is-mma-beginners-guide.html</loc>
+    <lastmod>2026-07-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
   <!-- Legal — low priority -->
   <url>
     <loc>https://redcrownmma.com/pages/privacy.html</loc>
