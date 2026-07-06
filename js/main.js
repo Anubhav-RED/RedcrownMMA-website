@@ -236,4 +236,101 @@
   /* ─── TICKER ─── */
   document.querySelectorAll('.ticker-track').forEach(t => (t.innerHTML += t.innerHTML));
 
+  /* ─── GOOGLE REVIEWS WIDGET ───
+     Fill these in once you have them, then this widget goes live automatically.
+     placeId: your Google Business Place ID (Find it: developers.google.com/maps/documentation/places/web-service/place-id)
+     apiKey:  a Google Places API key, restricted by HTTP referrer to redcrownmma.com
+              in Google Cloud Console. This key is not secret, restriction is what protects it.
+     Until both are filled in, the widget correctly shows the honest "reviews coming" state. */
+  const GR_CONFIG = {
+    placeId: '',
+    apiKey: ''
+  };
+
+  (function initGoogleReviews() {
+    const widget = document.getElementById('gr-widget');
+    if (!widget) return;
+    const loadingEl = widget.querySelector('.gr-loading');
+    const emptyEl   = widget.querySelector('.gr-empty');
+    const cardEl    = widget.querySelector('.gr-card');
+    const dotsEl    = widget.querySelector('.gr-dots');
+
+    function showEmpty() {
+      loadingEl.style.display = 'none';
+      cardEl.style.display = 'none';
+      dotsEl.style.display = 'none';
+      emptyEl.style.display = 'flex';
+    }
+
+    function renderReview(r) {
+      cardEl.classList.remove('gr-card');
+      void cardEl.offsetWidth; // restart animation
+      cardEl.classList.add('gr-card');
+      const stars = '★★★★★'.slice(0, r.rating || 5) + '☆☆☆☆☆'.slice(0, 5 - (r.rating || 5));
+      cardEl.querySelector('.gr-stars').textContent = stars;
+      cardEl.querySelector('.gr-text').textContent = '"' + (r.text || '') + '"';
+      cardEl.querySelector('.gr-name').textContent = r.author || 'Google User';
+      cardEl.querySelector('.gr-time').textContent = r.time || '';
+      const avatar = cardEl.querySelector('.gr-avatar');
+      if (r.photo) {
+        avatar.style.backgroundImage = `url(${r.photo})`;
+      } else {
+        avatar.style.backgroundImage = 'none';
+      }
+    }
+
+    function renderRotation(reviews) {
+      loadingEl.style.display = 'none';
+      emptyEl.style.display = 'none';
+      cardEl.style.display = 'flex';
+      let idx = 0;
+      renderReview(reviews[0]);
+
+      if (reviews.length > 1) {
+        dotsEl.style.display = 'flex';
+        dotsEl.innerHTML = '';
+        reviews.forEach((_, i) => {
+          const dot = document.createElement('span');
+          dot.className = 'gr-dot' + (i === 0 ? ' active' : '');
+          dot.addEventListener('click', () => {
+            idx = i;
+            renderReview(reviews[idx]);
+            dotsEl.querySelectorAll('.gr-dot').forEach((d, di) => d.classList.toggle('active', di === idx));
+          });
+          dotsEl.appendChild(dot);
+        });
+        setInterval(() => {
+          idx = (idx + 1) % reviews.length;
+          renderReview(reviews[idx]);
+          dotsEl.querySelectorAll('.gr-dot').forEach((d, di) => d.classList.toggle('active', di === idx));
+        }, 6000);
+      }
+    }
+
+    if (!GR_CONFIG.placeId || !GR_CONFIG.apiKey) {
+      showEmpty();
+      return;
+    }
+
+    fetch(`https://places.googleapis.com/v1/places/${GR_CONFIG.placeId}?fields=reviews,rating,userRatingCount`, {
+      headers: { 'X-Goog-Api-Key': GR_CONFIG.apiKey }
+    })
+      .then(res => res.json())
+      .then(data => {
+        const reviews = (data.reviews || [])
+          .filter(r => r.text && r.text.text)
+          .map(r => ({
+            text: r.text.text,
+            rating: r.rating,
+            author: r.authorAttribution ? r.authorAttribution.displayName : 'Google User',
+            photo: r.authorAttribution ? r.authorAttribution.photoUri : '',
+            time: r.relativePublishTimeDescription || ''
+          }))
+          .slice(0, 8);
+        if (!reviews.length) { showEmpty(); return; }
+        renderRotation(reviews);
+      })
+      .catch(showEmpty);
+  })();
+
 })();
