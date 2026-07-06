@@ -18,8 +18,13 @@
     pref = pref || localStorage.getItem(TKEY) || 'auto';
     const dark = pref === 'dark' ? true : pref === 'light' ? false : sysDark.matches;
     dark ? root.removeAttribute('data-theme') : root.setAttribute('data-theme', 'light');
-    document.querySelectorAll('.t-icon').forEach(el => el.textContent = dark ? '☾' : '☀');
-    document.querySelectorAll('.t-lbl').forEach(el  => el.textContent = pref === 'auto' ? 'AUTO' : dark ? 'DARK' : 'LIGHT');
+    document.querySelectorAll('.theme-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.themeSet === pref);
+    });
+    document.querySelectorAll('img[data-src-light]').forEach(img => {
+      const wanted = dark ? img.dataset.srcDark : img.dataset.srcLight;
+      if (wanted && img.getAttribute('src') !== wanted) img.setAttribute('src', wanted);
+    });
   }
 
   applyTheme();
@@ -29,9 +34,9 @@
   });
 
   document.addEventListener('click', e => {
-    if (!e.target.closest('.theme-toggle')) return;
-    const order = { auto: 'dark', dark: 'light', light: 'auto' };
-    const next  = order[localStorage.getItem(TKEY) || 'auto'];
+    const btn = e.target.closest('.theme-btn');
+    if (!btn) return;
+    const next = btn.dataset.themeSet;
     localStorage.setItem(TKEY, next);
     applyTheme(next);
   });
@@ -151,6 +156,58 @@
       get('batch') ? `Preferred batch: ${get('batch')}` : ''
     ].filter(Boolean).join('\n');
     window.open(`https://wa.me/919910604536?text=${encodeURIComponent(msg)}`, '_blank');
+  });
+
+  /* ─── GYM PACKAGE PRICING TOGGLE ─── */
+  const GYM_KEY = 'rc-gym-pricing';
+
+  function setCardPrice(card, showGym, animate) {
+    const valEl    = card.querySelector('.price-amount-val');
+    const strikeEl = card.querySelector('.price-strike');
+    const subEl    = card.querySelector('.price-sub');
+    if (!valEl) return;
+
+    const newVal    = showGym ? `₹${card.dataset.comboFinal}`  : `₹${card.dataset.mma}`;
+    const newStrike = showGym ? `₹${card.dataset.comboStrike}` : '';
+    const newSub    = showGym ? card.dataset.comboSub          : card.dataset.mmaSub;
+
+    const commit = () => {
+      valEl.textContent = newVal;
+      if (subEl) subEl.textContent = newSub;
+      if (strikeEl) {
+        strikeEl.textContent = newStrike;
+        strikeEl.classList.toggle('show', showGym);
+      }
+      valEl.classList.remove('rolling');
+    };
+
+    if (!animate) { commit(); return; }
+    valEl.classList.add('rolling');
+    setTimeout(commit, 200);
+  }
+
+  function applyGymPricing(active, animate) {
+    document.querySelectorAll('.gym-toggle').forEach(btn => {
+      btn.classList.toggle('active', active);
+      btn.setAttribute('aria-pressed', String(active));
+      const lbl = btn.querySelector('.gym-toggle-label');
+      if (lbl) lbl.textContent = active ? 'MMA + Gym Package' : 'Include Gym Package';
+    });
+    document.querySelectorAll('.price-card[data-mma]').forEach(card => {
+      card.classList.toggle('gym-active', active);
+      setCardPrice(card, active, animate);
+    });
+  }
+
+  const gymStart = sessionStorage.getItem(GYM_KEY) === '1';
+  applyGymPricing(gymStart, false);
+
+  document.addEventListener('click', e => {
+    const btn = e.target.closest('.gym-toggle');
+    if (!btn) return;
+    const active = !btn.classList.contains('active');
+    sessionStorage.setItem(GYM_KEY, active ? '1' : '0');
+    applyGymPricing(active, true);
   });
 
   /* ─── SCROLL REVEAL ─── */

@@ -10,7 +10,7 @@
   <!-- Homepage — highest priority -->
   <url>
     <loc>https://redcrownmma.com/</loc>
-    <lastmod>2026-06-20</lastmod>
+    <lastmod>2026-07-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -18,7 +18,7 @@
   <!-- Programs — core conversion page -->
   <url>
     <loc>https://redcrownmma.com/pages/programs.html</loc>
-    <lastmod>2026-06-20</lastmod>
+    <lastmod>2026-07-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -26,7 +26,7 @@
   <!-- Contact — local SEO critical page -->
   <url>
     <loc>https://redcrownmma.com/pages/contact.html</loc>
-    <lastmod>2026-06-20</lastmod>
+    <lastmod>2026-07-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -34,7 +34,7 @@
   <!-- Schedule -->
   <url>
     <loc>https://redcrownmma.com/pages/schedule.html</loc>
-    <lastmod>2026-06-20</lastmod>
+    <lastmod>2026-07-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -42,7 +42,7 @@
   <!-- Coaches -->
   <url>
     <loc>https://redcrownmma.com/pages/coaches.html</loc>
-    <lastmod>2026-06-20</lastmod>
+    <lastmod>2026-07-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -50,42 +50,42 @@
   <!-- Class pages — core conversion pages -->
   <url>
     <loc>https://redcrownmma.com/pages/classes/mma-classes-noida.html</loc>
-    <lastmod>2026-07-01</lastmod>
+    <lastmod>2026-07-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://redcrownmma.com/pages/classes/bjj-classes-noida.html</loc>
-    <lastmod>2026-07-01</lastmod>
+    <lastmod>2026-07-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://redcrownmma.com/pages/classes/boxing-classes-noida.html</loc>
-    <lastmod>2026-07-01</lastmod>
+    <lastmod>2026-07-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://redcrownmma.com/pages/classes/muay-thai-classes-noida.html</loc>
-    <lastmod>2026-07-01</lastmod>
+    <lastmod>2026-07-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://redcrownmma.com/pages/classes/self-defence-classes-noida.html</loc>
-    <lastmod>2026-07-01</lastmod>
+    <lastmod>2026-07-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://redcrownmma.com/pages/classes/strength-conditioning-noida.html</loc>
-    <lastmod>2026-07-01</lastmod>
+    <lastmod>2026-07-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -93,7 +93,7 @@
   <!-- Blog -->
   <url>
     <loc>https://redcrownmma.com/pages/blog.html</loc>
-    <lastmod>2026-06-25</lastmod>
+    <lastmod>2026-07-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -101,7 +101,7 @@
   <!-- FAQ -->
   <url>
     <loc>https://redcrownmma.com/pages/faq.html</loc>
-    <lastmod>2026-07-01</lastmod>
+    <lastmod>2026-07-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -109,7 +109,15 @@
   <!-- Beginner's guide article -->
   <url>
     <loc>https://redcrownmma.com/pages/what-is-mma-beginners-guide.html</loc>
-    <lastmod>2026-07-01</lastmod>
+    <lastmod>2026-07-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Muay Thai vs Kickboxing article -->
+  <url>
+    <loc>https://redcrownmma.com/pages/muay-thai-vs-kickboxing.html</loc>
+    <lastmod>2026-07-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -117,16 +125,22 @@
   <!-- Legal — low priority -->
   <url>
     <loc>https://redcrownmma.com/pages/privacy.html</loc>
-    <lastmod>2026-06-20</lastmod>
+    <lastmod>2026-07-05</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
 
   <url>
     <loc>https://redcrownmma.com/pages/terms.html</loc>
-    <lastmod>2026-06-20</lastmod>
+    <lastmod>2026-07-05</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
+
+  <!--
+    Sauna page (pages/sauna.html) is intentionally left out of this sitemap
+    and marked noindex while under construction. Add it here and remove
+    the noindex tag once the sauna is open to members.
+  -->
 
 </urlset>

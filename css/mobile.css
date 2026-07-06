@@ -44,7 +44,8 @@
   .nav-actions .btn { display: none !important; }
 
   /* Theme toggle: keep but shrink */
-  .theme-toggle { padding: 0.3em 0.55em; font-size: 0.65rem; }
+  .theme-group { height: 32px; }
+  .theme-btn { padding: 0.3em 0.55em; font-size: 0.65rem; }
 
   .nav-logo img { height: 38px !important; }
 
@@ -468,5 +469,8 @@
     fill: #fff;
     flex-shrink: 0;
   }
+
+  .pricing-head { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  .gym-toggle { width: 100%; justify-content: center; }
 
 } /* end @media 767px */

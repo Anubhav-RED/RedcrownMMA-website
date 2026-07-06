@@ -65,23 +65,25 @@
 <body>
 <header class="nav">
 <div class="nav-inner">
-<a class="nav-logo" href="/">
-<img alt="Red Crown MMA" height="512" src="../assets/logo.png" width="512"/>
+<a class="nav-logo" href="../index.html">
+<img alt="Red Crown MMA" data-src-dark="../assets/logo.png" data-src-light="../assets/logo-light.png" height="512" src="../assets/logo.png" width="512"/>
 </a>
 <nav class="nav-links">
-<a href="/">Home</a>
+<a href="../index.html">Home</a>
 <a href="programs.html">Programs</a>
 <a href="schedule.html">Schedule</a>
 <a href="coaches.html">Coaches</a>
 <a href="blog.html">Blog</a>
 <a href="faq.html">FAQ</a>
 <a href="contact.html">Contact</a>
+<a href="sauna.html">Sauna <span class="nav-soon">Soon</span></a>
 </nav>
 <div class="nav-actions">
-<button aria-label="Cycle theme: auto, dark, light" class="theme-toggle">
-<span class="t-icon">☾</span>
-<span class="t-lbl">AUTO</span>
-</button>
+<div class="theme-group" role="group" aria-label="Theme">
+<button aria-label="Auto theme" class="theme-btn" data-theme-set="auto"><span class="t-icon">◐</span><span class="t-lbl">AUTO</span></button>
+<button aria-label="Dark theme" class="theme-btn" data-theme-set="dark"><span class="t-icon">☾</span><span class="t-lbl">DARK</span></button>
+<button aria-label="Light theme" class="theme-btn" data-theme-set="light"><span class="t-icon">☀</span><span class="t-lbl">LIGHT</span></button>
+</div>
 <a class="btn btn-primary btn-sm" data-open-modal="" href="#">
 <span>Book Free Class</span>
 </a>
@@ -92,17 +94,19 @@
 </div>
 </header>
 <div class="mobile-nav">
-<a href="/">Home</a>
+<a href="../index.html">Home</a>
 <a href="programs.html">Programs</a>
 <a href="schedule.html">Schedule</a>
 <a href="coaches.html">Coaches</a>
 <a href="blog.html">Blog</a>
 <a href="faq.html">FAQ</a>
 <a href="contact.html">Contact</a>
+<a href="sauna.html">Sauna <span class="nav-soon">Soon</span></a>
 <a class="btn btn-primary" data-open-modal="" href="#">
 <span>Book Free Class</span>
 </a>
 </div>
+<main>
 <section class="page-hero">
 <div class="container">
 <div class="hero-tag">Legal</div>
@@ -128,10 +132,11 @@
 </div>
 </section>
 
+</main>
 <footer class="footer">
 <div class="container">
 <div class="footer-bot" style="border-top:none; padding-top:0;">
-<span class="footer-copy">© 2026 Redcrown MMA. All rights reserved. · Noida Sector 18, Uttar Pradesh</span>
+<span class="footer-copy">© 2026 Redcrown MMA. All rights reserved. · Sector 18, Noida, Uttar Pradesh 201301</span>
 <div class="footer-legal">
 <a href="privacy.html">Privacy Policy</a>
 <a href="terms.html">Terms &amp; Conditions</a>
