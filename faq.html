@@ -1,0 +1,476 @@
+/*
+ * ╔══════════════════════════════════════════════════════════════╗
+ * ║  REDCROWN MMA — MOBILE STYLESHEET                           ║
+ * ║  Loaded only at ≤767px via <link media="..."> on every page  ║
+ * ║  Desktop style.css is completely untouched.                  ║
+ * ╚══════════════════════════════════════════════════════════════╝
+ */
+
+@media screen and (max-width: 767px) {
+
+  /* ─── GLOBAL ──────────────────────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; }
+
+  body {
+    padding-bottom: 76px; /* space for sticky bottom bar */
+    overflow-x: hidden;
+  }
+
+  .container {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  img { max-width: 100%; height: auto; }
+
+  h1 { font-size: clamp(2.4rem, 11vw, 3.8rem) !important; line-height: 1.05 !important; }
+  h2 { font-size: clamp(1.7rem, 7.5vw, 2.6rem) !important; line-height: 1.1 !important; }
+  h3 { font-size: clamp(1.05rem, 5vw, 1.4rem) !important; }
+  p  { font-size: 1rem !important; line-height: 1.85 !important; }
+
+  /* ─── TICKER ──────────────────────────────────────────────── */
+  .top-ticker { padding: 0.45rem 0; }
+  .ticker-item { font-size: 0.6rem; letter-spacing: 0.12em; }
+
+  /* ─── NAV ─────────────────────────────────────────────────── */
+  .nav { padding: 0.85rem 0; }
+  .nav-inner { padding: 0 1.1rem; }
+
+  /* Kill desktop nav — force hamburger */
+  .nav-links { display: none !important; }
+  .hamburger { display: flex !important; }
+
+  /* Hide Book button from nav — bottom bar handles it */
+  .nav-actions .btn { display: none !important; }
+
+  /* Theme toggle: keep but shrink */
+  .theme-group { height: 32px; }
+  .theme-btn { padding: 0.3em 0.55em; font-size: 0.65rem; }
+
+  .nav-logo img { height: 38px !important; }
+
+  /* Mobile nav drawer */
+  .mobile-nav {
+    padding: 1.75rem 1.5rem 2rem;
+    font-size: 1.1rem;
+  }
+  .mobile-nav a {
+    padding: 0.9rem 0;
+    font-size: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .mobile-nav .btn {
+    margin-top: 1.25rem;
+    width: 100%;
+    min-height: 52px;
+    font-size: 0.9rem;
+  }
+
+  /* ─── HERO ────────────────────────────────────────────────── */
+  .hero {
+    min-height: 100svh;
+    padding-top: 62px;
+  }
+
+  .hero-inner {
+    padding: 2rem 0 5rem;
+    justify-content: flex-end;
+    align-items: flex-start;
+  }
+
+  .hero-content {
+    max-width: 100%;
+    z-index: 2;
+    position: relative;
+  }
+
+  .hero-photo {
+    width: 100%;
+    opacity: 0.2;
+    position: absolute;
+    top: 0; bottom: 0; left: 0; right: 0;
+    object-fit: cover;
+  }
+
+  .hero-logo {
+    height: 130px !important;
+    margin-bottom: 1.5rem;
+    display: block;
+  }
+
+  .hero-tag {
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    margin-bottom: 1rem;
+  }
+
+  .hero h1 { max-width: 100%; }
+
+  .hero-sub {
+    font-size: 1rem !important;
+    max-width: 100%;
+    line-height: 1.75 !important;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-checks {
+    gap: 0.7rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+  .hero-check { font-size: 0.72rem; }
+
+  .hero-ctas {
+    flex-direction: column;
+    gap: 0.75rem;
+    width: 100%;
+  }
+  .hero-ctas .btn {
+    width: 100% !important;
+    justify-content: center;
+    min-height: 54px !important;
+    font-size: 0.9rem;
+  }
+
+  .scroll-hint { display: none !important; }
+
+  /* ─── STATS BAND ──────────────────────────────────────────── */
+  .stats-band { padding: 2.5rem 0; }
+  .stats-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 0;
+  }
+  .stat-item {
+    padding: 1.5rem 1rem;
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .stat-item:nth-child(2n) { border-right: none; }
+  .stat-item:nth-last-child(-n+2) { border-bottom: none; }
+  .stat-number { font-size: clamp(2rem, 9vw, 3rem); }
+  .stat-label  { font-size: 0.72rem; }
+
+  /* ─── WHY / PILLARS SECTION ───────────────────────────────── */
+  .why-grid {
+    grid-template-columns: 1fr !important;
+    gap: 0 !important;
+  }
+  .why-item {
+    padding: 1.5rem 1.25rem;
+    border-right: none !important;
+    border-bottom: 1px solid var(--border);
+  }
+  .why-item:last-child { border-bottom: none; }
+  .why-icon  { font-size: 1.4rem; margin-bottom: 0.75rem; }
+  .why-title { font-size: 1.1rem !important; }
+  .why-body  { font-size: 0.97rem !important; }
+
+  /* ─── PROGRAMS GRID (homepage cards) ─────────────────────── */
+  .programs-grid {
+    grid-template-columns: 1fr !important;
+    gap: 0 !important;
+  }
+  .prog-card {
+    padding: 1.75rem 1.25rem !important;
+    border-right: none !important;
+    border-bottom: 1px solid var(--border);
+    grid-column: span 1 !important;
+  }
+  .prog-card:last-child { border-bottom: none; }
+  .prog-num  { font-size: 0.6rem; margin-bottom: 0.5rem; }
+  .prog-card h3 { font-size: 1.2rem !important; }
+  .prog-card p  { font-size: 0.97rem !important; }
+  .prog-link { font-size: 0.8rem; margin-top: 1rem; }
+
+  /* ─── PROGRAMS PAGE — individual sections ─────────────────── */
+  .prog-inner {
+    grid-template-columns: 1fr !important;
+    gap: 0 !important;
+    display: block !important;
+  }
+
+  .prog-ph { display: none !important; } /* hide decorative panel */
+
+  .prog-content { padding: 2rem 0 !important; }
+
+  .prog-name {
+    font-size: clamp(2rem, 10vw, 3.5rem) !important;
+    line-height: 1 !important;
+  }
+  .prog-for  { font-size: 0.7rem; margin-bottom: 1.25rem; }
+  .prog-desc { font-size: 0.97rem !important; }
+
+  .prog-detail-num  { font-size: 0.6rem; }
+  .prog-detail-name { font-size: 0.78rem !important; }
+  .prog-detail-body { font-size: 0.92rem !important; }
+
+  /* Two-col about grid on programs page */
+  .prog-about-grid,
+  .about-two-col {
+    display: block !important;
+  }
+  .prog-about-grid > *,
+  .about-two-col > * {
+    width: 100% !important;
+    margin-bottom: 2rem;
+  }
+
+  /* Prog-ctas (Learn More + Book) */
+  .prog-ctas {
+    flex-direction: column !important;
+    gap: 0.75rem !important;
+  }
+  .prog-ctas .btn {
+    width: 100% !important;
+    justify-content: center !important;
+    min-height: 52px !important;
+  }
+
+  /* ─── COACH SECTION (homepage) ────────────────────────────── */
+  .coach-wrap {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0 !important;
+  }
+  .coach-photo-wrap {
+    width: 100% !important;
+    height: 320px !important;
+    margin-bottom: 2rem;
+  }
+  .coach-photo-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+  }
+  .coach-content { padding: 0 !important; }
+  .coach-name  { font-size: clamp(1.8rem, 8vw, 2.8rem) !important; }
+  .coach-title { font-size: 0.75rem; }
+
+  .coach-stats-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 0 !important;
+  }
+  .coach-stat-item {
+    padding: 1rem 0.75rem;
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .coach-stat-item:nth-child(2n) { border-right: none; }
+  .coach-stat-item:last-child,
+  .coach-stat-item:nth-last-child(2):nth-child(odd) { border-bottom: none; }
+  .coach-stat-num  { font-size: 1.6rem !important; }
+  .coach-stat-lbl  { font-size: 0.65rem; }
+
+  .coach-cred-list li { font-size: 0.9rem !important; }
+
+  /* ─── PRICING ──────────────────────────────────────────────── */
+  .pricing-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+  .price-card {
+    padding: 2rem 1.5rem !important;
+  }
+  .price-plan   { font-size: 0.75rem; }
+  .price-amount { font-size: 2.2rem !important; }
+  .price-sub    { font-size: 0.85rem; }
+  .price-features li { font-size: 0.93rem !important; }
+  .price-card .btn,
+  .price-card .btn-gold {
+    width: 100% !important;
+    justify-content: center;
+    min-height: 50px;
+  }
+
+  /* ─── TESTIMONIALS ─────────────────────────────────────────── */
+  .testimonials-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+  .testi-card { padding: 1.5rem 1.25rem !important; }
+  .testi-text { font-size: 0.97rem !important; line-height: 1.75 !important; }
+  .testi-name { font-size: 0.8rem; }
+
+  /* ─── FAQ (homepage + FAQ page) ────────────────────────────── */
+  .faq-btn { padding: 1.25rem 1.1rem !important; font-size: 0.92rem !important; }
+  .faq-body p { padding: 0 1.1rem !important; font-size: 0.95rem !important; }
+  .faq-body ul { padding-left: 2.5rem !important; }
+
+  /* FAQ page category nav */
+  .faq-cat-nav { top: 58px; padding: 0.65rem 0; }
+  .faq-cat-pill { font-size: 0.62rem; padding: 0.3em 0.8em; }
+  .faq-section { padding: 2.5rem 0; }
+  .faq-section-header { margin-bottom: 1.75rem; }
+
+  /* ─── PAGE HERO (inner pages) ──────────────────────────────── */
+  .page-hero { padding: 6rem 0 2.5rem; }
+  .page-hero h1 { font-size: clamp(2rem, 9vw, 3.5rem) !important; }
+  .page-hero p  { font-size: 0.97rem !important; max-width: 100%; }
+
+  /* ─── CLASS COVER (class landing pages) ────────────────────── */
+  .class-cover { height: 52vh; min-height: 340px; }
+  .class-cover-content { padding: 0 0 2rem; }
+  .class-cover h1 { font-size: clamp(1.8rem, 8vw, 3rem) !important; }
+  .class-cover p  { font-size: 0.93rem !important; }
+
+  /* Class page about grid — override inline style */
+  .class-about-grid {
+    display: block !important;
+  }
+  .class-about-grid > * {
+    width: 100% !important;
+    margin-bottom: 2rem;
+  }
+  .class-about-grid > *:last-child { margin-bottom: 0; }
+
+  /* Class page train list */
+  .class-train-list li { font-size: 0.93rem !important; }
+
+  /* Benefits grid */
+  .benefits-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+  .benefit-card { padding: 1.5rem 1.25rem !important; }
+  .benefit-card h3 { font-size: 1.05rem !important; }
+  .benefit-card p  { font-size: 0.95rem !important; }
+
+  /* ─── CTA BAND ─────────────────────────────────────────────── */
+  .cta-band { padding: 3.5rem 0; }
+  .cta-band h2 { font-size: clamp(1.7rem, 7vw, 2.5rem) !important; margin-bottom: 1rem; }
+  .cta-band p  { font-size: 0.97rem !important; max-width: 100%; padding: 0 0.25rem; }
+  .cta-band .ctas {
+    flex-direction: column !important;
+    width: 100%;
+    gap: 0.75rem !important;
+  }
+  .cta-band .ctas .btn,
+  .cta-band .ctas .btn-gold {
+    width: 100% !important;
+    justify-content: center !important;
+    min-height: 54px !important;
+    font-size: 0.9rem;
+  }
+
+  /* ─── SCHEDULE INTERIM PAGE ────────────────────────────────── */
+  .batch-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+  .discipline-pills {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .s-pill { font-size: 0.72rem; }
+
+  /* ─── FOOTER ───────────────────────────────────────────────── */
+  .footer { padding: 3rem 0 1.5rem; }
+  .footer-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+  .footer-brand img { height: 36px !important; }
+  .footer-desc { font-size: 0.9rem !important; }
+
+  .footer-col h3 { font-size: 0.68rem; margin-bottom: 1rem; }
+  .footer-col li a { font-size: 0.92rem; padding: 0.2rem 0; display: block; }
+
+  .footer-bot {
+    flex-direction: column !important;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding-top: 1.5rem;
+    margin-top: 1.5rem;
+  }
+  .footer-copy  { font-size: 0.72rem !important; }
+  .footer-legal { gap: 1.25rem; }
+  .footer-legal a { font-size: 0.75rem; }
+
+  .soc-link { min-width: 42px; min-height: 42px; font-size: 0.72rem; }
+
+  /* ─── WA FAB — push above bottom bar ───────────────────────── */
+  .wa-fab {
+    bottom: calc(80px + env(safe-area-inset-bottom)) !important;
+    right: 1.1rem !important;
+    width: 50px !important;
+    height: 50px !important;
+  }
+  .wa-fab svg { width: 26px !important; height: 26px !important; }
+
+  /* ─── MODAL ────────────────────────────────────────────────── */
+  .modal {
+    max-height: 92svh;
+    overflow-y: auto;
+    margin: auto 0 0;
+    border-radius: 0;
+  }
+  .modal-backdrop { align-items: flex-end; }
+  .modal-header h3 { font-size: 1.15rem !important; }
+  .form-row { flex-direction: column; gap: 0; }
+  .form-group input,
+  .form-group select { font-size: 1rem; min-height: 46px; }
+  .modal-form .btn { min-height: 52px; }
+
+  /* ─── SECTION NUMS & LABELS ────────────────────────────────── */
+  .section-num { font-size: 0.6rem; letter-spacing: 0.25em; }
+  .label       { font-size: 0.6rem; letter-spacing: 0.2em; }
+
+  /* ─── MOBILE STICKY BOTTOM ACTION BAR ──────────────────────── */
+  .mobile-book-bar {
+    display: flex !important;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 0.7rem 1rem calc(0.7rem + env(safe-area-inset-bottom));
+    background: rgba(0, 15, 8, 0.97);
+    border-top: 1px solid var(--border);
+    z-index: 400;
+    gap: 0.6rem;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+  .mobile-book-bar .mbb-book {
+    flex: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--hunt);
+    color: #fff;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 0.82rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    min-height: 48px;
+    border: 1px solid var(--hunt);
+  }
+  .mobile-book-bar .mbb-wa {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    background: #25D366;
+    color: #fff;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 0.82rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    min-height: 48px;
+  }
+  .mobile-book-bar .mbb-wa svg {
+    width: 17px;
+    height: 17px;
+    fill: #fff;
+    flex-shrink: 0;
+  }
+
+  .pricing-head { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  .gym-toggle { width: 100%; justify-content: center; }
+
+} /* end @media 767px */
