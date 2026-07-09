@@ -138,6 +138,14 @@
     <priority>0.6</priority>
   </url>
 
+  <!-- Why Gym Training Matters for MMA article -->
+  <url>
+    <loc>https://redcrownmma.com/pages/why-gym-training-matters-for-mma.html</loc>
+    <lastmod>2026-07-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
   <!-- Legal — low priority -->
   <url>
     <loc>https://redcrownmma.com/pages/privacy.html</loc>
