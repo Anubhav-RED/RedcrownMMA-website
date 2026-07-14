@@ -158,27 +158,31 @@
     window.open(`https://wa.me/919910604536?text=${encodeURIComponent(msg)}`, '_blank');
   });
 
-  /* ─── GYM PACKAGE PRICING TOGGLE ─── */
-  const GYM_KEY = 'rc-gym-pricing';
+  /* ─── PLAN SELECTOR: MMA / GYM / COMBO ─── */
+  const PLAN_KEY = 'rc-plan-mode';
 
-  function setCardPrice(card, showGym, animate) {
+  function setCardPlan(card, plan, animate) {
     const valEl    = card.querySelector('.price-amount-val');
     const strikeEl = card.querySelector('.price-strike');
     const subEl    = card.querySelector('.price-sub');
     if (!valEl) return;
 
-    const newVal    = showGym ? `₹${card.dataset.comboFinal}`  : `₹${card.dataset.mma}`;
-    const newStrike = showGym ? `₹${card.dataset.comboStrike}` : '';
-    const newSub    = showGym ? card.dataset.comboSub          : card.dataset.mmaSub;
+    const showCombo = plan === 'combo';
+    const newVal    = showCombo ? `₹${card.dataset.comboFinal}`  : `₹${card.dataset.mma}`;
+    const newStrike = showCombo ? `₹${card.dataset.comboStrike}` : '';
+    const newSub     = showCombo ? card.dataset.comboSub          : card.dataset.mmaSub;
 
     const commit = () => {
       valEl.textContent = newVal;
       if (subEl) subEl.textContent = newSub;
       if (strikeEl) {
         strikeEl.textContent = newStrike;
-        strikeEl.classList.toggle('show', showGym);
+        strikeEl.classList.toggle('show', showCombo);
       }
       valEl.classList.remove('rolling');
+      card.querySelectorAll('.price-features').forEach(ul => {
+        ul.style.display = ul.classList.contains('pf-' + plan) ? '' : 'none';
+      });
     };
 
     if (!animate) { commit(); return; }
@@ -186,28 +190,27 @@
     setTimeout(commit, 200);
   }
 
-  function applyGymPricing(active, animate) {
-    document.querySelectorAll('.gym-toggle').forEach(btn => {
-      btn.classList.toggle('active', active);
-      btn.setAttribute('aria-pressed', String(active));
-      const lbl = btn.querySelector('.gym-toggle-label');
-      if (lbl) lbl.textContent = active ? 'MMA + Gym Package' : 'Include Gym Package';
+  function applyPlanMode(plan, animate) {
+    document.querySelectorAll('.plan-group').forEach(group => {
+      group.querySelectorAll('.plan-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.planSet === plan);
+      });
     });
     document.querySelectorAll('.price-card[data-mma]').forEach(card => {
-      card.classList.toggle('gym-active', active);
-      setCardPrice(card, active, animate);
+      card.classList.toggle('gym-active', plan !== 'mma');
+      setCardPlan(card, plan, animate);
     });
   }
 
-  const gymStart = sessionStorage.getItem(GYM_KEY) === '1';
-  applyGymPricing(gymStart, false);
+  const planStart = sessionStorage.getItem(PLAN_KEY) || 'mma';
+  applyPlanMode(planStart, false);
 
   document.addEventListener('click', e => {
-    const btn = e.target.closest('.gym-toggle');
+    const btn = e.target.closest('.plan-btn');
     if (!btn) return;
-    const active = !btn.classList.contains('active');
-    sessionStorage.setItem(GYM_KEY, active ? '1' : '0');
-    applyGymPricing(active, true);
+    const plan = btn.dataset.planSet;
+    sessionStorage.setItem(PLAN_KEY, plan);
+    applyPlanMode(plan, true);
   });
 
   /* ─── SCROLL REVEAL ─── */

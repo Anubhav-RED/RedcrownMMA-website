@@ -108,6 +108,7 @@
   ],
   "makesOffer": [
     { "@type": "Offer", "name": "MMA Membership, Monthly", "price": "4499", "priceCurrency": "INR", "category": "MMA Only" },
+    { "@type": "Offer", "name": "Gym Membership, Monthly", "price": "4499", "priceCurrency": "INR", "category": "Gym Only" },
     { "@type": "Offer", "name": "MMA + Gym Membership, Monthly", "price": "6499", "priceCurrency": "INR", "category": "MMA + Gym" }
   ],
   "areaServed": [
@@ -147,7 +148,7 @@
       "name": "How much does Redcrown MMA membership cost?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "MMA membership starts at Rs 4499 per month with full access to every discipline. 3-month (Rs 11999), 6-month (Rs 20999) and annual (Rs 35999) plans bring the rate down further. Add the gym package for full access to the training gym and strength area, starting at Rs 6499 per month, with unlimited MMA classes included. No joining fee on any plan, and annual MMA plus Gym members get a free training kit on the house."
+        "text": "MMA membership starts at Rs 4499 per month with full access to every discipline. Gym Only membership is priced identically, starting at Rs 4499 per month. MMA + Gym combines both starting at Rs 6499 per month, with unlimited MMA classes included. 3-month, 6-month and annual plans bring the per-month rate down further on every tier. No joining fee on any plan, and annual MMA plus Gym members get a free training kit on the house."
       }
     },
     {
@@ -442,12 +443,12 @@
 <p>Practical, tested, drawn from BJJ and Muay Thai. What to do when a situation goes wrong, built for real life rather than performance.</p>
 <span class="prog-link">View Program →</span>
 </a>
-<a class="prog-card reveal" href="pages/programs.html#gym" style="grid-column: span 3; background: linear-gradient(160deg, rgba(194,178,128,0.10) 0%, var(--void-3) 60%); border: 1px solid rgba(194,178,128,0.35);">
+<a class="prog-card reveal" href="pages/gym-membership-noida.html" style="grid-column: span 3; background: linear-gradient(160deg, rgba(194,178,128,0.10) 0%, var(--void-3) 60%); border: 1px solid rgba(194,178,128,0.35);">
 <span class="prog-num">07 / Training Floor</span>
 <h3>Gym &amp; Strength Floor</h3>
-<span class="prog-for">Open To Any Member</span>
-<p>We won't call it state of the art, because it isn't, and we're not going to pretend. What it is: racks, plates, bags and machines that get used every day by people training for a reason. Add gym access to any MMA membership, or train on your own schedule alongside your classes.</p>
-<span class="prog-link">View Gym Access →</span>
+<span class="prog-for">Open To Anyone, MMA Optional</span>
+<p>We won't call it state of the art, because it isn't, and we're not going to pretend. What it is: racks, plates, bags and machines that get used every day. Join gym-only at the same price as MMA, add it to any membership, or train on your own schedule alongside your classes.</p>
+<span class="prog-link">View Gym Membership →</span>
 </a>
 <a class="prog-card reveal" href="pages/programs.html#kids" style="grid-column: span 3;">
 <span class="prog-num">08 / Youth Program</span>
@@ -547,12 +548,13 @@
 <div class="pricing-head">
 <div>
 <h2 class="reveal" style="margin-bottom:1rem; max-width:600px;">Straightforward pricing.</h2>
-<p class="reveal d1" style="color:var(--bone-70); max-width:560px;">No hidden fees. No lock-in surprises. Add the gym whenever you want it.</p>
+<p class="reveal d1" style="color:var(--bone-70); max-width:560px;">MMA only. Gym only. Or both. Same simple pricing either way.</p>
 </div>
-<button aria-pressed="false" class="gym-toggle reveal d1">
-<span class="gym-toggle-track"><span class="gym-toggle-thumb"></span></span>
-<span class="gym-toggle-label">Include Gym Package</span>
-</button>
+<div aria-label="Choose your plan" class="plan-group reveal d1" role="group">
+<button class="plan-btn active" data-plan-set="mma">MMA Only</button>
+<button class="plan-btn" data-plan-set="gym">Gym Only</button>
+<button class="plan-btn" data-plan-set="combo">MMA + Gym</button>
+</div>
 </div>
 </div>
 <div class="container" style="padding:0; margin-top:2rem;">
@@ -562,10 +564,20 @@
 <div class="price-amount-line"><span class="price-strike"></span></div>
 <div class="price-amount"><span class="price-amount-val">₹4,499</span><span class="price-per">/mo</span></div>
 <div class="price-sub">Billed monthly</div>
-<ul class="price-features">
-<li>Access to all classes</li>
+<ul class="price-features pf-mma">
+<li>Access to all MMA classes</li>
 <li>All disciplines included</li>
-<li class="gym-feature"><strong>Unlimited MMA Classes</strong> + Gym Access</li>
+<li>No long-term commitment</li>
+</ul>
+<ul class="price-features pf-gym" style="display:none;">
+<li>Full gym floor access</li>
+<li>Strength equipment &amp; free weights</li>
+<li>No class commitment required</li>
+</ul>
+<ul class="price-features pf-combo" style="display:none;">
+<li>Access to all MMA classes</li>
+<li>All disciplines included</li>
+<li><strong>Unlimited MMA Classes</strong> + Gym Access</li>
 <li>No long-term commitment</li>
 </ul>
 <a class="btn btn-outline" data-open-modal="" href="#" style="width:100%;"><span>Get Started</span></a>
@@ -576,10 +588,20 @@
 <div class="price-amount-line"><span class="price-strike"></span></div>
 <div class="price-amount"><span class="price-amount-val">₹11,999</span></div>
 <div class="price-sub">₹4,000 / mo · Save ₹1,498</div>
-<ul class="price-features">
+<ul class="price-features pf-mma">
 <li>Everything in Monthly</li>
 <li>Priority batch selection</li>
-<li class="gym-feature"><strong>Unlimited MMA Classes</strong> + Gym Access</li>
+<li>Dedicated progress check-in</li>
+</ul>
+<ul class="price-features pf-gym" style="display:none;">
+<li>Full gym floor access</li>
+<li>Strength equipment &amp; free weights</li>
+<li>Train on your own schedule</li>
+</ul>
+<ul class="price-features pf-combo" style="display:none;">
+<li>Everything in Monthly</li>
+<li>Priority batch selection</li>
+<li><strong>Unlimited MMA Classes</strong> + Gym Access</li>
 <li>Dedicated progress check-in</li>
 </ul>
 <a class="btn btn-primary" data-open-modal="" href="#" style="width:100%;"><span>Get Started</span></a>
@@ -590,10 +612,19 @@
 <div class="price-amount-line"><span class="price-strike"></span></div>
 <div class="price-amount"><span class="price-amount-val">₹20,999</span></div>
 <div class="price-sub">₹3,500 / mo · Save ₹5,995</div>
-<ul class="price-features">
+<ul class="price-features pf-mma">
 <li>Everything in 3 Months</li>
 <li>Referral reward eligible</li>
-<li class="gym-feature"><strong>Unlimited MMA Classes</strong> + Gym Access</li>
+</ul>
+<ul class="price-features pf-gym" style="display:none;">
+<li>Full gym floor access</li>
+<li>Strength equipment &amp; free weights</li>
+<li>Referral reward eligible</li>
+</ul>
+<ul class="price-features pf-combo" style="display:none;">
+<li>Everything in 3 Months</li>
+<li>Referral reward eligible</li>
+<li><strong>Unlimited MMA Classes</strong> + Gym Access</li>
 </ul>
 <a class="btn btn-gold" data-open-modal="" href="#" style="width:100%;"><span>Get Started</span></a>
 </div>
@@ -602,11 +633,20 @@
 <div class="price-amount-line"><span class="price-strike"></span></div>
 <div class="price-amount"><span class="price-amount-val">₹35,999</span></div>
 <div class="price-sub">₹3,000 / mo · Save ₹17,989</div>
-<ul class="price-features">
+<ul class="price-features pf-mma">
 <li>Everything included</li>
 <li>First access to new programs</li>
-<li class="gym-feature"><strong>Unlimited MMA Classes</strong> + Gym Access</li>
-<li class="gym-feature"><strong>Free Training Kit</strong>, On The House</li>
+</ul>
+<ul class="price-features pf-gym" style="display:none;">
+<li>Full gym floor access</li>
+<li>Strength equipment &amp; free weights</li>
+<li>First access to new equipment</li>
+</ul>
+<ul class="price-features pf-combo" style="display:none;">
+<li>Everything included</li>
+<li>First access to new programs</li>
+<li><strong>Unlimited MMA Classes</strong> + Gym Access</li>
+<li><strong>Free Training Kit</strong>, On The House</li>
 </ul>
 <a class="btn btn-outline" data-open-modal="" href="#" style="width:100%;"><span>Get Started</span></a>
 </div>
@@ -671,8 +711,8 @@
 <div class="faq-body"><p>No joining fee on any plan, ever. Monthly plans have no lock-in and can be cancelled anytime. 3, 6 and 12-month plans are billed upfront for the full term you choose. Annual MMA + Gym members also get a free training kit (gloves, shin pads, hand wraps and a custom training jacket), on the house.</p></div>
 </div>
 <div class="faq-item">
-<button class="faq-btn"><span>How much does the gym package cost?</span><span class="faq-icon">+</span></button>
-<div class="faq-body"><p>Use the "Include Gym Package" toggle on our pricing section to see combined rates. MMA plus gym starts at ₹6,499 per month, with better per-month rates on the 3-month, 6-month and annual plans, and unlimited MMA classes included at every tier. You can add or drop gym access whenever your plan renews.</p></div>
+<button class="faq-btn"><span>Can I join just for the gym, without MMA classes?</span><span class="faq-icon">+</span></button>
+<div class="faq-body"><p>Yes. Use the MMA Only / Gym Only / MMA + Gym selector on our pricing section. A Gym Only membership is priced exactly the same as MMA Only, starting at ₹4,499 per month, with the same 3, 6 and 12-month rates. MMA + Gym combines both starting at ₹6,499 per month, with unlimited MMA classes included. You can switch between plans whenever your membership renews.</p></div>
 </div>
 <div class="faq-item">
 <button class="faq-btn"><span>Is the sauna open?</span><span class="faq-icon">+</span></button>
@@ -722,7 +762,7 @@
 <h3>Programs</h3>
 <ul>
 <li><a href="pages/programs.html#mma">MMA</a></li>
-<li><a href="pages/programs.html#gym">Gym</a></li>
+<li><a href="pages/gym-membership-noida.html">Gym Membership</a></li>
 <li><a href="pages/programs.html#bjj">BJJ</a></li>
 <li><a href="pages/programs.html#muaythai">Muay Thai</a></li>
 <li><a href="pages/programs.html#boxing">Boxing</a></li>

@@ -471,6 +471,7 @@
   }
 
   .pricing-head { flex-direction: column; align-items: flex-start; gap: 1rem; }
-  .gym-toggle { width: 100%; justify-content: center; }
+  .plan-group { width: 100%; }
+  .plan-btn { flex: 1; padding: 0 0.5rem; font-size: 0.68rem; }
 
 } /* end @media 767px */
