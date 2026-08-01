@@ -239,6 +239,40 @@
   /* ─── TICKER ─── */
   document.querySelectorAll('.ticker-track').forEach(t => (t.innerHTML += t.innerHTML));
 
+  /* ─── NAV "MORE" DROPDOWN ─── */
+  document.addEventListener('click', e => {
+    const btn = e.target.closest('.nav-more-btn');
+    const openMenu = document.querySelector('.nav-more.open');
+
+    if (btn) {
+      const wrap = btn.closest('.nav-more');
+      const willOpen = !wrap.classList.contains('open');
+      document.querySelectorAll('.nav-more.open').forEach(w => {
+        w.classList.remove('open');
+        w.querySelector('.nav-more-btn').setAttribute('aria-expanded', 'false');
+      });
+      if (willOpen) {
+        wrap.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+      return;
+    }
+
+    if (openMenu && !e.target.closest('.nav-more-menu')) {
+      openMenu.classList.remove('open');
+      openMenu.querySelector('.nav-more-btn').setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.nav-more.open').forEach(w => {
+        w.classList.remove('open');
+        w.querySelector('.nav-more-btn').setAttribute('aria-expanded', 'false');
+      });
+    }
+  });
+
   /* ─── GOOGLE REVIEWS WIDGET ───
      Fill these in once you have them, then this widget goes live automatically.
      placeId: your Google Business Place ID (Find it: developers.google.com/maps/documentation/places/web-service/place-id)

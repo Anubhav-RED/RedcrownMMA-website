@@ -28,6 +28,11 @@
 
   --section:   clamp(5rem, 10vw, 8rem);
   --wrap:      min(90%, 1200px);
+
+  --glass:        rgba(10, 18, 14, 0.52);
+  --glass-strong: rgba(6, 12, 9, 0.82);
+  --glass-border: rgba(255, 255, 240, 0.10);
+  --glass-blur:   18px;
 }
 
 [data-theme="light"] {
@@ -43,6 +48,11 @@
   --hunt-dim:  rgba(194, 178, 128, 0.22);
   --hunt-glow: 0 0 24px rgba(194, 178, 128, 0.38), 0 0 60px rgba(194, 178, 128, 0.14);
   --border:    rgba(194, 178, 128, 0.45);
+
+  --glass:        rgba(255, 255, 240, 0.58);
+  --glass-strong: rgba(255, 255, 240, 0.88);
+  --glass-border: rgba(0, 15, 8, 0.08);
+  --glass-blur:   18px;
 }
 
 /* ─── 2. RESET ─── */
@@ -276,6 +286,77 @@ section { padding: var(--section) 0; }
 .nav-links a.active { color: var(--bone); }
 .nav-links a:hover::after,
 .nav-links a.active::after { transform: scaleX(1); }
+
+/* ─── Nav "More" dropdown ─── */
+.nav-more { position: relative; }
+.nav-more-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+  font-size: 0.82rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--bone-70);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  transition: color 0.2s;
+  padding: 0;
+}
+.nav-more-btn:hover { color: var(--bone); }
+.nav-more-caret { font-size: 0.65em; transition: transform 0.2s var(--ease); display: inline-block; }
+.nav-more.open .nav-more-caret { transform: rotate(180deg); }
+.nav-more:has(.nav-more-menu a.active) .nav-more-btn { color: var(--hunt); }
+.nav-more-menu {
+  position: absolute;
+  top: calc(100% + 14px);
+  right: 0;
+  min-width: 170px;
+  background: var(--void);
+  border: 1px solid var(--border);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.35);
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px);
+  transition: opacity 0.2s var(--ease), transform 0.2s var(--ease), visibility 0.2s;
+  z-index: 50;
+}
+.nav-more.open .nav-more-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.nav-more-menu a {
+  padding: 0.6rem 0.75rem;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--bone-70);
+  transition: color 0.2s, background 0.2s;
+  white-space: nowrap;
+}
+.nav-more-menu a:hover { color: var(--bone); background: var(--void-2); }
+.nav-more-menu a.active { color: var(--hunt); }
+
+.mobile-nav-divider {
+  display: block;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--bone-45);
+  padding: 0.75rem 0 0.35rem;
+  border-top: 1px solid var(--border);
+  margin-top: 0.5rem;
+}
 
 .nav-actions {
   display: flex;
@@ -908,6 +989,52 @@ section { padding: var(--section) 0; }
   color: var(--bone-45);
   letter-spacing: 0.12em;
   text-transform: uppercase;
+}
+
+/* ─── Owner Cards (Meet the Owners) ─── */
+.owners-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+.owner-card { text-align: center; }
+.owner-photo-frame {
+  aspect-ratio: 1/1;
+  max-width: 220px;
+  margin: 0 auto 1.25rem;
+  background: var(--void-3);
+  border: 1px dashed var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.owner-wip-tag {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--bone-45);
+  padding: 0.4em 0.8em;
+  border: 1px solid var(--border);
+  background: var(--void-2);
+}
+.owner-card h3 { margin-bottom: 0.3rem; }
+.owner-role {
+  display: block;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--hunt);
+  margin-bottom: 0.85rem;
+}
+.owner-card p { color: var(--bone-70); font-size: 0.92rem; line-height: 1.7; max-width: 320px; margin: 0 auto; }
+
+@media (max-width: 640px) {
+  .owners-grid { grid-template-columns: 1fr; gap: 2.5rem; }
 }
 
 .coach-creds { margin: 1.5rem 0 2rem; }
