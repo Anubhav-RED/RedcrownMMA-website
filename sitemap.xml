@@ -58,7 +58,7 @@
   <!-- Our Philosophy -->
   <url>
     <loc>https://redcrownmma.com/pages/philosophy.html</loc>
-    <lastmod>2026-07-06</lastmod>
+    <lastmod>2026-08-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -182,5 +182,18 @@
     and marked noindex while under construction. Add it here and remove
     the noindex tag once the sauna is open to members.
   -->
+
+  <!--
+    Referral page (pages/referral.html) is intentionally NOT linked from
+    any site navigation. It is indexed and included here so Google can
+    still discover it, but the only intended entry point is a QR code
+    on physical materials (flyers, posters, member cards).
+  -->
+  <url>
+    <loc>https://redcrownmma.com/pages/referral.html</loc>
+    <lastmod>2026-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
 
 </urlset>
