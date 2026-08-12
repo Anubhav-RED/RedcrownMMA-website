@@ -57,8 +57,8 @@
     padding: 5.5rem 1.5rem 2rem;
     font-size: 1.1rem;
     background: var(--glass-strong);
-    backdrop-filter: blur(24px) saturate(160%);
-    -webkit-backdrop-filter: blur(24px) saturate(160%);
+    backdrop-filter: blur(var(--glass-blur-strong)) saturate(var(--glass-saturate));
+    -webkit-backdrop-filter: blur(var(--glass-blur-strong)) saturate(var(--glass-saturate));
     justify-content: flex-start !important;
     overflow-y: auto;
     gap: 0 !important;
@@ -95,12 +95,12 @@
     z-index: 2;
     position: relative;
     background: var(--glass);
-    backdrop-filter: blur(var(--glass-blur)) saturate(150%);
-    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(150%);
+    backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
     border: 1px solid var(--glass-border);
-    border-radius: 18px;
+    border-radius: 22px;
     padding: 1.5rem 1.35rem 1.75rem;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.28);
+    box-shadow: var(--glass-specular), var(--glass-shadow);
   }
 
   .hero-photo {
@@ -147,6 +147,7 @@
     background: var(--glass-strong);
     border: 1px solid var(--glass-border);
     border-radius: 999px;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
   }
 
   .hero-price-teaser {
@@ -160,6 +161,7 @@
     padding: 0.6rem 0.5rem 0.6rem 1.1rem;
     margin-bottom: 1.1rem;
     text-decoration: none;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
   }
   .hero-price-teaser .hpt-label {
     font-family: 'Rajdhani', sans-serif;
@@ -209,10 +211,8 @@
   }
   .stat-item {
     padding: 1.25rem 0.75rem;
-    background: var(--glass);
-    backdrop-filter: blur(var(--glass-blur));
-    -webkit-backdrop-filter: blur(var(--glass-blur));
-    border: 1px solid var(--glass-border);
+    background: var(--void-2);
+    border: 1px solid var(--border);
     border-radius: 16px;
     text-align: center;
   }
@@ -226,10 +226,8 @@
   }
   .why-item {
     padding: 1.5rem 1.25rem;
-    background: var(--glass);
-    backdrop-filter: blur(var(--glass-blur));
-    -webkit-backdrop-filter: blur(var(--glass-blur));
-    border: 1px solid var(--glass-border) !important;
+    background: var(--void-2);
+    border: 1px solid var(--border) !important;
     border-radius: 16px;
   }
   .why-icon  { font-size: 1.5rem; margin-bottom: 0.6rem; display: block; }
@@ -249,10 +247,8 @@
   }
   .prog-card {
     padding: 1.5rem 1.25rem !important;
-    background: var(--glass);
-    backdrop-filter: blur(var(--glass-blur));
-    -webkit-backdrop-filter: blur(var(--glass-blur));
-    border: 1px solid var(--glass-border) !important;
+    background: var(--void-2);
+    border: 1px solid var(--border) !important;
     border-radius: 16px;
     grid-column: span 1 !important;
   }
@@ -330,10 +326,8 @@
   }
   .coach-stat {
     padding: 0.9rem 0.6rem !important;
-    background: var(--glass);
-    backdrop-filter: blur(var(--glass-blur));
-    -webkit-backdrop-filter: blur(var(--glass-blur));
-    border: 1px solid var(--glass-border);
+    background: var(--void-2);
+    border: 1px solid var(--border);
     border-radius: 12px;
     text-align: center;
   }
@@ -349,10 +343,8 @@
   }
   .price-card {
     padding: 1.75rem 1.5rem !important;
-    background: var(--glass);
-    backdrop-filter: blur(var(--glass-blur));
-    -webkit-backdrop-filter: blur(var(--glass-blur));
-    border: 1px solid var(--glass-border) !important;
+    background: var(--void-2);
+    border: 1px solid var(--border) !important;
     border-radius: 18px;
   }
   .price-plan   { font-size: 0.75rem; }
@@ -369,10 +361,8 @@
   /* ─── GOOGLE REVIEWS WIDGET (Glassmorphic) ─────────────────── */
   .gr-widget {
     padding: 2rem 1.5rem !important;
-    background: var(--glass);
-    backdrop-filter: blur(var(--glass-blur));
-    -webkit-backdrop-filter: blur(var(--glass-blur));
-    border: 1px solid var(--glass-border) !important;
+    background: var(--void-2);
+    border: 1px solid var(--border) !important;
     border-radius: 18px;
   }
   .gr-text { font-size: 0.95rem !important; }
@@ -380,10 +370,8 @@
 
   /* ─── FAQ (homepage + FAQ page, Glassmorphic) ──────────────── */
   .faq-item {
-    background: var(--glass);
-    backdrop-filter: blur(var(--glass-blur));
-    -webkit-backdrop-filter: blur(var(--glass-blur));
-    border: 1px solid var(--glass-border);
+    background: var(--void-2);
+    border: 1px solid var(--border);
     border-radius: 14px;
     margin-bottom: 0.6rem;
     overflow: hidden;
@@ -429,10 +417,8 @@
   }
   .benefit-card {
     padding: 1.5rem 1.25rem !important;
-    background: var(--glass);
-    backdrop-filter: blur(var(--glass-blur));
-    -webkit-backdrop-filter: blur(var(--glass-blur));
-    border: 1px solid var(--glass-border) !important;
+    background: var(--void-2);
+    border: 1px solid var(--border) !important;
     border-radius: 16px;
   }
   .benefit-card h3 { font-size: 1.05rem !important; }
@@ -450,10 +436,8 @@
     gap: 0.85rem !important;
   }
   .qf-item {
-    background: var(--glass) !important;
-    backdrop-filter: blur(var(--glass-blur));
-    -webkit-backdrop-filter: blur(var(--glass-blur));
-    border: 1px solid var(--glass-border) !important;
+    background: var(--void-2) !important;
+    border: 1px solid var(--border) !important;
     border-radius: 16px;
     padding: 1.25rem 1.1rem !important;
   }
@@ -527,10 +511,11 @@
     max-height: 92svh;
     overflow-y: auto;
     margin: auto 0 0;
-    border-radius: 20px 20px 0 0;
+    border-radius: 24px 24px 0 0;
     background: var(--glass-strong);
-    backdrop-filter: blur(24px) saturate(160%);
-    -webkit-backdrop-filter: blur(24px) saturate(160%);
+    backdrop-filter: blur(var(--glass-blur-strong)) saturate(var(--glass-saturate));
+    -webkit-backdrop-filter: blur(var(--glass-blur-strong)) saturate(var(--glass-saturate));
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.14), 0 -10px 40px rgba(0,0,0,0.28);
   }
   .modal-backdrop { align-items: flex-end; }
   .modal-header h3 { font-size: 1.15rem !important; }
@@ -551,12 +536,13 @@
     left: 0;
     right: 0;
     padding: 0.7rem 1rem calc(0.7rem + env(safe-area-inset-bottom));
-    background: rgba(0, 15, 8, 0.97);
-    border-top: 1px solid var(--border);
+    background: var(--glass-strong);
+    border-top: 1px solid var(--glass-border);
     z-index: 400;
     gap: 0.6rem;
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(var(--glass-blur-strong)) saturate(var(--glass-saturate));
+    -webkit-backdrop-filter: blur(var(--glass-blur-strong)) saturate(var(--glass-saturate));
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
   }
   .mobile-book-bar .mbb-book {
     flex: 2;
