@@ -184,13 +184,33 @@ section { padding: var(--section) 0; }
 .btn > span { position: relative; z-index: 1; }
 
 .btn-primary {
-  background: var(--hunt);
+  background: linear-gradient(135deg, #ff5c63 0%, var(--hunt) 35%, #a8121c 68%, var(--hunt) 100%);
   color: var(--bone);
-  border: 1px solid var(--hunt);
+  border: 1px solid rgba(255,255,255,0.25);
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.35), inset 0 -2px 4px rgba(0,0,0,0.35), 0 6px 18px rgba(0,0,0,0.3);
 }
 .btn-primary::before { background: #d12c35; }
 .btn-primary:hover::before { transform: scaleX(1); }
-.btn-primary:hover { box-shadow: var(--hunt-glow); }
+.btn-primary:hover { box-shadow: var(--hunt-glow), inset 0 1px 0 rgba(255,255,255,0.45), inset 0 -2px 4px rgba(0,0,0,0.35); }
+.btn-primary::after {
+  content: "";
+  position: absolute;
+  top: 0; left: -60%;
+  width: 40%; height: 100%;
+  background: linear-gradient(100deg, transparent, rgba(255,255,255,0.55), transparent);
+  transform: skewX(-20deg);
+  animation: metalSheen 3.2s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes metalSheen {
+  0%, 15%  { left: -60%; }
+  55%, 100% { left: 130%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .btn-primary::after { animation: none; display: none; }
+}
 
 .btn-outline {
   background: transparent;
@@ -1218,7 +1238,11 @@ section { padding: var(--section) 0; }
 .price-card {
   background: var(--void);
   padding: 2rem 1.75rem;
+  display: flex;
+  flex-direction: column;
 }
+.price-card .price-features { flex: 0 0 auto; }
+.price-card > .btn { margin-top: auto; padding-top: 1.5rem; }
 .price-card.featured {
   background: linear-gradient(160deg, rgba(200, 0, 0, 0.07) 0%, var(--void-3) 60%);
   border: 1px solid rgba(200, 0, 0, 0.28);
@@ -2874,8 +2898,8 @@ textarea:focus-visible {
   z-index: 60;
   display: none;
   align-items: center;
-  gap: 0.25rem;
-  padding: 0.5rem;
+  gap: 0.35rem;
+  padding: 0.4rem;
   background: var(--glass-strong);
   border: 1px solid var(--glass-border);
   border-radius: var(--r-pill);
@@ -2886,28 +2910,28 @@ textarea:focus-visible {
 .tab-bar a {
   position: relative;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2px;
-  width: 52px;
-  height: 48px;
-  border-radius: var(--r-lg);
+  width: 44px;
+  height: 44px;
+  border-radius: var(--r-md);
   color: var(--bone-45);
-  transition: color 0.25s var(--ease);
+  background: transparent;
+  box-shadow: inset 0 0 0 1px transparent;
+  transition: color 0.25s var(--ease), background 0.25s var(--ease), box-shadow 0.25s var(--ease), transform 0.2s var(--spring);
 }
-.tab-bar a svg { width: 20px; height: 20px; }
-.tab-bar a span { font-size: 0.55rem; letter-spacing: 0.04em; text-transform: uppercase; font-family: 'Rajdhani', sans-serif; }
-.tab-bar a.active { color: var(--hunt); }
-.tab-bar-limelight {
-  position: absolute;
-  top: -2px;
-  height: 2px;
-  width: 24px;
-  border-radius: var(--r-pill);
-  background: var(--lime-color);
-  box-shadow: var(--lime-glow);
-  transition: left 0.4s var(--spring);
+.tab-bar a svg { width: 19px; height: 19px; }
+.tab-bar a:active { transform: scale(0.92); }
+.tab-bar a.active {
+  color: var(--hunt);
+  background: var(--bone-15);
+  box-shadow: inset 0 0 0 1px rgba(230,55,64,0.35);
+}
+.tab-bar-divider {
+  width: 1px;
+  height: 22px;
+  background: var(--glass-border);
+  flex-shrink: 0;
 }
 @media (max-width: 760px) {
   .tab-bar { display: flex; }
@@ -2979,7 +3003,56 @@ textarea:focus-visible {
   transition: transform 0.3s var(--spring);
 }
 .coach-dock-trigger:hover { transform: scale(1.06); }
-.coach-dock-trigger svg { width: 26px; height: 26px; }
+.coach-dock-trigger svg { width: 24px; height: 24px; transition: transform 0.3s var(--spring); }
+.coach-dock.is-dial-open .coach-dock-trigger { transform: rotate(45deg); }
+
+.dock-speed-dial {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.55rem;
+  margin-bottom: 0.2rem;
+}
+.dock-speed-item {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.55rem 0.7rem 0.55rem 1rem;
+  background: var(--glass-strong);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--r-pill);
+  box-shadow: var(--glass-shadow), var(--glass-specular);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  color: var(--bone);
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(10px) scale(0.92);
+  pointer-events: none;
+  transition: opacity 0.25s var(--ease), transform 0.3s var(--spring), border-color 0.2s;
+}
+.dock-speed-item:hover { border-color: var(--hunt); }
+.dock-speed-icon {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  background: var(--bone-15);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.dock-speed-icon svg { width: 17px; height: 17px; }
+.coach-dock.is-dial-open .dock-speed-item {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+.coach-dock.is-dial-open .dock-speed-item:nth-child(1) { transition-delay: 0.02s; }
+.coach-dock.is-dial-open .dock-speed-item:nth-child(2) { transition-delay: 0.06s; }
+.coach-dock.is-dial-open .dock-speed-item:nth-child(3) { transition-delay: 0.10s; }
 
 .coach-dock-panel {
   width: min(320px, 84vw);
@@ -3001,7 +3074,6 @@ textarea:focus-visible {
   opacity: 1;
   pointer-events: auto;
 }
-.coach-dock.is-open .coach-dock-trigger { transform: rotate(45deg); }
 
 .coach-list { display: flex; gap: 0.6rem; margin-bottom: 0.85rem; }
 .coach-chip {
@@ -3045,3 +3117,66 @@ textarea:focus-visible {
 @media (max-width: 760px) {
   .coach-dock { right: 14px; bottom: calc(88px + env(safe-area-inset-bottom)); }
 }
+
+/* ─── K. EXPANDABLE LOCATION CARD (contact page map) ─── */
+.loc-card {
+  margin-top: 3rem;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--r-lg);
+  box-shadow: var(--glass-shadow), var(--glass-specular);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  overflow: hidden;
+}
+.loc-card-head {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 1.1rem 1.25rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  color: var(--bone);
+}
+.loc-card-icon {
+  width: 40px; height: 40px;
+  border-radius: var(--r-md);
+  background: var(--bone-15);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--hunt);
+  flex-shrink: 0;
+}
+.loc-card-icon svg { width: 19px; height: 19px; }
+.loc-card-text { display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0; }
+.loc-card-label { font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.7rem; color: var(--bone-45); }
+.loc-card-addr { font-family: 'Share Tech', sans-serif; font-size: 0.95rem; }
+.loc-card-status {
+  display: flex; align-items: center; gap: 0.4rem;
+  font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em;
+  color: #3ddc72;
+  flex-shrink: 0;
+  font-family: 'Rajdhani', sans-serif; font-weight: 600;
+}
+.loc-dot { width: 7px; height: 7px; border-radius: 50%; background: #3ddc72; box-shadow: 0 0 8px rgba(61,220,114,0.7); }
+.loc-card-chevron { flex-shrink: 0; color: var(--bone-45); transition: transform 0.3s var(--ease); }
+.loc-card-chevron svg { width: 18px; height: 18px; display: block; }
+.loc-card-head[aria-expanded="true"] .loc-card-chevron { transform: rotate(180deg); }
+
+.loc-card-body {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.45s var(--ease);
+}
+.loc-card-body > .map-ph {
+  overflow: hidden;
+  min-height: 0;
+  margin-top: 0;
+  border: none;
+  border-top: 1px solid var(--glass-border);
+  aspect-ratio: 16/7;
+}
+.loc-card[data-expanded="true"] .loc-card-body { grid-template-rows: 1fr; }
+.loc-card-body > div { overflow: hidden; }

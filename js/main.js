@@ -69,8 +69,9 @@
 
   const curFile = location.pathname.split('/').pop() || 'index.html';
   document.querySelectorAll('.nav-links a, .mobile-nav a').forEach(a => {
-    const f = (a.getAttribute('href') || '').split('/').pop();
-    if (f === curFile || (!curFile && f === 'index.html')) a.classList.add('active');
+    let f = (a.getAttribute('href') || '').split('/').pop();
+    if (f === '' ) f = 'index.html'; // href="/" points at the homepage
+    if (f === curFile) a.classList.add('active');
   });
 
   /* ─── ANCHOR SCROLL ─── */
@@ -447,16 +448,24 @@
       lime.style.opacity = '1';
     }
 
-    const active = list.querySelector('a.active');
+    // Only direct children of the top-level bar drive the limelight.
+    // Dropdown items (.nav-more-menu a) live in a different offsetParent —
+    // tracking them here was the cause of the underline "ghosting" bug.
+    const topLevel = Array.from(list.children).filter(el => el.tagName === 'A');
+    const moreBtn = list.querySelector('.nav-more-btn');
+
+    const active = topLevel.find(a => a.classList.contains('active'));
     if (active) moveTo(active);
 
-    list.querySelectorAll('a').forEach(a => {
-      a.addEventListener('mouseenter', () => moveTo(a));
+    topLevel.forEach(a => a.addEventListener('mouseenter', () => moveTo(a)));
+    if (moreBtn) moreBtn.addEventListener('mouseenter', () => moveTo(moreBtn));
+    list.addEventListener('mouseleave', e => {
+      if (e.relatedTarget && list.querySelector('.nav-more-menu')?.contains(e.relatedTarget)) return;
+      moveTo(topLevel.find(a => a.classList.contains('active')));
     });
-    list.addEventListener('mouseleave', () => moveTo(list.querySelector('a.active')));
   });
 
-  /* ─── MOBILE LIMELIGHT TAB BAR: build from existing nav links, mirrors current page ─── */
+  /* ─── MOBILE MINIMAL DOCK: icon-only bottom nav, built from existing nav links ─── */
   (function buildTabBar() {
     const src = document.querySelector('.nav-links');
     if (!src || document.querySelector('.tab-bar')) return;
@@ -470,6 +479,7 @@
     const icons = {
       Home: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>',
       Programs: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg>',
+      Book: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/><path d="M9 15l2 2 4-4"/></svg>',
       Schedule: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>',
       Contact: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 01-2 2H8l-5 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>'
     };
@@ -479,43 +489,33 @@
       const match = links.find(a => a.textContent.trim().toLowerCase() === label.toLowerCase());
       if (match) found.push({ label, href: match.getAttribute('href'), active: match.classList.contains('active') });
     });
-    // Always add a central "Book" action tied to the existing modal trigger
     const bookHref = document.querySelector('[data-open-modal]') ? '#' : null;
-
-    const frag = document.createDocumentFragment();
-    const lime = document.createElement('span');
-    lime.className = 'tab-bar-limelight';
-    lime.setAttribute('aria-hidden', 'true');
 
     function addTab(label, href, active, isBook) {
       const a = document.createElement('a');
       a.href = href;
+      a.setAttribute('aria-label', label);
       if (isBook) a.setAttribute('data-open-modal', '');
       if (active) a.classList.add('active');
-      a.innerHTML = (icons[label] || icons.Home) + `<span>${label}</span>`;
+      a.innerHTML = icons[label] || icons.Home;
       a.addEventListener('click', () => {
         bar.querySelectorAll('a').forEach(x => x.classList.remove('active'));
         a.classList.add('active');
-        positionLime(a);
       });
       bar.appendChild(a);
-      return a;
+    }
+    function addDivider() {
+      const d = document.createElement('span');
+      d.className = 'tab-bar-divider';
+      d.setAttribute('aria-hidden', 'true');
+      bar.appendChild(d);
     }
 
-    let activeTab = null;
-    found.slice(0, 2).forEach(f => { const t = addTab(f.label, f.href, f.active, false); if (f.active) activeTab = t; });
-    if (bookHref) { const t = addTab('Book', bookHref, false, true); }
-    found.slice(2).forEach(f => { const t = addTab(f.label, f.href, f.active, false); if (f.active) activeTab = t; });
+    found.slice(0, 2).forEach(f => addTab(f.label, f.href, f.active, false));
+    if (bookHref) { addDivider(); addTab('Book', bookHref, false, true); addDivider(); }
+    found.slice(2).forEach(f => addTab(f.label, f.href, f.active, false));
 
-    bar.appendChild(lime);
     document.body.appendChild(bar);
-
-    function positionLime(el) {
-      if (!el) return;
-      lime.style.left = (el.offsetLeft + el.offsetWidth / 2 - 12) + 'px';
-    }
-    if (activeTab) positionLime(activeTab);
-    window.addEventListener('resize', () => positionLime(bar.querySelector('a.active')));
   })();
 
   /* ─── HOVER PREVIEW: interlink image previews on [data-preview] terms ─── */
@@ -565,11 +565,12 @@
     panel.addEventListener('mouseleave', hide);
   })();
 
-  /* ─── COACH DOCK: "Talk to a Coach" — expandable, contextual WhatsApp send ─── */
+  /* ─── COACH DOCK: speed-dial (Message / Instagram / Book) → contextual WhatsApp send ─── */
   (function coachDock() {
     const dock = document.querySelector('.coach-dock');
     if (!dock) return;
     const trigger = dock.querySelector('.coach-dock-trigger');
+    const messageAction = dock.querySelector('[data-dock-action="message"]');
     const chips = dock.querySelectorAll('.coach-chip');
     const nameEl = dock.querySelector('.coach-dock-name');
     const input = dock.querySelector('.coach-dock-form input');
@@ -584,22 +585,37 @@
       if (nameEl) nameEl.textContent = 'Message ' + chip.dataset.name;
       if (input) input.placeholder = 'Send a message to ' + chip.dataset.name + '…';
     }
-
     chips.forEach(chip => chip.addEventListener('click', () => selectChip(chip)));
     if (chips.length) selectChip(chips[0]);
 
+    function closeAll() {
+      dock.classList.remove('is-dial-open', 'is-open');
+    }
+    function toggleDial() {
+      const opening = !dock.classList.contains('is-dial-open');
+      dock.classList.remove('is-open');
+      dock.classList.toggle('is-dial-open', opening);
+    }
+    function openChat() {
+      dock.classList.remove('is-dial-open');
+      dock.classList.add('is-open');
+      input?.focus();
+    }
+
     trigger?.addEventListener('click', () => {
-      dock.classList.toggle('is-open');
-      if (dock.classList.contains('is-open')) input?.focus();
+      if (dock.classList.contains('is-open')) { closeAll(); return; }
+      toggleDial();
     });
+    messageAction?.addEventListener('click', openChat);
+    dock.querySelector('[data-dock-action="book"]')?.addEventListener('click', closeAll);
 
     document.addEventListener('click', e => {
-      if (dock.classList.contains('is-open') && !dock.contains(e.target)) {
-        dock.classList.remove('is-open');
+      if (!dock.contains(e.target) && (dock.classList.contains('is-dial-open') || dock.classList.contains('is-open'))) {
+        closeAll();
       }
     });
     document.addEventListener('keydown', e => {
-      if (e.key === 'Escape' && dock.classList.contains('is-open')) dock.classList.remove('is-open');
+      if (e.key === 'Escape') closeAll();
     });
 
     function send() {
@@ -615,5 +631,15 @@
     sendBtn?.addEventListener('click', send);
     input?.addEventListener('keydown', e => { if (e.key === 'Enter') send(); });
   })();
+
+  /* ─── EXPANDABLE LOCATION CARD ─── */
+  document.querySelectorAll('.loc-card').forEach(card => {
+    const head = card.querySelector('.loc-card-head');
+    head?.addEventListener('click', () => {
+      const expanded = card.getAttribute('data-expanded') === 'true';
+      card.setAttribute('data-expanded', String(!expanded));
+      head.setAttribute('aria-expanded', String(!expanded));
+    });
+  });
 
 })();
