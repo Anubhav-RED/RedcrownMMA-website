@@ -38,7 +38,25 @@
     if (!btn) return;
     const next = btn.dataset.themeSet;
     localStorage.setItem(TKEY, next);
-    applyTheme(next);
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!document.startViewTransition || reduceMotion) { applyTheme(next); return; }
+
+    const rect = btn.getBoundingClientRect();
+    const x = rect.left + rect.width / 2;
+    const y = rect.top + rect.height / 2;
+    const endRadius = Math.hypot(
+      Math.max(x, window.innerWidth - x),
+      Math.max(y, window.innerHeight - y)
+    );
+
+    const transition = document.startViewTransition(() => applyTheme(next));
+    transition.ready.then(() => {
+      document.documentElement.animate(
+        { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${endRadius}px at ${x}px ${y}px)`] },
+        { duration: 500, easing: 'ease-in-out', pseudoElement: '::view-transition-new(root)' }
+      );
+    });
   });
 
   /* ─── NAV: scroll state + active link ─── */
@@ -86,31 +104,63 @@
 
   /* ─── BOOKING MODAL ─── */
   const backdrop = document.getElementById('booking-modal');
+  const modalPanel = backdrop?.querySelector('.modal');
+  let modalReturnFocus = null;
 
-  function openModal() {
+  if (modalPanel) {
+    modalPanel.setAttribute('role', 'dialog');
+    modalPanel.setAttribute('aria-modal', 'true');
+    const heading = modalPanel.querySelector('.modal-header h3, h3, h2');
+    if (heading) {
+      if (!heading.id) heading.id = 'booking-modal-title';
+      modalPanel.setAttribute('aria-labelledby', heading.id);
+    }
+  }
+  const successEl = backdrop?.querySelector('.modal-success');
+  if (successEl) successEl.setAttribute('aria-live', 'polite');
+
+  function getFocusable(container) {
+    return Array.from(container.querySelectorAll(
+      'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    )).filter(el => el.offsetParent !== null);
+  }
+
+  function openModal(trigger) {
     if (!backdrop) return;
+    modalReturnFocus = trigger || document.activeElement;
     backdrop.querySelector('.modal-form')?.classList.remove('hide');
     backdrop.querySelector('.modal-success')?.classList.remove('show');
     backdrop.classList.add('open');
     document.body.style.overflow = 'hidden';
+    const focusables = modalPanel ? getFocusable(modalPanel) : [];
+    (focusables[0] || modalPanel)?.focus();
   }
   function closeModal() {
     if (!backdrop) return;
     backdrop.classList.remove('open');
     document.body.style.overflow = '';
+    modalReturnFocus?.focus?.();
   }
 
   document.addEventListener('click', e => {
     if (!e.target.closest('[data-open-modal]')) return;
     e.preventDefault();
-    openModal();
+    openModal(e.target.closest('[data-open-modal]'));
   });
   if (backdrop) {
     backdrop.querySelector('.modal-close')?.addEventListener('click', closeModal);
     backdrop.addEventListener('click', e => { if (e.target === backdrop) closeModal(); });
   }
   document.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && backdrop?.classList.contains('open')) closeModal();
+    if (!backdrop?.classList.contains('open')) return;
+    if (e.key === 'Escape') { closeModal(); return; }
+    if (e.key === 'Tab' && modalPanel) {
+      const focusables = getFocusable(modalPanel);
+      if (!focusables.length) return;
+      const first = focusables[0], last = focusables[focusables.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
   });
 
   /* ─── FORM → GOOGLE SHEETS (no-cors: data hits the sheet, response is opaque) ─── */
@@ -237,7 +287,10 @@
   });
 
   /* ─── TICKER ─── */
-  document.querySelectorAll('.ticker-track').forEach(t => (t.innerHTML += t.innerHTML));
+  document.querySelectorAll('.ticker-track').forEach(t => {
+    t.setAttribute('aria-hidden', 'true');
+    t.innerHTML += t.innerHTML;
+  });
 
   /* ─── NAV "MORE" DROPDOWN ─── */
   document.addEventListener('click', e => {
@@ -368,6 +421,199 @@
         renderRotation(reviews);
       })
       .catch(showEmpty);
+  })();
+
+
+  /* ─── SPOTLIGHT CARDS: mouse-tracked radial glow ─── */
+  document.querySelectorAll('.spotlight-card').forEach(card => {
+    card.addEventListener('pointermove', e => {
+      const r = card.getBoundingClientRect();
+      card.style.setProperty('--mx', `${e.clientX - r.left}px`);
+      card.style.setProperty('--my', `${e.clientY - r.top}px`);
+    });
+  });
+
+  /* ─── LIMELIGHT NAV: glow tracks the active/hovered link ─── */
+  document.querySelectorAll('.nav-links').forEach(list => {
+    const lime = document.createElement('span');
+    lime.className = 'nav-limelight';
+    lime.setAttribute('aria-hidden', 'true');
+    list.appendChild(lime);
+
+    function moveTo(el) {
+      if (!el) { lime.style.opacity = '0'; return; }
+      lime.style.left = el.offsetLeft + 'px';
+      lime.style.width = el.offsetWidth + 'px';
+      lime.style.opacity = '1';
+    }
+
+    const active = list.querySelector('a.active');
+    if (active) moveTo(active);
+
+    list.querySelectorAll('a').forEach(a => {
+      a.addEventListener('mouseenter', () => moveTo(a));
+    });
+    list.addEventListener('mouseleave', () => moveTo(list.querySelector('a.active')));
+  });
+
+  /* ─── MOBILE LIMELIGHT TAB BAR: build from existing nav links, mirrors current page ─── */
+  (function buildTabBar() {
+    const src = document.querySelector('.nav-links');
+    if (!src || document.querySelector('.tab-bar')) return;
+
+    const wanted = ['Home', 'Programs', 'Schedule', 'Contact'];
+    const links = Array.from(src.querySelectorAll('a'));
+    const bar = document.createElement('nav');
+    bar.className = 'tab-bar';
+    bar.setAttribute('aria-label', 'Quick navigation');
+
+    const icons = {
+      Home: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>',
+      Programs: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg>',
+      Schedule: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>',
+      Contact: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 01-2 2H8l-5 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>'
+    };
+
+    const found = [];
+    wanted.forEach(label => {
+      const match = links.find(a => a.textContent.trim().toLowerCase() === label.toLowerCase());
+      if (match) found.push({ label, href: match.getAttribute('href'), active: match.classList.contains('active') });
+    });
+    // Always add a central "Book" action tied to the existing modal trigger
+    const bookHref = document.querySelector('[data-open-modal]') ? '#' : null;
+
+    const frag = document.createDocumentFragment();
+    const lime = document.createElement('span');
+    lime.className = 'tab-bar-limelight';
+    lime.setAttribute('aria-hidden', 'true');
+
+    function addTab(label, href, active, isBook) {
+      const a = document.createElement('a');
+      a.href = href;
+      if (isBook) a.setAttribute('data-open-modal', '');
+      if (active) a.classList.add('active');
+      a.innerHTML = (icons[label] || icons.Home) + `<span>${label}</span>`;
+      a.addEventListener('click', () => {
+        bar.querySelectorAll('a').forEach(x => x.classList.remove('active'));
+        a.classList.add('active');
+        positionLime(a);
+      });
+      bar.appendChild(a);
+      return a;
+    }
+
+    let activeTab = null;
+    found.slice(0, 2).forEach(f => { const t = addTab(f.label, f.href, f.active, false); if (f.active) activeTab = t; });
+    if (bookHref) { const t = addTab('Book', bookHref, false, true); }
+    found.slice(2).forEach(f => { const t = addTab(f.label, f.href, f.active, false); if (f.active) activeTab = t; });
+
+    bar.appendChild(lime);
+    document.body.appendChild(bar);
+
+    function positionLime(el) {
+      if (!el) return;
+      lime.style.left = (el.offsetLeft + el.offsetWidth / 2 - 12) + 'px';
+    }
+    if (activeTab) positionLime(activeTab);
+    window.addEventListener('resize', () => positionLime(bar.querySelector('a.active')));
+  })();
+
+  /* ─── HOVER PREVIEW: interlink image previews on [data-preview] terms ─── */
+  (function hoverPreview() {
+    const terms = document.querySelectorAll('[data-preview]');
+    if (!terms.length) return;
+
+    const panel = document.createElement('div');
+    panel.className = 'hover-preview';
+    panel.innerHTML = `<img alt="" /><div class="hp-title"></div><div class="hp-sub"></div>`;
+    document.body.appendChild(panel);
+    const imgEl = panel.querySelector('img');
+    const titleEl = panel.querySelector('.hp-title');
+    const subEl = panel.querySelector('.hp-sub');
+    let hideTimer;
+
+    function show(el) {
+      clearTimeout(hideTimer);
+      const src = el.dataset.previewImg || 'assets/images/previews/placeholder.jpg';
+      imgEl.src = src;
+      imgEl.alt = el.dataset.previewTitle || '';
+      titleEl.textContent = el.dataset.previewTitle || el.textContent;
+      subEl.textContent = el.dataset.previewSub || '';
+
+      const r = el.getBoundingClientRect();
+      const panelW = 240;
+      let left = r.left + r.width / 2 - panelW / 2;
+      left = Math.max(12, Math.min(left, window.innerWidth - panelW - 12));
+      let top = r.top - 160;
+      if (top < 12) top = r.bottom + 12;
+      panel.style.left = left + 'px';
+      panel.style.top = top + 'px';
+      requestAnimationFrame(() => panel.classList.add('is-visible'));
+    }
+    function hide() {
+      hideTimer = setTimeout(() => panel.classList.remove('is-visible'), 80);
+    }
+
+    terms.forEach(el => {
+      el.classList.add('hp-term');
+      el.addEventListener('mouseenter', () => show(el));
+      el.addEventListener('mouseleave', hide);
+      el.addEventListener('focus', () => show(el));
+      el.addEventListener('blur', hide);
+    });
+    panel.addEventListener('mouseenter', () => clearTimeout(hideTimer));
+    panel.addEventListener('mouseleave', hide);
+  })();
+
+  /* ─── COACH DOCK: "Talk to a Coach" — expandable, contextual WhatsApp send ─── */
+  (function coachDock() {
+    const dock = document.querySelector('.coach-dock');
+    if (!dock) return;
+    const trigger = dock.querySelector('.coach-dock-trigger');
+    const chips = dock.querySelectorAll('.coach-chip');
+    const nameEl = dock.querySelector('.coach-dock-name');
+    const input = dock.querySelector('.coach-dock-form input');
+    const sendBtn = dock.querySelector('.coach-dock-send');
+
+    let active = chips[0];
+
+    function selectChip(chip) {
+      chips.forEach(c => c.classList.remove('is-active'));
+      chip.classList.add('is-active');
+      active = chip;
+      if (nameEl) nameEl.textContent = 'Message ' + chip.dataset.name;
+      if (input) input.placeholder = 'Send a message to ' + chip.dataset.name + '…';
+    }
+
+    chips.forEach(chip => chip.addEventListener('click', () => selectChip(chip)));
+    if (chips.length) selectChip(chips[0]);
+
+    trigger?.addEventListener('click', () => {
+      dock.classList.toggle('is-open');
+      if (dock.classList.contains('is-open')) input?.focus();
+    });
+
+    document.addEventListener('click', e => {
+      if (dock.classList.contains('is-open') && !dock.contains(e.target)) {
+        dock.classList.remove('is-open');
+      }
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && dock.classList.contains('is-open')) dock.classList.remove('is-open');
+    });
+
+    function send() {
+      const text = (input?.value || '').trim();
+      const who = active?.dataset.name || 'Redcrown MMA';
+      const number = active?.dataset.wa || '919910604536';
+      const msg = text
+        ? `Hi ${who}, ${text}`
+        : `Hi ${who}, I'd like to know more.`;
+      window.open(`https://wa.me/${number}?text=${encodeURIComponent(msg)}`, '_blank');
+      if (input) input.value = '';
+    }
+    sendBtn?.addEventListener('click', send);
+    input?.addEventListener('keydown', e => { if (e.key === 'Enter') send(); });
   })();
 
 })();

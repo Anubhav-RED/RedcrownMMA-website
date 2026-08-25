@@ -10,14 +10,15 @@
   --void:      #000F08;
   --void-2:    #060f09;
   --void-3:    #0a1a10;
-  --hunt:      #fb3640;
+  --hunt:      #e63740;
+  --hunt-hot:  #fb3640;
   --bone:      #FFFFF0;
-  --hunt-dim:  rgba(251, 54, 64, 0.12);
-  --hunt-glow: 0 0 24px rgba(251, 54, 64, 0.28), 0 0 60px rgba(251, 54, 64, 0.08);
+  --hunt-dim:  rgba(230, 55, 64, 0.12);
+  --hunt-glow: 0 0 24px rgba(230, 55, 64, 0.28), 0 0 60px rgba(230, 55, 64, 0.08);
   --bone-70:   rgba(255, 255, 240, 0.70);
-  --bone-45:   rgba(255, 255, 240, 0.45);
+  --bone-45:   rgba(255, 255, 240, 0.48);
   --bone-15:   rgba(255, 255, 240, 0.08);
-  --border:    rgba(251, 54, 64, 0.18);
+  --border:    rgba(230, 55, 64, 0.18);
   --ease:      cubic-bezier(0.4, 0, 0.2, 1);
   --spring:    cubic-bezier(0.34, 1.56, 0.64, 1);
 
@@ -29,14 +30,33 @@
   --section:   clamp(5rem, 10vw, 8rem);
   --wrap:      min(90%, 1200px);
 
+  /* metal/glass material system */
   --glass:          rgba(10, 18, 14, 0.42);
   --glass-strong:   rgba(6, 12, 9, 0.78);
   --glass-border:   rgba(255, 255, 240, 0.12);
   --glass-specular: inset 0 1px 0 rgba(255,255,255,0.14), inset 0 0 0 1px rgba(255,255,255,0.04);
-  --glass-shadow:   0 20px 50px rgba(0,0,0,0.32), 0 2px 10px rgba(0,0,0,0.22);
+  --glass-shadow:   0 20px 50px rgba(0,4,2,0.40), 0 2px 10px rgba(0,4,2,0.30);
   --glass-blur:        16px;
   --glass-blur-strong: 28px;
   --glass-saturate:    140%;
+
+  /* corner radius scale — soft geometry replacing the old zero-radius grid */
+  --r-sm:  10px;
+  --r-md:  16px;
+  --r-lg:  22px;
+  --r-xl:  28px;
+  --r-pill: 999px;
+
+  /* spotlight / limelight tokens */
+  --spot-size: 420px;
+  --spot-color: rgba(230, 55, 64, 0.16);
+  --lime-color: rgba(230, 55, 64, 0.9);
+  --lime-glow: 0 0 18px rgba(230, 55, 64, 0.65), 0 0 40px rgba(230, 55, 64, 0.25);
+
+  /* mesh gradient stops, toned down from the old flat hunt-red */
+  --mesh-1: rgba(230, 55, 64, 0.20);
+  --mesh-2: rgba(194, 178, 128, 0.10);
+  --mesh-3: rgba(10, 26, 16, 0.60);
 }
 
 [data-theme="light"] {
@@ -49,9 +69,16 @@
   --bone-15:   rgba(0, 15, 8, 0.06);
   --metallic:  #C2B280;
   --hunt:      #8a7642;
+  --hunt-hot:  #a6853c;
   --hunt-dim:  rgba(194, 178, 128, 0.22);
   --hunt-glow: 0 0 24px rgba(194, 178, 128, 0.38), 0 0 60px rgba(194, 178, 128, 0.14);
   --border:    rgba(194, 178, 128, 0.45);
+  --spot-color: rgba(138, 118, 66, 0.14);
+  --lime-color: rgba(138, 118, 66, 0.9);
+  --lime-glow: 0 0 18px rgba(138, 118, 66, 0.5), 0 0 40px rgba(138, 118, 66, 0.2);
+  --mesh-1: rgba(138, 118, 66, 0.14);
+  --mesh-2: rgba(194, 178, 128, 0.16);
+  --mesh-3: rgba(255, 255, 240, 0.5);
 
   --glass:          rgba(255, 255, 240, 0.46);
   --glass-strong:   rgba(255, 255, 240, 0.82);
@@ -386,7 +413,7 @@ section { padding: var(--section) 0; }
   gap: 0.35rem;
   color: var(--bone-45);
   cursor: pointer;
-  transition: all 0.25s;
+  transition: color 0.25s, background 0.25s, border-color 0.25s;
   user-select: none;
   border-right: 1px solid var(--border);
   background: transparent;
@@ -414,7 +441,7 @@ section { padding: var(--section) 0; }
 .hamburger span {
   display: block; width: 100%; height: 1.5px;
   background: var(--bone);
-  transition: all 0.3s var(--ease);
+  transition: transform 0.3s var(--ease), background 0.3s var(--ease), opacity 0.3s var(--ease);
   transform-origin: center;
 }
 .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
@@ -546,7 +573,7 @@ section { padding: var(--section) 0; }
   color: var(--bone-45);
   font-size: 1.1rem;
   flex-shrink: 0;
-  transition: all 0.2s;
+  transition: border-color 0.2s, color 0.2s, transform 0.2s;
   margin-top: 4px;
 }
 .modal-close:hover { border-color: var(--hunt); color: var(--hunt); }
@@ -575,14 +602,19 @@ section { padding: var(--section) 0; }
   font-size: 1.0rem;
   padding: 0.75rem 1rem;
   outline: none;
-  transition: border-color 0.2s;
-  border-radius: 0;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  border-radius: var(--r-sm);
   -webkit-appearance: none;
   appearance: none;
 }
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus { border-color: var(--hunt); }
+.form-group input:focus-visible,
+.form-group select:focus-visible,
+.form-group textarea:focus-visible {
+  box-shadow: 0 0 0 2px var(--void), 0 0 0 4px var(--hunt);
+}
 .form-group select option { background: var(--void-3); color: var(--bone); }
 
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
@@ -1325,7 +1357,7 @@ section { padding: var(--section) 0; }
   border-right: 1px solid var(--border);
   background: transparent;
   cursor: pointer;
-  transition: all 0.25s;
+  transition: color 0.25s, background 0.25s;
   font-family: 'Rajdhani', sans-serif;
   font-weight: 700;
   font-size: 0.78rem;
@@ -1355,6 +1387,7 @@ section { padding: var(--section) 0; }
 .price-strike.show { opacity: 1; max-width: 200px; }
 .price-amount-val {
   display: inline-block;
+  font-variant-numeric: tabular-nums;
   transition: transform 0.22s var(--ease), opacity 0.22s var(--ease);
 }
 .price-amount-val.rolling {
@@ -1558,7 +1591,7 @@ section { padding: var(--section) 0; }
   display: flex; align-items: center; justify-content: center;
   font-size: 0.82rem;
   color: var(--bone-70);
-  transition: all 0.22s;
+  transition: border-color 0.22s, color 0.22s, transform 0.22s;
 }
 .soc-link:hover { border-color: var(--hunt); color: var(--hunt); }
 
@@ -2715,4 +2748,300 @@ section { padding: var(--section) 0; }
   /* Modal */
   .modal { padding: 1.5rem 1rem calc(2rem + env(safe-area-inset-bottom)); }
   .modal-header h3 { font-size: 1.2rem; }
+}
+
+/* ==========================================================================
+   LIQUID GLASS / METAL RETHEME — appended system layer
+   Soft geometry, glass materiality, and the six new interaction systems.
+   Everything below cascades to every page that loads this stylesheet.
+   ========================================================================== */
+
+/* ─── A. GLOBAL FOCUS-VISIBLE (accessibility fix) ─── */
+a:focus-visible,
+button:focus-visible,
+.btn:focus-visible,
+.faq-btn:focus-visible,
+.gr-dot:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--void), 0 0 0 4px var(--hunt);
+  border-radius: var(--r-sm);
+}
+
+/* ─── B. REDUCED MOTION (accessibility fix) ─── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .ticker-track { animation: none !important; }
+  .mesh-bg { animation: none !important; }
+}
+
+/* ─── C. SOFT GEOMETRY — round the existing card/panel/button vocabulary ─── */
+.card, .benefit-card, .blog-card, .prog-card, .price-card, .why-item,
+.faq-item, .contact-form-box, .contact-item, .test-item, .gr-card,
+.coach-wrap, .coach-img-frame, .btn, .label, .modal, .modal-close,
+.form-group input, .form-group select, .form-group textarea,
+.faq-cat-pill, .gold-tag, .blog-cat {
+  border-radius: var(--r-md);
+}
+.btn-lg, .btn-sm { border-radius: var(--r-sm); }
+.faq-cat-pill, .gold-tag, .blog-cat, .label { border-radius: var(--r-pill); }
+
+/* ─── D. GLASS SURFACE UTILITY ─── */
+.glass-surface {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--r-lg);
+  box-shadow: var(--glass-shadow), var(--glass-specular);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+}
+
+.cta-band > .container { position: relative; z-index: 1; }
+
+/* ─── E. ANIMATED MESH GRADIENTS ─── */
+.mesh-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 600px 500px at 15% 20%, var(--mesh-1), transparent 60%),
+    radial-gradient(ellipse 500px 600px at 85% 30%, var(--mesh-2), transparent 60%),
+    radial-gradient(ellipse 700px 500px at 50% 90%, var(--mesh-3), transparent 65%);
+  background-size: 140% 140%;
+  animation: meshDrift 22s ease-in-out infinite alternate;
+  will-change: background-position;
+}
+@keyframes meshDrift {
+  0%   { background-position: 0% 0%, 100% 0%, 50% 100%; }
+  100% { background-position: 10% 15%, 85% 20%, 55% 85%; }
+}
+
+/* ─── F. SPOTLIGHT CARDS (mouse-tracked radial glow) ─── */
+.spotlight-card {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.spotlight-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: radial-gradient(
+    var(--spot-size) circle at var(--mx, 50%) var(--my, 50%),
+    var(--spot-color),
+    transparent 65%
+  );
+  opacity: 0;
+  transition: opacity 0.35s var(--ease);
+  pointer-events: none;
+}
+.spotlight-card:hover::before,
+.spotlight-card:focus-within::before { opacity: 1; }
+.spotlight-card > * { position: relative; z-index: 1; }
+
+/* ─── G. LIMELIGHT NAV ─── */
+.nav-links { position: relative; }
+.nav-limelight {
+  position: absolute;
+  bottom: -1px;
+  height: 2px;
+  width: 0;
+  left: 0;
+  background: var(--lime-color);
+  box-shadow: var(--lime-glow);
+  border-radius: var(--r-pill);
+  transition: left 0.4s var(--spring), width 0.4s var(--spring), opacity 0.25s var(--ease);
+  opacity: 0;
+  pointer-events: none;
+}
+.nav-links a { position: relative; }
+
+/* mobile bottom limelight tab bar */
+.tab-bar {
+  position: fixed;
+  left: 50%;
+  bottom: calc(14px + env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  z-index: 60;
+  display: none;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.5rem;
+  background: var(--glass-strong);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--r-pill);
+  box-shadow: var(--glass-shadow), var(--glass-specular);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+}
+.tab-bar a {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  width: 52px;
+  height: 48px;
+  border-radius: var(--r-lg);
+  color: var(--bone-45);
+  transition: color 0.25s var(--ease);
+}
+.tab-bar a svg { width: 20px; height: 20px; }
+.tab-bar a span { font-size: 0.55rem; letter-spacing: 0.04em; text-transform: uppercase; font-family: 'Rajdhani', sans-serif; }
+.tab-bar a.active { color: var(--hunt); }
+.tab-bar-limelight {
+  position: absolute;
+  top: -2px;
+  height: 2px;
+  width: 24px;
+  border-radius: var(--r-pill);
+  background: var(--lime-color);
+  box-shadow: var(--lime-glow);
+  transition: left 0.4s var(--spring);
+}
+@media (max-width: 760px) {
+  .tab-bar { display: flex; }
+  .mobile-book-bar { display: none !important; }
+}
+
+/* ─── H. HOVER PREVIEW ─── */
+.hp-term {
+  border-bottom: 1px dashed var(--hunt);
+  cursor: help;
+}
+.hover-preview {
+  position: fixed;
+  z-index: 500;
+  width: 240px;
+  padding: 0.6rem;
+  background: var(--glass-strong);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--r-lg);
+  box-shadow: var(--glass-shadow), var(--glass-specular);
+  backdrop-filter: blur(var(--glass-blur-strong)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-strong)) saturate(var(--glass-saturate));
+  opacity: 0;
+  transform: translateY(6px) scale(0.97);
+  transition: opacity 0.2s var(--ease), transform 0.2s var(--ease);
+  pointer-events: none;
+}
+.hover-preview.is-visible { opacity: 1; transform: translateY(0) scale(1); }
+.hover-preview img {
+  width: 100%;
+  height: 130px;
+  object-fit: cover;
+  border-radius: var(--r-sm);
+  margin-bottom: 0.5rem;
+  background: var(--void-3);
+}
+.hover-preview .hp-title {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+.hover-preview .hp-sub { font-size: 0.75rem; color: var(--bone-45); margin-top: 2px; }
+
+/* ─── I. COACH DOCK ("Talk to a Coach") ─── */
+.coach-dock {
+  position: fixed;
+  right: 18px;
+  bottom: calc(18px + env(safe-area-inset-bottom));
+  z-index: 90;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.6rem;
+  font-family: 'Share Tech', sans-serif;
+}
+.coach-dock-trigger {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: var(--hunt);
+  color: var(--void);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--hunt-glow), 0 8px 24px rgba(0,0,0,0.4);
+  border: 1px solid rgba(255,255,255,0.2);
+  transition: transform 0.3s var(--spring);
+}
+.coach-dock-trigger:hover { transform: scale(1.06); }
+.coach-dock-trigger svg { width: 26px; height: 26px; }
+
+.coach-dock-panel {
+  width: min(320px, 84vw);
+  background: var(--glass-strong);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--r-xl);
+  box-shadow: var(--glass-shadow), var(--glass-specular);
+  backdrop-filter: blur(var(--glass-blur-strong)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-strong)) saturate(var(--glass-saturate));
+  padding: 1rem;
+  transform-origin: bottom right;
+  transform: scale(0.9) translateY(12px);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.3s var(--spring), opacity 0.25s var(--ease);
+}
+.coach-dock.is-open .coach-dock-panel {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+.coach-dock.is-open .coach-dock-trigger { transform: rotate(45deg); }
+
+.coach-list { display: flex; gap: 0.6rem; margin-bottom: 0.85rem; }
+.coach-chip {
+  position: relative;
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem;
+  background: var(--bone-15);
+  border: 1px solid var(--glass-border);
+  cursor: pointer;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.coach-chip:hover, .coach-chip.is-active { border-color: var(--hunt); transform: translateY(-2px); }
+.coach-chip .dot {
+  position: absolute; right: -1px; bottom: -1px;
+  width: 11px; height: 11px; border-radius: 50%;
+  background: #3ddc72; border: 2px solid var(--void-2);
+}
+.coach-dock-name { font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.04em; margin-bottom: 0.6rem; color: var(--bone-70); }
+.coach-dock-form { display: flex; gap: 0.5rem; align-items: center; background: var(--bone-15); border: 1px solid var(--glass-border); border-radius: var(--r-pill); padding: 0.3rem 0.3rem 0.3rem 0.9rem; }
+.coach-dock-form input {
+  flex: 1; background: none; border: none; outline: none; color: var(--bone);
+  font-family: 'Share Tech', sans-serif; font-size: 0.85rem;
+}
+.coach-dock-send {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: var(--hunt); color: var(--void);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.coach-dock-send svg { width: 16px; height: 16px; }
+
+/* ─── J. ANIMATED THEME SWITCHER (view-transition wipe) ─── */
+::view-transition-old(root),
+::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
+.theme-wipe {
+  position: fixed; inset: 0; z-index: 9999; pointer-events: none;
+  border-radius: 50%;
+}
+
+@media (max-width: 760px) {
+  .coach-dock { right: 14px; bottom: calc(88px + env(safe-area-inset-bottom)); }
 }
