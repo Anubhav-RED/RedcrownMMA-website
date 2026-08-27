@@ -565,71 +565,27 @@
     panel.addEventListener('mouseleave', hide);
   })();
 
-  /* ─── COACH DOCK: speed-dial (Message / Instagram / Book) → contextual WhatsApp send ─── */
+  /* ─── CONTACT DOCK: speed-dial (Message on WhatsApp / Instagram / Book) ─── */
   (function coachDock() {
     const dock = document.querySelector('.coach-dock');
     if (!dock) return;
     const trigger = dock.querySelector('.coach-dock-trigger');
-    const messageAction = dock.querySelector('[data-dock-action="message"]');
-    const chips = dock.querySelectorAll('.coach-chip');
-    const nameEl = dock.querySelector('.coach-dock-name');
-    const input = dock.querySelector('.coach-dock-form input');
-    const sendBtn = dock.querySelector('.coach-dock-send');
 
-    let active = chips[0];
+    function closeAll() { dock.classList.remove('is-dial-open'); }
+    function toggleDial() { dock.classList.toggle('is-dial-open'); }
 
-    function selectChip(chip) {
-      chips.forEach(c => c.classList.remove('is-active'));
-      chip.classList.add('is-active');
-      active = chip;
-      if (nameEl) nameEl.textContent = 'Message ' + chip.dataset.name;
-      if (input) input.placeholder = 'Send a message to ' + chip.dataset.name + '…';
-    }
-    chips.forEach(chip => chip.addEventListener('click', () => selectChip(chip)));
-    if (chips.length) selectChip(chips[0]);
-
-    function closeAll() {
-      dock.classList.remove('is-dial-open', 'is-open');
-    }
-    function toggleDial() {
-      const opening = !dock.classList.contains('is-dial-open');
-      dock.classList.remove('is-open');
-      dock.classList.toggle('is-dial-open', opening);
-    }
-    function openChat() {
-      dock.classList.remove('is-dial-open');
-      dock.classList.add('is-open');
-      input?.focus();
-    }
-
-    trigger?.addEventListener('click', () => {
-      if (dock.classList.contains('is-open')) { closeAll(); return; }
-      toggleDial();
+    trigger?.addEventListener('click', toggleDial);
+    // Message/Instagram/Book are plain links or the modal trigger — just close the dial after any of them fire.
+    dock.querySelectorAll('.dock-speed-item').forEach(item => {
+      item.addEventListener('click', closeAll);
     });
-    messageAction?.addEventListener('click', openChat);
-    dock.querySelector('[data-dock-action="book"]')?.addEventListener('click', closeAll);
 
     document.addEventListener('click', e => {
-      if (!dock.contains(e.target) && (dock.classList.contains('is-dial-open') || dock.classList.contains('is-open'))) {
-        closeAll();
-      }
+      if (!dock.contains(e.target) && dock.classList.contains('is-dial-open')) closeAll();
     });
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape') closeAll();
     });
-
-    function send() {
-      const text = (input?.value || '').trim();
-      const who = active?.dataset.name || 'Redcrown MMA';
-      const number = active?.dataset.wa || '919910604536';
-      const msg = text
-        ? `Hi ${who}, ${text}`
-        : `Hi ${who}, I'd like to know more.`;
-      window.open(`https://wa.me/${number}?text=${encodeURIComponent(msg)}`, '_blank');
-      if (input) input.value = '';
-    }
-    sendBtn?.addEventListener('click', send);
-    input?.addEventListener('keydown', e => { if (e.key === 'Enter') send(); });
   })();
 
   /* ─── EXPANDABLE LOCATION CARD ─── */
