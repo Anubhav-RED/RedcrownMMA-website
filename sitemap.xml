@@ -138,6 +138,14 @@
     <priority>0.6</priority>
   </url>
 
+  <!-- Age/beginner guide article -->
+  <url>
+    <loc>https://redcrownmma.com/pages/is-25-too-late-to-start-mma.html</loc>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
   <!-- Muay Thai vs Kickboxing article -->
   <url>
     <loc>https://redcrownmma.com/pages/muay-thai-vs-kickboxing.html</loc>
