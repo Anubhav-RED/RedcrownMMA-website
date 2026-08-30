@@ -146,6 +146,14 @@
     <priority>0.6</priority>
   </url>
 
+  <!-- MMA classes in Noida guide -->
+  <url>
+    <loc>https://redcrownmma.com/pages/mma-classes-in-noida.html</loc>
+    <lastmod>2026-08-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
   <!-- Muay Thai vs Kickboxing article -->
   <url>
     <loc>https://redcrownmma.com/pages/muay-thai-vs-kickboxing.html</loc>
