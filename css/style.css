@@ -2139,6 +2139,24 @@ section { padding: var(--section) 0; }
   margin: 0 auto;
   padding: 4rem 0 6rem;
 }
+.post-body figure {
+  margin: 2rem 0 2.25rem;
+}
+.post-body figure img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--r-lg);
+  box-shadow: var(--glass-shadow);
+}
+.post-body figcaption {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.82rem;
+  color: var(--bone-45);
+  text-align: center;
+  margin-top: 0.6rem;
+  letter-spacing: 0.02em;
+}
 .post-body p {
   font-size: 1rem;
   line-height: 1.9;
