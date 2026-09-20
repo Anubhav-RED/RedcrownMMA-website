@@ -162,6 +162,14 @@
     <priority>0.7</priority>
   </url>
 
+  <!-- Calorie burn guide -->
+  <url>
+    <loc>https://redcrownmma.com/pages/how-many-calories-does-mma-training-burn.html</loc>
+    <lastmod>2026-09-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
   <!-- Muay Thai vs Kickboxing article -->
   <url>
     <loc>https://redcrownmma.com/pages/muay-thai-vs-kickboxing.html</loc>
