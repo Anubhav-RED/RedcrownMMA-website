@@ -7,8 +7,6 @@
 (function () {
   'use strict';
 
-  const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwNrioeb_sG3A2rH8xhzqTCZJgseJJeFauFfdJBDBCXrV8sURM9tZ8Mho48zWq31TdcsQ/exec';
-
   /* ─── THEME: system + click override ─── */
   const root    = document.documentElement;
   const sysDark = window.matchMedia('(prefers-color-scheme: dark)');
@@ -164,51 +162,6 @@
     }
   });
 
-  /* ─── FORM → GOOGLE SHEETS (no-cors: data hits the sheet, response is opaque) ─── */
-  document.querySelectorAll('.modal-form').forEach(form => {
-    form.addEventListener('submit', async e => {
-      e.preventDefault();
-      const btnSpan = form.querySelector('[type="submit"] span');
-      if (btnSpan) btnSpan.textContent = 'Sending…';
-
-      const data = {
-        name:       form.querySelector('[name="name"]')?.value?.trim()       || '',
-        phone:      form.querySelector('[name="phone"]')?.value?.trim()      || '',
-        email:      form.querySelector('[name="email"]')?.value?.trim()      || '',
-        discipline: form.querySelector('[name="discipline"]')?.value?.trim() || '',
-        batch:      form.querySelector('[name="batch"]')?.value?.trim()      || ''
-      };
-
-      try {
-        await fetch(SHEETS_URL, {
-          method:  'POST',
-          mode:    'no-cors',
-          headers: { 'Content-Type': 'application/json' },
-          body:    JSON.stringify(data)
-        });
-      } catch (_) { /* fire and forget — sheet still receives it */ }
-
-      form.classList.add('hide');
-      form.closest('.modal, .contact-form-box')?.querySelector('.modal-success')?.classList.add('show');
-    });
-  });
-
-  /* ─── WHATSAPP PRE-FILL ─── */
-  document.addEventListener('click', e => {
-    const btn = e.target.closest('.btn-wa');
-    if (!btn) return;
-    const ctx = btn.closest('.modal, .contact-form-box, form') || document;
-    const get = n => ctx.querySelector?.(`[name="${n}"]`)?.value?.trim() || '';
-    const msg = [
-      "Hi Redcrown MMA! I'd like to book a free class.",
-      get('name')  ? `Name: ${get('name')}`   : '',
-      get('phone') ? `Phone: ${get('phone')}` : '',
-      `Interest: ${get('discipline') || 'Not decided yet'}`,
-      get('batch') ? `Preferred batch: ${get('batch')}` : ''
-    ].filter(Boolean).join('\n');
-    window.open(`https://wa.me/919910604536?text=${encodeURIComponent(msg)}`, '_blank');
-  });
-
   /* ─── PLAN SELECTOR: MMA / GYM / COMBO ─── */
   const PLAN_KEY = 'rc-plan-mode';
 
@@ -334,7 +287,7 @@
               in Google Cloud Console. This key is not secret, restriction is what protects it.
      Until both are filled in, the widget correctly shows the honest "reviews coming" state. */
   const GR_CONFIG = {
-    placeId: '',
+    placeId: 'ChIJTQnZM_XlDDkRPLSlDQGAUyI',
     apiKey: ''
   };
 

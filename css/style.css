@@ -3163,3 +3163,17 @@ textarea:focus-visible {
 }
 .loc-card[data-expanded="true"] .loc-card-body { grid-template-rows: 1fr; }
 .loc-card-body > div { overflow: hidden; }
+
+
+/* Hero H1 keyword line (added: carries location + service in the H1 without changing the headline) */
+.hero h1 .h1-kw {
+  display: block;
+  margin-top: 0.9rem;
+  font-size: clamp(0.8rem, 1.5vw, 1.15rem);
+  font-weight: 500;
+  font-style: normal;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  line-height: 1.4;
+  color: var(--bone-70);
+}
