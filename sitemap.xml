@@ -224,6 +224,27 @@
     <priority>0.7</priority>
   </url>
 
+  <url>
+    <loc>https://redcrownmma.com/pages/how-to-check-if-an-mma-coach-is-qualified.html</loc>
+    <lastmod>2026-10-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://redcrownmma.com/pages/mma-calorie-calculator.html</loc>
+    <lastmod>2026-10-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://redcrownmma.com/pages/which-martial-art-quiz.html</loc>
+    <lastmod>2026-10-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
   <!--
     Sauna page (pages/sauna.html) is intentionally left out of this sitemap
     and marked noindex while under construction. Add it here and remove
