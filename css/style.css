@@ -3177,3 +3177,149 @@ textarea:focus-visible {
   line-height: 1.4;
   color: var(--bone-70);
 }
+
+
+/* ==========================================================================
+   PHOTO HERO — photo behind a gradient, oversized type in front.
+   Used by: program pages, programs index, blog index, blog posts.
+   Photo sits right on desktop and dissolves left into the page; on mobile it
+   goes full-bleed and dissolves downward. Always dark (legible in both themes).
+   ========================================================================== */
+.photo-hero {
+  --bone: #ffffff;
+  --bone-70: rgba(255,255,255,0.80);
+  --bone-45: rgba(255,255,255,0.62);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  min-height: clamp(540px, 84vh, 800px);
+  padding: 9rem 0 4.5rem;
+  background: #000F08;
+  color: #fff;
+  border-bottom: 1px solid var(--border);
+}
+.photo-hero::before { display: none; }              /* kill legacy .post-hero grid overlay */
+.photo-hero-media {
+  position: absolute; top: 0; bottom: 0; right: 0;
+  width: 64%;
+  z-index: -3;
+  margin: 0;
+}
+.photo-hero.is-wide .photo-hero-media { width: 100%; }
+.photo-hero-media img {
+  display: block;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: var(--fx, 50%) var(--fy, 30%);
+}
+.photo-hero-shade {
+  position: absolute; inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, #000F08 0%, rgba(0,15,8,0.93) 28%, rgba(0,15,8,0.50) 52%, rgba(0,15,8,0.06) 80%),
+    linear-gradient(0deg,  #000F08 0%, rgba(0,15,8,0.60) 26%, rgba(0,15,8,0) 56%),
+    linear-gradient(180deg, rgba(0,15,8,0.72) 0%, rgba(0,15,8,0) 24%);
+}
+.photo-hero.is-wide .photo-hero-shade {
+  background:
+    linear-gradient(90deg, rgba(0,15,8,0.94) 0%, rgba(0,15,8,0.62) 38%, rgba(0,15,8,0.10) 75%),
+    linear-gradient(0deg,  #000F08 0%, rgba(0,15,8,0.55) 28%, rgba(0,15,8,0) 58%),
+    linear-gradient(180deg, rgba(0,15,8,0.72) 0%, rgba(0,15,8,0) 24%);
+}
+/* Giant outlined word, in front of the photo, behind the copy */
+.photo-hero::after {
+  content: attr(data-word);
+  position: absolute;
+  left: -0.03em; bottom: -0.14em;
+  z-index: -1;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: clamp(7rem, 23vw, 21rem);
+  line-height: 0.8;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255,255,255,0.20);
+  pointer-events: none;
+  user-select: none;
+}
+.photo-hero .container { position: relative; max-width: none; }
+.photo-hero-copy { max-width: min(900px, 100%); }
+.photo-hero h1 {
+  font-size: clamp(2.5rem, 5.4vw, 5.2rem);
+  line-height: 0.96;
+  letter-spacing: -0.012em;
+  text-transform: uppercase;
+  color: #fff;
+  margin: 0 0 1.25rem;
+  text-shadow: 0 2px 32px rgba(0,0,0,0.5);
+}
+.photo-hero h1 em { color: #ff4651; font-style: italic; }
+.photo-hero .photo-hero-lede { color: rgba(255,255,255,0.82); font-size: 1.08rem; line-height: 1.7; max-width: 540px; margin: 0; }
+.photo-hero .post-meta-row { margin-bottom: 1.25rem; }
+.photo-hero .hero-tag { color: #ff4651; margin-bottom: 1.1rem; }
+.photo-hero .hero-tag::before { background: #ff4651; }
+
+/* Breadcrumbs */
+.crumbs ol {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 0.15rem 0.45rem;
+  list-style: none; margin: 0 0 1.6rem; padding: 0;
+  font-family: 'Rajdhani', sans-serif; font-weight: 600;
+  font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase;
+  color: rgba(255,255,255,0.62);
+}
+.crumbs li + li::before { content: "/"; margin-right: 0.45rem; opacity: 0.45; }
+.crumbs a { color: rgba(255,255,255,0.82); text-decoration: none; min-height: 0 !important; display: inline; }
+.crumbs a:hover { color: #ff4651; }
+.crumbs [aria-current] { color: #fff; }
+
+/* In-article photo with caption */
+.post-figure { margin: 2.5rem 0; }
+.post-figure img {
+  display: block; width: 100%; height: auto;
+  aspect-ratio: 16 / 10; object-fit: cover;
+  object-position: var(--fx, 50%) var(--fy, 30%);
+  border: 1px solid var(--border);
+}
+.post-figure figcaption {
+  margin-top: 0.65rem;
+  font-size: 0.78rem; letter-spacing: 0.04em;
+  color: var(--bone-45); line-height: 1.5;
+}
+
+/* ─── MOBILE BUG FIX: invisible coach-dock was swallowing taps ───
+   The speed-dial items were opacity:0 but the container (219x249px) still sat
+   over the page with pointer-events:auto, so anything under it was "untouchable". */
+.coach-dock, .dock-speed-dial { pointer-events: none; }
+.coach-dock-trigger { pointer-events: auto; }
+.dock-speed-item {
+  visibility: hidden;
+  transition: opacity 0.25s var(--ease), transform 0.3s var(--spring), border-color 0.2s, visibility 0s linear 0.3s;
+}
+.coach-dock.is-dial-open .dock-speed-item {
+  visibility: visible;
+  transition: opacity 0.25s var(--ease), transform 0.3s var(--spring), border-color 0.2s, visibility 0s;
+}
+
+/* Photo-hero details: accent colours that stay legible on the dark photo in both themes */
+.photo-hero .post-cat { color: #ff4651; }
+.photo-hero-copy p a { color: #ff6a73; }
+.photo-hero .hero-tag { text-shadow: 0 1px 12px rgba(0,0,0,0.6); }
+
+/* Transparent nav sitting over a photo hero: force light-on-dark until it gets its own background */
+.nav.on-photo {
+  --bone: #ffffff;
+  --bone-70: rgba(255,255,255,0.86);
+  --bone-45: rgba(255,255,255,0.66);
+  --border: rgba(255,255,255,0.28);
+}
+.nav.on-photo .hamburger span { background: #fff; }
+
+/* Program cards: photo fills its 16:9 frame, cropped around the focal point */
+.prog-ph { overflow: hidden; }
+.prog-ph picture { display: block; width: 100%; height: 100%; }
+.prog-ph img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: var(--fx, 50%) var(--fy, 30%); }

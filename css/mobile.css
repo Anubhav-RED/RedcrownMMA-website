@@ -85,7 +85,7 @@
   }
 
   .hero-inner {
-    padding: 2rem 0 5rem;
+    padding: 2rem 0 7.5rem; /* clear the floating tab bar */
     justify-content: flex-end;
     align-items: flex-start;
   }
@@ -529,8 +529,10 @@
   .label       { font-size: 0.6rem; letter-spacing: 0.2em; }
 
   /* ─── MOBILE STICKY BOTTOM ACTION BAR ──────────────────────── */
+  /* The icon tab bar (style.css) is the mobile bottom nav. This older bar used to
+     force itself on with !important and stacked on top of it, killing the tab bar. */
   .mobile-book-bar {
-    display: flex !important;
+    display: none !important;
     position: fixed;
     bottom: 0;
     left: 0;
@@ -588,5 +590,28 @@
   .pricing-head { flex-direction: column; align-items: flex-start; gap: 1rem; }
   .plan-group { width: 100%; }
   .plan-btn { flex: 1; padding: 0 0.5rem; font-size: 0.68rem; }
+
+} 
+  /* ─── PHOTO HERO (mobile): photo full-bleed, dissolves downward ─── */
+  .photo-hero { min-height: min(86svh, 700px); padding: 7rem 0 2.25rem; }
+  .photo-hero-media, .photo-hero.is-wide .photo-hero-media { width: 100%; }
+  .photo-hero-shade, .photo-hero.is-wide .photo-hero-shade {
+    background:
+      linear-gradient(0deg, #000F08 0%, rgba(0,15,8,0.90) 30%, rgba(0,15,8,0.30) 62%, rgba(0,15,8,0.12) 100%),
+      linear-gradient(180deg, rgba(0,15,8,0.70) 0%, rgba(0,15,8,0) 22%);
+  }
+  .photo-hero::after { top: 5.6rem; bottom: auto; font-size: 31vw; -webkit-text-stroke: 1px rgba(255,255,255,0.24); }
+  .photo-hero h1 { font-size: clamp(2.3rem, 11.5vw, 3.6rem) !important; line-height: 0.97 !important; margin-bottom: 1rem; }
+  .photo-hero .photo-hero-lede { font-size: 0.95rem !important; line-height: 1.65 !important; color: rgba(255,255,255,0.85); }
+  .crumbs ol { font-size: 0.64rem; margin-bottom: 1.1rem; }
+  .photo-hero .hero-tag { font-size: 0.6rem; letter-spacing: 0.14em; gap: 0.6rem; }
+  .post-figure { margin: 1.75rem 0; }
+
+
+  /* ─── BLOG "KEEP READING" GRID ─────────────────────────────── */
+  /* Inline style forced repeat(3,1fr) on phones: it stretched every post to 430-580px,
+     widening the layout viewport (hamburger off-screen, fixed layers misaligned). */
+  [style*="repeat(3, 1fr)"] { grid-template-columns: 1fr !important; }
+  .post-meta-row { gap: 0.4rem 1.1rem; }
 
 } /* end @media 767px */

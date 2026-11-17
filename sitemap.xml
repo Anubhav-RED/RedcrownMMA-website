@@ -5,7 +5,7 @@
   Submit this URL in Google Search Console → Indexing → Sitemaps
   Update <lastmod> dates whenever you make significant changes to a page.
 -->
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 
   <!-- Homepage — highest priority -->
   <url>
@@ -18,9 +18,16 @@
   <!-- Programs — core conversion page -->
   <url>
     <loc>https://redcrownmma.com/pages/programs.html</loc>
-    <lastmod>2026-10-08</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+  
+    <image:image><image:loc>https://redcrownmma.com/assets/images/photos/training-floor-mats-heavy-bags-redcrown-mma-noida-1445.jpg</image:loc></image:image>
+    <image:image><image:loc>https://redcrownmma.com/assets/images/photos/mma-coach-strike-pad-redcrown-mma-noida-1089.jpg</image:loc></image:image>
+    <image:image><image:loc>https://redcrownmma.com/assets/images/photos/muay-thai-kick-drill-redcrown-mma-noida-1089.jpg</image:loc></image:image>
+    <image:image><image:loc>https://redcrownmma.com/assets/images/photos/boxing-stance-heavy-bag-redcrown-mma-noida-1089.jpg</image:loc></image:image>
+    <image:image><image:loc>https://redcrownmma.com/assets/images/photos/self-defence-pad-work-redcrown-mma-noida-1089.jpg</image:loc></image:image>
+    <image:image><image:loc>https://redcrownmma.com/assets/images/photos/kickboxing-high-kick-pad-redcrown-mma-noida-1089.jpg</image:loc></image:image>
   </url>
 
   <!-- Gym Membership — core conversion page, new audience -->
@@ -66,52 +73,66 @@
   <!-- Class pages — core conversion pages -->
   <url>
     <loc>https://redcrownmma.com/pages/classes/mma-classes-noida.html</loc>
-    <lastmod>2026-10-08</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  
+    <image:image><image:loc>https://redcrownmma.com/assets/images/photos/mma-coach-strike-pad-redcrown-mma-noida-1089.jpg</image:loc></image:image>
   </url>
 
   <url>
     <loc>https://redcrownmma.com/pages/classes/bjj-classes-noida.html</loc>
-    <lastmod>2026-10-08</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  
+    <image:image><image:loc>https://redcrownmma.com/assets/images/photos/training-floor-mats-heavy-bags-redcrown-mma-noida-1445.jpg</image:loc></image:image>
   </url>
 
   <url>
     <loc>https://redcrownmma.com/pages/classes/boxing-classes-noida.html</loc>
-    <lastmod>2026-10-08</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  
+    <image:image><image:loc>https://redcrownmma.com/assets/images/photos/boxing-stance-heavy-bag-redcrown-mma-noida-1089.jpg</image:loc></image:image>
   </url>
 
   <url>
     <loc>https://redcrownmma.com/pages/classes/muay-thai-classes-noida.html</loc>
-    <lastmod>2026-10-08</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  
+    <image:image><image:loc>https://redcrownmma.com/assets/images/photos/muay-thai-kick-drill-redcrown-mma-noida-1089.jpg</image:loc></image:image>
   </url>
 
   <url>
     <loc>https://redcrownmma.com/pages/classes/self-defence-classes-noida.html</loc>
-    <lastmod>2026-10-08</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  
+    <image:image><image:loc>https://redcrownmma.com/assets/images/photos/self-defence-pad-work-redcrown-mma-noida-1089.jpg</image:loc></image:image>
   </url>
 
   <url>
     <loc>https://redcrownmma.com/pages/classes/strength-conditioning-noida.html</loc>
-    <lastmod>2026-10-08</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  
+    <image:image><image:loc>https://redcrownmma.com/assets/images/photos/training-floor-mats-heavy-bags-redcrown-mma-noida-1445.jpg</image:loc></image:image>
   </url>
 
   <!-- Blog -->
   <url>
     <loc>https://redcrownmma.com/pages/blog.html</loc>
-    <lastmod>2026-10-08</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+  
+    <image:image><image:loc>https://redcrownmma.com/assets/images/photos/mma-coach-strike-pad-redcrown-mma-noida-1089.jpg</image:loc></image:image>
   </url>
 
   <!-- FAQ -->
@@ -125,81 +146,111 @@
   <!-- Beginner's guide article -->
   <url>
     <loc>https://redcrownmma.com/pages/what-is-mma-beginners-guide.html</loc>
-    <lastmod>2026-10-08</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+  
+    <image:image><image:loc>https://redcrownmma.com/assets/images/photos/mma-coach-strike-pad-redcrown-mma-noida-1089.jpg</image:loc></image:image>
+    <image:image><image:loc>https://redcrownmma.com/assets/images/photos/training-floor-mats-heavy-bags-redcrown-mma-noida-1445.jpg</image:loc></image:image>
   </url>
 
   <!-- Etiquette guide article -->
   <url>
     <loc>https://redcrownmma.com/pages/mma-etiquette-for-beginners.html</loc>
-    <lastmod>2026-10-08</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+  
+    <image:image><image:loc>https://redcrownmma.com/assets/images/photos/training-floor-mats-heavy-bags-redcrown-mma-noida-1445.jpg</image:loc></image:image>
+    <image:image><image:loc>https://redcrownmma.com/assets/images/photos/self-defence-pad-work-redcrown-mma-noida-1089.jpg</image:loc></image:image>
   </url>
 
   <!-- Age/beginner guide article -->
   <url>
     <loc>https://redcrownmma.com/pages/is-25-too-late-to-start-mma.html</loc>
-    <lastmod>2026-10-08</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+  
+    <image:image><image:loc>https://redcrownmma.com/assets/images/photos/boxing-stance-heavy-bag-redcrown-mma-noida-1089.jpg</image:loc></image:image>
+    <image:image><image:loc>https://redcrownmma.com/assets/images/photos/self-defence-pad-work-redcrown-mma-noida-1089.jpg</image:loc></image:image>
   </url>
 
   <!-- MMA classes in Noida guide -->
   <url>
     <loc>https://redcrownmma.com/pages/mma-classes-in-noida.html</loc>
-    <lastmod>2026-10-08</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+  
+    <image:image><image:loc>https://redcrownmma.com/assets/images/photos/training-floor-mats-heavy-bags-redcrown-mma-noida-1445.jpg</image:loc></image:image>
+    <image:image><image:loc>https://redcrownmma.com/assets/images/photos/mma-coach-strike-pad-redcrown-mma-noida-1089.jpg</image:loc></image:image>
   </url>
 
   <!-- Self-defence for women guide -->
   <url>
     <loc>https://redcrownmma.com/pages/self-defence-classes-for-women-noida.html</loc>
-    <lastmod>2026-10-08</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+  
+    <image:image><image:loc>https://redcrownmma.com/assets/images/photos/self-defence-pad-work-redcrown-mma-noida-1089.jpg</image:loc></image:image>
+    <image:image><image:loc>https://redcrownmma.com/assets/images/photos/mma-coach-strike-pad-redcrown-mma-noida-1089.jpg</image:loc></image:image>
   </url>
 
   <!-- Calorie burn guide -->
   <url>
     <loc>https://redcrownmma.com/pages/how-many-calories-does-mma-training-burn.html</loc>
-    <lastmod>2026-10-08</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+  
+    <image:image><image:loc>https://redcrownmma.com/assets/images/photos/kickboxing-high-kick-pad-redcrown-mma-noida-1089.jpg</image:loc></image:image>
+    <image:image><image:loc>https://redcrownmma.com/assets/images/photos/self-defence-pad-work-redcrown-mma-noida-1089.jpg</image:loc></image:image>
   </url>
 
   <!-- Muay Thai vs Kickboxing article -->
   <url>
     <loc>https://redcrownmma.com/pages/muay-thai-vs-kickboxing.html</loc>
-    <lastmod>2026-10-08</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+  
+    <image:image><image:loc>https://redcrownmma.com/assets/images/photos/muay-thai-kick-drill-redcrown-mma-noida-1089.jpg</image:loc></image:image>
+    <image:image><image:loc>https://redcrownmma.com/assets/images/photos/kickboxing-high-kick-pad-redcrown-mma-noida-1089.jpg</image:loc></image:image>
   </url>
 
   <!-- MMA for Fitness & Weight Loss article -->
   <url>
     <loc>https://redcrownmma.com/pages/mma-for-fitness-and-weight-loss.html</loc>
-    <lastmod>2026-10-08</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+  
+    <image:image><image:loc>https://redcrownmma.com/assets/images/photos/self-defence-pad-work-redcrown-mma-noida-1089.jpg</image:loc></image:image>
+    <image:image><image:loc>https://redcrownmma.com/assets/images/photos/mma-coach-strike-pad-redcrown-mma-noida-1089.jpg</image:loc></image:image>
   </url>
 
   <!-- Why Gym Training Matters for MMA article -->
   <url>
     <loc>https://redcrownmma.com/pages/why-gym-training-matters-for-mma.html</loc>
-    <lastmod>2026-10-08</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+  
+    <image:image><image:loc>https://redcrownmma.com/assets/images/photos/boxing-stance-heavy-bag-redcrown-mma-noida-1089.jpg</image:loc></image:image>
+    <image:image><image:loc>https://redcrownmma.com/assets/images/photos/training-floor-mats-heavy-bags-redcrown-mma-noida-1445.jpg</image:loc></image:image>
   </url>
 
   <!-- Why Skinny Guys Should Do MMA and Gym article -->
   <url>
     <loc>https://redcrownmma.com/pages/mma-gym-for-skinny-guys.html</loc>
-    <lastmod>2026-10-08</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+  
+    <image:image><image:loc>https://redcrownmma.com/assets/images/photos/mma-coach-strike-pad-redcrown-mma-noida-1089.jpg</image:loc></image:image>
+    <image:image><image:loc>https://redcrownmma.com/assets/images/photos/training-floor-mats-heavy-bags-redcrown-mma-noida-1445.jpg</image:loc></image:image>
   </url>
 
   <!-- Legal — low priority -->
@@ -219,30 +270,40 @@
 
   <url>
     <loc>https://redcrownmma.com/pages/mma-vs-gym-for-fat-loss.html</loc>
-    <lastmod>2026-10-15</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+  
+    <image:image><image:loc>https://redcrownmma.com/assets/images/photos/kickboxing-high-kick-pad-redcrown-mma-noida-1089.jpg</image:loc></image:image>
+    <image:image><image:loc>https://redcrownmma.com/assets/images/photos/self-defence-pad-work-redcrown-mma-noida-1089.jpg</image:loc></image:image>
   </url>
 
   <url>
     <loc>https://redcrownmma.com/pages/how-to-check-if-an-mma-coach-is-qualified.html</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+  
+    <image:image><image:loc>https://redcrownmma.com/assets/images/photos/muay-thai-kick-drill-redcrown-mma-noida-1089.jpg</image:loc></image:image>
+    <image:image><image:loc>https://redcrownmma.com/assets/images/photos/mma-coach-strike-pad-redcrown-mma-noida-1089.jpg</image:loc></image:image>
   </url>
 
   <url>
     <loc>https://redcrownmma.com/pages/mma-calorie-calculator.html</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+  
+    <image:image><image:loc>https://redcrownmma.com/assets/images/photos/boxing-stance-heavy-bag-redcrown-mma-noida-1089.jpg</image:loc></image:image>
   </url>
 
   <url>
     <loc>https://redcrownmma.com/pages/which-martial-art-quiz.html</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+  
+    <image:image><image:loc>https://redcrownmma.com/assets/images/photos/muay-thai-kick-drill-redcrown-mma-noida-1089.jpg</image:loc></image:image>
   </url>
 
   <!--

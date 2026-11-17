@@ -2,6 +2,8 @@ TITLE:    This Is a Sample Post — Replace This With Your Real Title
 DATE:     2026-06-23
 CATEGORY: Beginners Guide
 SLUG:     sample-post-delete-me
+IMAGE:    4
+WORD:     MMA
 EXCERPT:  One clear sentence that describes the article. This shows on the blog index card. Keep it under 20 words.
 ---
 This is your first paragraph. Write it like you're talking to someone who just walked into your gym. No jargon, no fluff — just the thing they need to know.

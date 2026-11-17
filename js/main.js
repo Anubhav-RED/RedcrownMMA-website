@@ -20,6 +20,7 @@
       btn.classList.toggle('active', btn.dataset.themeSet === pref);
     });
     document.querySelectorAll('img[data-src-light]').forEach(img => {
+      if (img.closest('.nav') && document.querySelector('.photo-hero') && window.scrollY <= 40) return; // nav logo handled by scroll sync
       const wanted = dark ? img.dataset.srcDark : img.dataset.srcLight;
       if (wanted && img.getAttribute('src') !== wanted) img.setAttribute('src', wanted);
     });
@@ -60,9 +61,30 @@
   /* ─── NAV: scroll state + active link ─── */
   const nav = document.querySelector('.nav');
   if (nav) {
-    const tick = () => nav.classList.toggle('scrolled', window.scrollY > 40);
+    // The fixed nav used to sit on top of the in-flow ticker (logo/theme buttons
+    // overlapping ticker text at scroll 0). Park it under the ticker, then let it
+    // glide up to top:0 as the ticker scrolls away.
+    const ticker = document.querySelector('.top-ticker');
+    const hasPhotoHero = !!document.querySelector('.photo-hero');
+    const tick = () => {
+      const th = ticker ? ticker.offsetHeight : 0;
+      nav.style.top = Math.max(0, th - window.scrollY) + 'px';
+      const scrolled = window.scrollY > 40;
+      nav.classList.toggle('scrolled', scrolled);
+      if (hasPhotoHero) {
+        // Over a dark photo hero the nav is light-on-dark; swap to the light-on-dark logo too.
+        nav.classList.toggle('on-photo', !scrolled);
+        const logo = nav.querySelector('.nav-logo img[data-src-dark]');
+        if (logo) {
+          const isDark = root.getAttribute('data-theme') !== 'light';
+          const want = (!scrolled || isDark) ? logo.dataset.srcDark : logo.dataset.srcLight;
+          if (want && logo.getAttribute('src') !== want) logo.setAttribute('src', want);
+        }
+      }
+    };
     tick();
     window.addEventListener('scroll', tick, { passive: true });
+    window.addEventListener('resize', tick, { passive: true });
   }
 
   const curFile = location.pathname.split('/').pop() || 'index.html';
@@ -524,8 +546,11 @@
     if (!dock) return;
     const trigger = dock.querySelector('.coach-dock-trigger');
 
-    function closeAll() { dock.classList.remove('is-dial-open'); }
-    function toggleDial() { dock.classList.toggle('is-dial-open'); }
+    function closeAll() { dock.classList.remove('is-dial-open'); trigger?.setAttribute('aria-expanded', 'false'); }
+    function toggleDial() {
+      const open = dock.classList.toggle('is-dial-open');
+      trigger?.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
 
     trigger?.addEventListener('click', toggleDial);
     // Message/Instagram/Book are plain links or the modal trigger — just close the dial after any of them fire.

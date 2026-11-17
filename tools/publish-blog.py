@@ -11,6 +11,8 @@ Usage (run from project root):
     CATEGORY: Beginners Guide
     SLUG:     url-friendly-slug-here
     EXCERPT:  One sentence shown on blog index.
+    IMAGE:    (optional) photo 1-6 for the hero. 1 self-defence, 2 muay thai, 3 interior/BJJ, 4 MMA, 5 kickboxing, 6 boxing
+    WORD:     (optional) short ghost word shown big behind the title (default BLOG)
     ---
     First paragraph of your article.
 
@@ -156,28 +158,68 @@ def fmt_date(d):
         return d
 
 # ── generate blog post HTML ──────────────────────────────────────────────────
+# ── photo library (assets/images/photos) ─────────────────────────────────────
+# Optional frontmatter:  IMAGE: 1-6   (default 4)   WORD: ONE-WORD GHOST TEXT (default BLOG)
+PHOTOS = {
+    '1': dict(slug='self-defence-pad-work-redcrown-mma-noida', big=1089, small=540, w=1089, h=1445, fx=50, fy=33,
+              alt="Student throwing a straight punch at a coach's strike pad during a self-defence class at Redcrown MMA, Noida Sector 18"),
+    '2': dict(slug='muay-thai-kick-drill-redcrown-mma-noida', big=1089, small=540, w=1089, h=1445, fx=50, fy=38,
+              alt='Student drilling a Muay Thai kick while a coach holds a strike pad at Redcrown MMA in Noida Sector 18'),
+    '3': dict(slug='training-floor-mats-heavy-bags-redcrown-mma-noida', big=1445, small=720, w=1445, h=1089, fx=30, fy=55,
+              alt='Redcrown MMA training floor in Noida Sector 18 with grey mats, branded heavy bags and a full-length mirror wall'),
+    '4': dict(slug='mma-coach-strike-pad-redcrown-mma-noida', big=1089, small=540, w=1089, h=1445, fx=60, fy=22,
+              alt='Coach holding a Redcrown strike pad on the training floor at Redcrown MMA, Noida Sector 18'),
+    '5': dict(slug='kickboxing-high-kick-pad-redcrown-mma-noida', big=1089, small=540, w=1089, h=1445, fx=55, fy=30,
+              alt="Student throwing a kickboxing high kick onto a coach's focus pad on the mats at Redcrown MMA, Noida"),
+    '6': dict(slug='boxing-stance-heavy-bag-redcrown-mma-noida', big=1089, small=540, w=1089, h=1445, fx=52, fy=28,
+              alt='Student in a boxing stance beside a Redcrown heavy bag at Redcrown MMA, Noida Sector 18'),
+}
+
+def hero_picture(ph):
+    d = f"../assets/images/photos/{ph['slug']}"
+    wide = ' is-wide' if ph['w'] > ph['h'] else ''
+    sizes = '100vw' if wide else '(min-width:768px) 64vw, 100vw'
+    pic = (f'<picture><source type="image/webp" srcset="{d}-{ph["small"]}.webp {ph["small"]}w, {d}-{ph["big"]}.webp {ph["big"]}w" sizes="{sizes}">'
+           f'<img src="{d}-{ph["big"]}.jpg" alt="{ph["alt"]}" width="{ph["w"]}" height="{ph["h"]}" fetchpriority="high" decoding="async" '
+           f'style="--fx:{ph["fx"]}%;--fy:{ph["fy"]}%"></picture>')
+    return pic, wide
+
 def gen_post(meta, body_html):
     title    = meta['TITLE']
     date_raw = meta['DATE']
     cat      = meta['CATEGORY']
     excerpt  = meta['EXCERPT']
     date_fmt = fmt_date(date_raw)
+    ph = PHOTOS.get(meta.get('IMAGE', '4'), PHOTOS['4'])
+    pic, wide = hero_picture(ph)
+    word = meta.get('WORD', 'BLOG').upper()
+    og = f"https://redcrownmma.com/assets/images/photos/{ph['slug']}-og.jpg"
+    page_url = f"https://redcrownmma.com/pages/{meta['SLUG']}.html"
 
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<link rel="canonical" href="{page_url}">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 <title>{title} | Redcrown MMA Blog</title>
 <meta name="description" content="{excerpt}">
 <meta name="theme-color" content="#000F08">
 <meta property="og:title" content="{title} | Redcrown MMA">
 <meta property="og:description" content="{excerpt}">
-<meta property="og:image" content="https://redcrownmma.com/assets/images/og-image.jpg">
+<meta property="og:image" content="{og}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="{ph['alt']}">
+<meta property="og:url" content="{page_url}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="{og}">
 <meta property="og:type" content="article">
 <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
 <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
 <link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 767px)">
 <script type="application/ld+json">
 {{
   "@context": "https://schema.org",
@@ -195,7 +237,27 @@ def gen_post(meta, body_html):
     "name": "Redcrown MMA",
     "url": "https://redcrownmma.com"
   }},
-  "image": "https://redcrownmma.com/assets/images/og-image.jpg"
+  "dateModified": "{date_raw}",
+  "mainEntityOfPage": {{ "@type": "WebPage", "@id": "{page_url}" }},
+  "image": [{{
+    "@type": "ImageObject",
+    "url": "{og}",
+    "width": 1200,
+    "height": 630,
+    "description": "{ph['alt']}",
+    "creditText": "Redcrown MMA"
+  }}]
+}}
+</script>
+<script type="application/ld+json">
+{{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://redcrownmma.com/"}},
+    {{"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://redcrownmma.com/pages/blog.html"}},
+    {{"@type": "ListItem", "position": 3, "name": "{title}", "item": "{page_url}"}}
+  ]
 }}
 </script>
 <!-- GA4: Paste your Google Analytics script here. Get your Measurement ID from analytics.google.com -->
@@ -243,16 +305,18 @@ def gen_post(meta, body_html):
   <a href="#" class="btn btn-primary" data-open-modal><span>Book Free Class</span></a>
 </div>
 
-<section class="post-hero">
-  <div class="container">
-    <a href="blog.html" style="display:inline-flex;align-items:center;gap:0.5rem;font-family:'Rajdhani',sans-serif;font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--bone-45);margin-bottom:1.5rem;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='var(--hunt)'" onmouseout="this.style.color='var(--bone-45)'">← Back to Blog</a>
-    <div class="post-meta-row" style="margin-bottom:1.25rem;">
+<section class="post-hero photo-hero{wide}" data-word="{word}">
+  <div class="photo-hero-media">{pic}</div>
+  <div class="photo-hero-shade"></div>
+  <div class="container"><div class="photo-hero-copy">
+    <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li><a href="/pages/blog.html">Blog</a></li><li aria-current="page">{title}</li></ol></nav>
+    <div class="post-meta-row">
       <span class="post-cat">{cat}</span>
       <span>{date_fmt}</span>
     </div>
     <h1>{title}</h1>
-    <p style="color:var(--bone-70); font-size:1.05rem; max-width:680px;">{excerpt}</p>
-  </div>
+    <p class="photo-hero-lede">{excerpt}</p>
+  </div></div>
 </section>
 
 <section style="padding-top:0; padding-bottom:0;">
